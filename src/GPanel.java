@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class GPanel extends JPanel implements Runnable{
 
@@ -8,27 +9,87 @@ public class GPanel extends JPanel implements Runnable{
     private int tileSize;
     private int screenWidth;
     private int screenHeight;
+    private int FPS;
 
     Thread thread;
+    KeyHandler keyHandler;
+
+ // players position
+    private int playerX;
+    private int playerY;
+    private int speed;
+
 
 
     public GPanel(){
         this.tileSize = 48;
         this.screenWidth = tileSize * 18;
         this.screenHeight = tileSize * 14;
+        this.FPS = 60;
+
+        this.playerX = 100;
+        this.playerY = 100;
+        this.speed = 5;
 
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
+        this.setLayout(null);
+        this.keyHandler = new KeyHandler();
+        this.addKeyListener(keyHandler);
+        this.setFocusable(true);
 
     }
 
     public void startThread(){
-        thread = new Thread();
+        thread = new Thread(this);
+        thread.start();
+    }
+
+    public void update(){
+        if (keyHandler.upPress){
+            playerY -= speed;
+        } else if (keyHandler.downPress) {
+            playerY += speed;
+        } else if (keyHandler.leftPress) {
+            playerX -= speed;
+        }else if (keyHandler.rightPress){
+            playerX += speed;
+        }
+    }
+
+    public void paintComponent(Graphics graphics){
+        super.paintComponent(graphics);
+        Graphics2D graphics2D = (Graphics2D)graphics;
+
+        graphics2D.setPaint(Color.WHITE);
+        graphics2D.fillRect(playerX,playerY,tileSize,tileSize);
+        graphics2D.dispose();
     }
 
     @Override
     public void run() {
 
+        double interval = 1000000000/FPS;
+        double delta = 0;
+        long lastTime = System.nanoTime();
+        long currTime;
+
+
+        while (thread != null){
+
+            currTime = System.nanoTime();
+            delta += (currTime - lastTime)/interval;
+            lastTime = currTime;
+
+            if (delta >= 1){
+                update();
+                repaint();
+                delta--;
+            }
+
+
+        }
     }
+
 }
