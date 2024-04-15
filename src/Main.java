@@ -1,5 +1,5 @@
-import javax.swing.*;
-import java.awt.*;
+import game.GFrame;
+import game.GPanel;
 
 public class Main {
     public static void main(String[] args) {

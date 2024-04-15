@@ -1,12 +1,46 @@
+package game;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 
-    public boolean upPress;
-    public boolean downPress;
-    public boolean leftPress;
-    public boolean rightPress;
+    private boolean upPress;
+    private boolean downPress;
+    private boolean leftPress;
+    private boolean rightPress;
+
+    public boolean isUpPress() {
+        return upPress;
+    }
+
+    public void setUpPress(boolean upPress) {
+        this.upPress = upPress;
+    }
+
+    public boolean isDownPress() {
+        return downPress;
+    }
+
+    public void setDownPress(boolean downPress) {
+        this.downPress = downPress;
+    }
+
+    public boolean isLeftPress() {
+        return leftPress;
+    }
+
+    public void setLeftPress(boolean leftPress) {
+        this.leftPress = leftPress;
+    }
+
+    public boolean isRightPress() {
+        return rightPress;
+    }
+
+    public void setRightPress(boolean rightPress) {
+        this.rightPress = rightPress;
+    }
 
     @Override
     public void keyTyped(KeyEvent e) {

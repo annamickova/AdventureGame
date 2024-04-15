@@ -1,6 +1,9 @@
+package game;
+
+import game.entity.Player;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 
 public class GPanel extends JPanel implements Runnable{
 
@@ -14,12 +17,23 @@ public class GPanel extends JPanel implements Runnable{
     Thread thread;
     KeyHandler keyHandler;
 
- // players position
+ // player
+    private Player player;
     private int playerX;
     private int playerY;
     private int speed;
 
+    public int getTileSize() {
+        return tileSize;
+    }
 
+    public int getScreenWidth() {
+        return screenWidth;
+    }
+
+    public int getScreenHeight() {
+        return screenHeight;
+    }
 
     public GPanel(){
         this.tileSize = 48;
@@ -27,6 +41,7 @@ public class GPanel extends JPanel implements Runnable{
         this.screenHeight = tileSize * 14;
         this.FPS = 60;
 
+        this.player = new Player(this, keyHandler);
         this.playerX = 100;
         this.playerY = 100;
         this.speed = 5;
@@ -47,23 +62,13 @@ public class GPanel extends JPanel implements Runnable{
     }
 
     public void update(){
-        if (keyHandler.upPress){
-            playerY -= speed;
-        } else if (keyHandler.downPress) {
-            playerY += speed;
-        } else if (keyHandler.leftPress) {
-            playerX -= speed;
-        }else if (keyHandler.rightPress){
-            playerX += speed;
-        }
+        player.update();
     }
 
     public void paintComponent(Graphics graphics){
         super.paintComponent(graphics);
         Graphics2D graphics2D = (Graphics2D)graphics;
-
-        graphics2D.setPaint(Color.WHITE);
-        graphics2D.fillRect(playerX,playerY,tileSize,tileSize);
+        player.draw(graphics2D);
         graphics2D.dispose();
     }
 
@@ -75,9 +80,7 @@ public class GPanel extends JPanel implements Runnable{
         long lastTime = System.nanoTime();
         long currTime;
 
-
         while (thread != null){
-
             currTime = System.nanoTime();
             delta += (currTime - lastTime)/interval;
             lastTime = currTime;
@@ -87,8 +90,6 @@ public class GPanel extends JPanel implements Runnable{
                 repaint();
                 delta--;
             }
-
-
         }
     }
 
