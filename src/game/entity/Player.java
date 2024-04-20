@@ -20,16 +20,24 @@ public class Player extends Entity{
 
     }
 
+    public void getImage(){
+
+    }
+
     public void update(){
-        if (keyHandler.isUpPress()){
-            y -= speedP;
-        } else if (keyHandler.isDownPress()) {
-            y += speedP;
-        } else if (keyHandler.isLeftPress()) {
-            x -= speedP;
-        }else if (keyHandler.isRightPress()){
-            x += speedP;
+
+        if (keyHandler.isUpPress() || keyHandler.downPress || keyHandler.isLeftPress() || keyHandler.isRightPress()){
+            if (keyHandler.upPress){
+                y -= speedP;
+            } else if (keyHandler.downPress) {
+                y += speedP;
+            } else if (keyHandler.leftPress) {
+                x -= speedP;
+            }else if (keyHandler.rightPress){
+                x += speedP;
+            }
         }
+
     }
     public void draw(Graphics2D graphics2D){
         graphics2D.setPaint(Color.WHITE);

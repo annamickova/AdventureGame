@@ -9,4 +9,5 @@ public class Entity {
     protected int speedP;
 
     protected BufferedImage playerImage;
+    protected String direction;
 }

@@ -15,12 +15,10 @@ public class GPanel extends JPanel implements Runnable{
     private int FPS;
 
     Thread thread;
-    KeyHandler keyHandler;
+    KeyHandler keyHandler = new KeyHandler();
 
  // player
-    private Player player;
-    private int playerX;
-    private int playerY;
+    private Player player = new Player(this, keyHandler);
     private int speed;
 
     public int getTileSize() {
@@ -41,16 +39,13 @@ public class GPanel extends JPanel implements Runnable{
         this.screenHeight = tileSize * 14;
         this.FPS = 60;
 
-        this.player = new Player(this, keyHandler);
-        this.playerX = 100;
-        this.playerY = 100;
         this.speed = 5;
 
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
         this.setLayout(null);
-        this.keyHandler = new KeyHandler();
+
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
 
@@ -63,12 +58,27 @@ public class GPanel extends JPanel implements Runnable{
 
     public void update(){
         player.update();
+
+//        if (keyHandler.upPress){
+//            playerY -= speed;
+//        } else if (keyHandler.downPress) {
+//            playerY += speed;
+//        } else if (keyHandler.leftPress) {
+//            playerX -= speed;
+//        }else if (keyHandler.rightPress){
+//            playerX += speed;
+//        }
     }
 
     public void paintComponent(Graphics graphics){
         super.paintComponent(graphics);
         Graphics2D graphics2D = (Graphics2D)graphics;
-        player.draw(graphics2D);
+
+
+         player.draw(graphics2D);
+//        graphics2D.setPaint(Color.WHITE);
+//        graphics2D.fillRect(playerX,playerY, tileSize, tileSize);
+
         graphics2D.dispose();
     }
 
