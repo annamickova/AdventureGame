@@ -3,12 +3,19 @@ package game.entity;
 import game.GPanel;
 import game.KeyHandler;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-public class Player extends Entity{
+public class Player extends Entity {
 
     private GPanel gPanel;
     private KeyHandler keyHandler;
+
+    private int screenX;
+    private int screenY;
 
     public Player(GPanel gPanel, KeyHandler keyHandler) {
         this.gPanel = gPanel;
@@ -17,31 +24,58 @@ public class Player extends Entity{
         x = 100;
         y = 100;
         speedP = 4;
+        direction = "down";
 
+        getImage();
     }
 
-    public void getImage(){
-
+    public void getImage() {
+        try {
+            playerImage = ImageIO.read(new File("cat.jpeg"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public void update(){
+    public BufferedImage getPlayerImage() {
+        return playerImage;
+    }
 
-        if (keyHandler.isUpPress() || keyHandler.downPress || keyHandler.isLeftPress() || keyHandler.isRightPress()){
-            if (keyHandler.upPress){
+    public void update() {
+    //    Rectangle enemy = new Rectangle(100, 100, gPanel.getTileSize(), gPanel.getTileSize());
+
+        if (keyHandler.moveUp || keyHandler.moveDown || keyHandler.moveLeft || keyHandler.moveRight) {
+            if (keyHandler.moveUp) {
                 y -= speedP;
-            } else if (keyHandler.downPress) {
+              direction = "up";
+            } else if (keyHandler.moveDown) {
+                direction = "down";
                 y += speedP;
-            } else if (keyHandler.leftPress) {
+            } else if (keyHandler.moveLeft) {
+               direction = "left";
                 x -= speedP;
-            }else if (keyHandler.rightPress){
+            } else if (keyHandler.moveRight) {
+                direction = "right";
                 x += speedP;
             }
         }
 
+        /*switch (direction){
+            case "up" -> y -= speedP;
+            case "down" -> y += speedP;
+            case "left" -> x -= speedP;
+            case "right" ->  x += speedP;
+        }*/
+
     }
-    public void draw(Graphics2D graphics2D){
-        graphics2D.setPaint(Color.WHITE);
-        graphics2D.fillRect(x,y, gPanel.getTileSize(), gPanel.getTileSize());
+
+    public void draw(Graphics2D graphics2D) {
+        graphics2D.drawImage(playerImage, x, y, gPanel.getTileSize(), gPanel.getTileSize(), null);
     }
+
+    //   public boolean checkCollision(Rectangle objectBounds) {
+     //   Rectangle playerBounds = new Rectangle(x, y, gPanel.getTileSize(), gPanel.getTileSize());
+       // return playerBounds.intersects(objectBounds);
+    //}
 
 }
