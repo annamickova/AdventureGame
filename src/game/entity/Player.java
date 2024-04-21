@@ -17,12 +17,28 @@ public class Player extends Entity {
     private int screenX;
     private int screenY;
 
+    public int getScreenX() {
+        return screenX  = (gPanel.getScreenWidth()/2) - (gPanel.getTileSize()/2);
+    }
+
+    public int getScreenY() {
+        return screenY = (gPanel.getScreenHeight()/2) - (gPanel.getTileSize()/2);
+    }
+
+    public int getX(){
+        return x;
+    }
+
+    public int getY(){
+        return y;
+    }
+
     public Player(GPanel gPanel, KeyHandler keyHandler) {
         this.gPanel = gPanel;
         this.keyHandler = keyHandler;
 
-        x = 100;
-        y = 100;
+        x = gPanel.getTileSize() * 23;
+        y = gPanel.getTileSize() * 21;
         speedP = 4;
         direction = "down";
 
@@ -42,7 +58,6 @@ public class Player extends Entity {
     }
 
     public void update() {
-    //    Rectangle enemy = new Rectangle(100, 100, gPanel.getTileSize(), gPanel.getTileSize());
 
         if (keyHandler.moveUp || keyHandler.moveDown || keyHandler.moveLeft || keyHandler.moveRight) {
             if (keyHandler.moveUp) {
@@ -70,7 +85,7 @@ public class Player extends Entity {
     }
 
     public void draw(Graphics2D graphics2D) {
-        graphics2D.drawImage(playerImage, x, y, gPanel.getTileSize(), gPanel.getTileSize(), null);
+        graphics2D.drawImage(playerImage, getScreenX(), getScreenY(), gPanel.getTileSize(), gPanel.getTileSize(), null);
     }
 
     //   public boolean checkCollision(Rectangle objectBounds) {

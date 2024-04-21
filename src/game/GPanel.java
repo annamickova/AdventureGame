@@ -22,6 +22,8 @@ public class GPanel extends JPanel implements Runnable{
     private Player player = new Player(this, keyHandler);
     private int speed;
     private Background bGround;
+    private int maxCol;
+    private int maxRow;
 
     public int getTileSize() {
         return tileSize;
@@ -35,14 +37,31 @@ public class GPanel extends JPanel implements Runnable{
         return screenHeight;
     }
 
+    public int getMaxCol() {
+        return maxCol;
+    }
+
+
+    public int getMaxRow() {
+        return maxRow;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
     public GPanel(){
         this.tileSize = 48;
-        this.screenWidth = tileSize * 18;
-        this.screenHeight = tileSize * 14;
+        this.maxRow = 60;
+        this.maxCol = 60;
+
+        this.screenWidth = tileSize * 16;
+        this.screenHeight = tileSize * 16;
         this.FPS = 60;
 
         this.speed = 5;
         this.bGround = new Background(this);
+
 
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
@@ -78,7 +97,7 @@ public class GPanel extends JPanel implements Runnable{
         Graphics2D graphics2D = (Graphics2D)graphics;
 
         bGround.draw(graphics2D);
-         player.draw(graphics2D);
+        player.draw(graphics2D);
 //        graphics2D.setPaint(Color.WHITE);
 //        graphics2D.fillRect(playerX,playerY, tileSize, tileSize);
 
