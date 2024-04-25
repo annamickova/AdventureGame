@@ -7,7 +7,7 @@ public class Main {
         GPanel panel = new GPanel();
         GFrame frame = new GFrame(panel);
 
-        panel.startThread();
+        panel.startGame();
 
     }
 }

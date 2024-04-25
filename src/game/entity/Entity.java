@@ -1,5 +1,6 @@
 package game.entity;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Entity {
@@ -10,4 +11,9 @@ public class Entity {
 
     protected BufferedImage playerImage;
     protected String direction;
+    protected boolean collision;
+
+    public Rectangle getBounds(){
+        return new Rectangle();
+    }
 }

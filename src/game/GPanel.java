@@ -10,7 +10,7 @@ public class GPanel extends JPanel implements Runnable{
 
 
     // screen settings
-    private int tileSize;
+    private final int tileSize = 48;
     private int screenWidth;
     private int screenHeight;
     private int FPS;
@@ -24,6 +24,11 @@ public class GPanel extends JPanel implements Runnable{
     private Background bGround;
     private int maxCol;
     private int maxRow;
+    private boolean running;
+
+    public Background getbGround() {
+        return bGround;
+    }
 
     public int getTileSize() {
         return tileSize;
@@ -51,7 +56,7 @@ public class GPanel extends JPanel implements Runnable{
     }
 
     public GPanel(){
-        this.tileSize = 48;
+        this.running = true;
         this.maxRow = 60;
         this.maxCol = 60;
 
@@ -73,9 +78,14 @@ public class GPanel extends JPanel implements Runnable{
 
     }
 
-    public void startThread(){
-        thread = new Thread(this);
-        thread.start();
+    public void startGame(){
+        if (thread == null || !running){
+            thread = new Thread(this);
+            thread.start();
+        }
+    }
+    public void stopGame(){
+        running = false;
     }
 
     public void update(){
@@ -107,22 +117,31 @@ public class GPanel extends JPanel implements Runnable{
     @Override
     public void run() {
 
-        double interval = 1000000000/FPS;
-        double delta = 0;
-        long lastTime = System.nanoTime();
-        long currTime;
+        double drawInterval = 1000000000/FPS;
+        double nextDrawTime = System.nanoTime() + drawInterval;
 
-        while (thread != null){
-            currTime = System.nanoTime();
-            delta += (currTime - lastTime)/interval;
-            lastTime = currTime;
 
-            if (delta >= 1){
-                update();
-                repaint();
-                delta--;
+        while (running){
+            update();
+            repaint();
+
+            try {
+                double remainingT = nextDrawTime - System.nanoTime();
+                remainingT = remainingT/1000000;
+
+                if (remainingT < 0){
+                    remainingT = 0;
+                }
+
+                Thread.sleep((long) remainingT);
+                nextDrawTime += drawInterval;
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
+
+
 
 }

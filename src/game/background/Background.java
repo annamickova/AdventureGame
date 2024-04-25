@@ -16,44 +16,41 @@ public class Background {
         this.gPanel = gPanel;
         this.tiles = new Tile[15];
         this.tileMap = new int[60][60];
-        getTiles();
+        loadTiles();
         loadMap();
     }
 
-    public void loadMap(){
+    public Tile getTile(int col, int row) {
+        int tileNum = tileMap[col][row];
+        return tiles[tileNum];
+    }
 
-        try (BufferedReader br = new BufferedReader(new FileReader("map.txt"))){
-            int col = 0;
-            int row = 0;
+    private void loadMap() {
 
-            while (col < gPanel.getMaxCol() && row < gPanel.getMaxRow()){
+        try (BufferedReader br = new BufferedReader(new FileReader("map.txt"))) {
+            for (int row = 0; row < gPanel.getMaxRow(); row++) {
                 String line = br.readLine();
-                while (col < gPanel.getMaxCol()){
-                    String[] map = line.split(" ");
+                String[] map = line.split(" ");
+                for (int col = 0; col < gPanel.getMaxCol(); col++) {
                     int num = Integer.parseInt(map[col]);
                     tileMap[col][row] = num;
-                    col++;
-                }
-                if (col == gPanel.getMaxCol()){
-                    col = 0;
-                    row++;
                 }
             }
-        }catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void getTiles(){
+    public void loadTiles() {
         try {
-
             tiles[0] = new Tile();
             tiles[0].setImage(ImageIO.read(new File("grass4.jpg")));
 
             tiles[1] = new Tile();
-            tiles[1].setImage(ImageIO.read(new File("wall.jpg"))); ;
+            tiles[1].setImage(ImageIO.read(new File("wall.jpg")));
+            ;
             tiles[1].setCollision(true);
 
             tiles[2] = new Tile();
@@ -70,43 +67,37 @@ public class Background {
             tiles[5] = new Tile();
             tiles[5].setImage(ImageIO.read(new File("sand.jpg")));
 
-
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void draw(Graphics2D graphics2D){
+    // draws only visible tiles
+    public void draw(Graphics2D graphics2D) {
 
-        int col = 0;
-        int row = 0;
+        int leftTileCol = (gPanel.getPlayer().getX() - gPanel.getPlayer().getScreenX()) / gPanel.getTileSize();
+        int topTileRow = (gPanel.getPlayer().getY() - gPanel.getPlayer().getScreenY()) / gPanel.getTileSize();
 
-        while (col < gPanel.getMaxCol() && row < gPanel.getMaxRow()){
 
-            int mapX = col * gPanel.getTileSize();
-            int mapY = row * gPanel.getTileSize();
-            int scX = mapX - gPanel.getPlayer().getX() + gPanel.getPlayer().getScreenX();
-            int scY = mapY - gPanel.getPlayer().getY() + gPanel.getPlayer().getScreenY();
+        int scTileX = gPanel.getScreenWidth() / gPanel.getTileSize() + 2;
+        int scTileY = gPanel.getScreenHeight() / gPanel.getTileSize() + 2;
 
-            int tileNum = tileMap[col][row];
+        for (int col = leftTileCol; col < leftTileCol + scTileX; col++) {
+            for (int row = topTileRow; row < topTileRow + scTileY; row++) {
+                if (col >= 0 && row >= 0 && col < gPanel.getMaxCol() && row < gPanel.getMaxRow()) {
+                    int tileNum = tileMap[col][row];
+                    int worldX = col * gPanel.getTileSize();
+                    int worldY = row * gPanel.getTileSize();
+                    int scX = worldX - (gPanel.getPlayer().getX() - gPanel.getPlayer().getScreenX());
+                    int scY = worldY - (gPanel.getPlayer().getY() - gPanel.getPlayer().getScreenY());
 
-            if (mapX + gPanel.getTileSize() > gPanel.getPlayer().getX() - gPanel.getPlayer().getScreenX() &&
-                mapX - gPanel.getTileSize() < gPanel.getPlayer().getX() + gPanel.getPlayer().getScreenX() &&
-                mapY + gPanel.getTileSize() > gPanel.getPlayer().getY() - gPanel.getPlayer().getScreenY() &&
-                mapY - gPanel.getTileSize() < gPanel.getPlayer().getY() + gPanel.getPlayer().getScreenY()){
-                graphics2D.drawImage(tiles[tileNum].getImage(), scX, scY, gPanel.getTileSize(), gPanel.getTileSize(), null);
-            }
-
-            col++;
-
-            if (col == gPanel.getMaxCol()){
-                col = 0;
-                row++;
-
+                    graphics2D.drawImage(tiles[tileNum].getImage(), scX, scY, gPanel.getTileSize(),
+                            gPanel.getTileSize(), null);
+                }
             }
         }
-
     }
+
 
 
 }

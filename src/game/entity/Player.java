@@ -2,6 +2,7 @@ package game.entity;
 
 import game.GPanel;
 import game.KeyHandler;
+import game.background.Tile;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -33,23 +34,31 @@ public class Player extends Entity {
         return y;
     }
 
+
+
     public Player(GPanel gPanel, KeyHandler keyHandler) {
         this.gPanel = gPanel;
         this.keyHandler = keyHandler;
 
-        x = gPanel.getTileSize() * 23;
-        y = gPanel.getTileSize() * 21;
-        speedP = 4;
-        direction = "down";
 
+        defValues();
         getImage();
     }
 
-    public void getImage() {
+    private void defValues(){
+        this.x = gPanel.getTileSize()*23;
+        this.y = gPanel.getTileSize()*21;
+        System.out.println(x+ " "+ y);
+
+        speedP = 4;
+        direction = "down";
+    }
+
+    private void getImage() {
         try {
             playerImage = ImageIO.read(new File("cat.jpeg"));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
@@ -59,29 +68,42 @@ public class Player extends Entity {
 
     public void update() {
 
+        int newX = x;
+        int newY = y;
+
         if (keyHandler.moveUp || keyHandler.moveDown || keyHandler.moveLeft || keyHandler.moveRight) {
             if (keyHandler.moveUp) {
-                y -= speedP;
+                newY -= speedP;
               direction = "up";
             } else if (keyHandler.moveDown) {
                 direction = "down";
-                y += speedP;
+                newY += speedP;
             } else if (keyHandler.moveLeft) {
                direction = "left";
-                x -= speedP;
+                newX -= speedP;
             } else if (keyHandler.moveRight) {
                 direction = "right";
-                x += speedP;
+                newX += speedP;
             }
         }
 
-        /*switch (direction){
-            case "up" -> y -= speedP;
-            case "down" -> y += speedP;
-            case "left" -> x -= speedP;
-            case "right" ->  x += speedP;
-        }*/
+        if (!hasCollision(newX, newY, direction)){
+            x = newX;
+            y = newY;
+        }
 
+
+    }
+
+    private boolean hasCollision(int newX, int newY, String direction) {
+
+        int tileX = newX / gPanel.getTileSize();
+        int tileY = newY / gPanel.getTileSize();
+
+
+
+        Tile tile = gPanel.getbGround().getTile(tileX, tileY);
+        return tile.isCollision();
     }
 
     public void draw(Graphics2D graphics2D) {
