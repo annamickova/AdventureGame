@@ -48,7 +48,6 @@ public class Player extends Entity {
     private void defValues(){
         this.x = gPanel.getTileSize()*23;
         this.y = gPanel.getTileSize()*21;
-        System.out.println(x+ " "+ y);
 
         speedP = 4;
         direction = "down";
@@ -96,6 +95,16 @@ public class Player extends Entity {
     }
 
     private boolean hasCollision(int newX, int newY, String direction) {
+
+        int rightTopX;
+        int leftTopX;
+        int rightBottomX;
+        int leftBottomX;
+
+        int rightTopY;
+        int leftTopY;
+        int rightBottomY;
+        int leftBottomY;
 
         int tileX = newX / gPanel.getTileSize();
         int tileY = newY / gPanel.getTileSize();
