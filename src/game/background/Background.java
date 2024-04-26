@@ -67,6 +67,7 @@ public class Background {
             tiles[5] = new Tile();
             tiles[5].setImage(ImageIO.read(new File("sand.jpg")));
 
+
         } catch (IOException e) {
             e.printStackTrace();
         }
