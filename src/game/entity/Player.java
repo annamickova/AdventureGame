@@ -1,5 +1,6 @@
 package game.entity;
 
+import game.CollisionDetect;
 import game.GPanel;
 import game.KeyHandler;
 import game.background.Tile;
@@ -14,6 +15,7 @@ public class Player extends Entity {
 
     private GPanel gPanel;
     private KeyHandler keyHandler;
+    private CollisionDetect collisionDetect;
 
     private int screenX;
     private int screenY;
@@ -39,7 +41,7 @@ public class Player extends Entity {
     public Player(GPanel gPanel, KeyHandler keyHandler) {
         this.gPanel = gPanel;
         this.keyHandler = keyHandler;
-
+        collisionDetect = new CollisionDetect(gPanel);
 
         defValues();
         getImage();
@@ -70,23 +72,24 @@ public class Player extends Entity {
         int newX = x;
         int newY = y;
 
-        if (keyHandler.moveUp || keyHandler.moveDown || keyHandler.moveLeft || keyHandler.moveRight) {
-            if (keyHandler.moveUp) {
-                newY -= speedP;
-              direction = "up";
-            } else if (keyHandler.moveDown) {
-                direction = "down";
-                newY += speedP;
-            } else if (keyHandler.moveLeft) {
-               direction = "left";
-                newX -= speedP;
-            } else if (keyHandler.moveRight) {
-                direction = "right";
-                newX += speedP;
-            }
+        if (keyHandler.moveUp) {
+            newY -= speedP;
+            direction = "up";
+        }
+        if (keyHandler.moveDown ) {
+            newY += speedP;
+            direction = "down";
+        }
+        if (keyHandler.moveLeft) {
+            newX -= speedP;
+            direction = "left";
+        }
+        if (keyHandler.moveRight) {
+            newX += speedP;
+            direction = "right";
         }
 
-        if (!hasCollision(newX, newY, direction)){
+        if (!collisionDetect.hasCollision(direction,x,y)){
             x = newX;
             y = newY;
         }
@@ -94,34 +97,10 @@ public class Player extends Entity {
 
     }
 
-    private boolean hasCollision(int newX, int newY, String direction) {
 
-        int rightTopX;
-        int leftTopX;
-        int rightBottomX;
-        int leftBottomX;
-
-        int rightTopY;
-        int leftTopY;
-        int rightBottomY;
-        int leftBottomY;
-
-        int tileX = newX / gPanel.getTileSize();
-        int tileY = newY / gPanel.getTileSize();
-
-
-
-        Tile tile = gPanel.getbGround().getTile(tileX, tileY);
-        return tile.isCollision();
-    }
 
     public void draw(Graphics2D graphics2D) {
         graphics2D.drawImage(playerImage, getScreenX(), getScreenY(), gPanel.getTileSize(), gPanel.getTileSize(), null);
     }
-
-    //   public boolean checkCollision(Rectangle objectBounds) {
-     //   Rectangle playerBounds = new Rectangle(x, y, gPanel.getTileSize(), gPanel.getTileSize());
-       // return playerBounds.intersects(objectBounds);
-    //}
 
 }
