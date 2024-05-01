@@ -1,10 +1,13 @@
 package game;
 
 import game.background.Background;
+import game.entity.Entity;
 import game.entity.Player;
+import game.items.Item;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class GPanel extends JPanel implements Runnable{
 
@@ -18,8 +21,10 @@ public class GPanel extends JPanel implements Runnable{
     Thread thread;
     KeyHandler keyHandler = new KeyHandler(this);
 
- // player
     private Player player = new Player(this, keyHandler);
+    private ArrayList<Item> items = new ArrayList<>();
+    private ArrayList<Entity> npc = new ArrayList<>();
+    private Settings settings = new Settings(this);
     private int speed;
     private Background bGround;
     private int maxCol;
@@ -84,6 +89,22 @@ public class GPanel extends JPanel implements Runnable{
         return player;
     }
 
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(ArrayList<Item> items) {
+        this.items = items;
+    }
+
+    public ArrayList<Entity> getNpc() {
+        return npc;
+    }
+
+    public void setNpc(ArrayList<Entity> npc) {
+        this.npc = npc;
+    }
+
     public boolean isButtonVisible() {
         return isButtonVisible;
     }
@@ -94,18 +115,20 @@ public class GPanel extends JPanel implements Runnable{
 
     public GPanel(){
         gameState = play;
-        this.running = true;
-        this.maxRow = 60;
-        this.maxCol = 60;
+        running = true;
+        maxRow = 60;
+        maxCol = 60;
 
-        this.screenWidth = tileSize * 16;
-        this.screenHeight = tileSize * 16;
-        this.FPS = 60;
+        screenWidth = tileSize * 16;
+        screenHeight = tileSize * 16;
+        FPS = 60;
 
-        this.speed = 5;
-        this.bGround = new Background(this);
-
-
+        speed = 5;
+        bGround = new Background(this);
+        settings.setNPC();
+        gPanelSettings();
+    }
+    private void gPanelSettings(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
@@ -113,7 +136,6 @@ public class GPanel extends JPanel implements Runnable{
 
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
-
     }
 
     public void startGame(){
@@ -122,25 +144,12 @@ public class GPanel extends JPanel implements Runnable{
             thread.start();
         }
     }
-    public void stopGame(){
-        running = false;
-    }
 
-    public void update(){
+    private void update(){
         if (gameState == play){
             player.update();
 
         }
-
-//        if (keyHandler.upPress){
-//            playerY -= speed;
-//        } else if (keyHandler.downPress) {
-//            playerY += speed;
-//        } else if (keyHandler.leftPress) {
-//            playerX -= speed;
-//        }else if (keyHandler.rightPress){
-//            playerX += speed;
-//        }
     }
 
     public void paintComponent(Graphics graphics){
@@ -148,10 +157,18 @@ public class GPanel extends JPanel implements Runnable{
         Graphics2D graphics2D = (Graphics2D)graphics;
 
         bGround.draw(graphics2D);
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i) != null){
+                items.get(i).drawItem(graphics2D, this);
+            }
+        }
+        for (int i = 0; i < npc.size(); i++) {
+            if (npc.get(i) != null){
+                npc.get(i).drawEntity(graphics2D);
+            }
+        }
         player.draw(graphics2D);
         pause(graphics2D);
-//        graphics2D.setPaint(Color.WHITE);
-//        graphics2D.fillRect(playerX,playerY, tileSize, tileSize);
 
         graphics2D.dispose();
     }
@@ -184,7 +201,7 @@ public class GPanel extends JPanel implements Runnable{
         }
     }
 
-    public void pause(Graphics2D graphics2D){
+    private void pause(Graphics2D graphics2D){
         graphics2D.setColor(Color.white);
         if (gameState == play){
         }
@@ -193,7 +210,7 @@ public class GPanel extends JPanel implements Runnable{
         }
     }
 
-    public void pauseScreen(Graphics2D graphics2D){
+    private void pauseScreen(Graphics2D graphics2D){
         String text = "PAUSED";
         graphics2D.setFont(new Font("Arial", Font.PLAIN, 60));
         int l = (int)graphics2D.getFontMetrics().getStringBounds(text, graphics2D).getWidth();

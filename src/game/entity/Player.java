@@ -27,16 +27,6 @@ public class Player extends Entity {
         return screenY = (gPanel.getScreenHeight()/2) - (gPanel.getTileSize()/2);
     }
 
-    public int getX(){
-        return x;
-    }
-
-    public int getY(){
-        return y;
-    }
-
-
-
     public Player(GPanel gPanel, KeyHandler keyHandler) {
         super(gPanel);
         this.keyHandler = keyHandler;
@@ -62,10 +52,7 @@ public class Player extends Entity {
         }
     }
 
-    public BufferedImage getPlayerImage() {
-        return playerImage;
-    }
-
+    @Override
     public void update() {
 
         int newX = x;
