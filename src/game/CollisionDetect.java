@@ -1,11 +1,5 @@
 package game;
-
-import game.GPanel;
 import game.background.Tile;
-import game.entity.Player;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class CollisionDetect {
 

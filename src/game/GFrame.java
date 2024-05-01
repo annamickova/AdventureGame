@@ -2,16 +2,26 @@ package game;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GFrame extends JFrame {
+    public GFrame() throws HeadlessException {
+        GPanel gPanel = new GPanel();
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        frame.setResizable(false);
+        frame.setTitle("Adventure game");
+        gPanel.setLayout(null);
+        frame.add(gPanel);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
 
-    public GFrame(GPanel gPanel) throws HeadlessException {
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setResizable(false);
-        this.setTitle("Adventure game");
-        this.add(gPanel);
-        this.pack();
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
+        gPanel.startGame();
+
     }
+
+
 }
+

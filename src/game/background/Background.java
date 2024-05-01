@@ -79,7 +79,6 @@ public class Background {
         int leftTileCol = (gPanel.getPlayer().getX() - gPanel.getPlayer().getScreenX()) / gPanel.getTileSize();
         int topTileRow = (gPanel.getPlayer().getY() - gPanel.getPlayer().getScreenY()) / gPanel.getTileSize();
 
-
         int scTileX = gPanel.getScreenWidth() / gPanel.getTileSize() + 2;
         int scTileY = gPanel.getScreenHeight() / gPanel.getTileSize() + 2;
 
@@ -98,6 +97,8 @@ public class Background {
             }
         }
     }
+
+
 
 
 

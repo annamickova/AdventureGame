@@ -13,7 +13,6 @@ import java.io.IOException;
 
 public class Player extends Entity {
 
-    private GPanel gPanel;
     private KeyHandler keyHandler;
     private CollisionDetect collisionDetect;
 
@@ -39,7 +38,7 @@ public class Player extends Entity {
 
 
     public Player(GPanel gPanel, KeyHandler keyHandler) {
-        this.gPanel = gPanel;
+        super(gPanel);
         this.keyHandler = keyHandler;
         collisionDetect = new CollisionDetect(gPanel);
 

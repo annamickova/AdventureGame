@@ -16,7 +16,7 @@ public class GPanel extends JPanel implements Runnable{
     private int FPS;
 
     Thread thread;
-    KeyHandler keyHandler = new KeyHandler();
+    KeyHandler keyHandler = new KeyHandler(this);
 
  // player
     private Player player = new Player(this, keyHandler);
@@ -25,6 +25,35 @@ public class GPanel extends JPanel implements Runnable{
     private int maxCol;
     private int maxRow;
     private boolean running;
+    private boolean isButtonVisible = false;
+
+    private int gameState;
+    private int play = 1;
+    private int stop = 0;
+
+    public int getGameState() {
+        return gameState;
+    }
+
+    public void setGameState(int gameState) {
+        this.gameState = gameState;
+    }
+
+    public int getPlay() {
+        return play;
+    }
+
+    public void setPlay(int play) {
+        this.play = play;
+    }
+
+    public int getStop() {
+        return stop;
+    }
+
+    public void setStop(int stop) {
+        this.stop = stop;
+    }
 
     public Background getbGround() {
         return bGround;
@@ -55,7 +84,16 @@ public class GPanel extends JPanel implements Runnable{
         return player;
     }
 
+    public boolean isButtonVisible() {
+        return isButtonVisible;
+    }
+
+    public void setButtonVisible(boolean buttonVisible) {
+        isButtonVisible = buttonVisible;
+    }
+
     public GPanel(){
+        gameState = play;
         this.running = true;
         this.maxRow = 60;
         this.maxCol = 60;
@@ -89,7 +127,10 @@ public class GPanel extends JPanel implements Runnable{
     }
 
     public void update(){
-        player.update();
+        if (gameState == play){
+            player.update();
+
+        }
 
 //        if (keyHandler.upPress){
 //            playerY -= speed;
@@ -108,6 +149,7 @@ public class GPanel extends JPanel implements Runnable{
 
         bGround.draw(graphics2D);
         player.draw(graphics2D);
+        pause(graphics2D);
 //        graphics2D.setPaint(Color.WHITE);
 //        graphics2D.fillRect(playerX,playerY, tileSize, tileSize);
 
@@ -141,6 +183,29 @@ public class GPanel extends JPanel implements Runnable{
             }
         }
     }
+
+    public void pause(Graphics2D graphics2D){
+        graphics2D.setColor(Color.white);
+        if (gameState == play){
+        }
+        if (gameState == stop ) {
+            pauseScreen(graphics2D);
+        }
+    }
+
+    public void pauseScreen(Graphics2D graphics2D){
+        String text = "PAUSED";
+        graphics2D.setFont(new Font("Arial", Font.PLAIN, 60));
+        int l = (int)graphics2D.getFontMetrics().getStringBounds(text, graphics2D).getWidth();
+        int x = screenWidth/2 - l/2;
+        int y = screenHeight/2 - tileSize;
+
+        graphics2D.drawString(text, x, y);
+
+
+    }
+
+
 
 
 
