@@ -7,17 +7,20 @@ import java.awt.image.BufferedImage;
 
 public class Item {
 
+    protected GPanel gPanel;
     protected String name;
     protected BufferedImage itemImage;
 
     protected int itemX;
     protected int itemY;
+    protected Rectangle area;
 
     public Item(String name) {
         this.name = name;
     }
 
-    public Item() {
+    public Item(GPanel gPanel) {
+        this.gPanel = gPanel;
     }
 
     public int getItemX() {
@@ -46,6 +49,19 @@ public class Item {
         }else{
             this.name = "item";
         }
+    }
+
+    public BufferedImage getItemImage() {
+        return itemImage;
+    }
+
+    public void setItemImage(BufferedImage itemImage) {
+        this.itemImage = itemImage;
+    }
+
+    public Rectangle itemArea() {
+        area = new Rectangle(itemX, itemY,gPanel.getTileSize(), gPanel.getTileSize() );
+        return area;
     }
 
 

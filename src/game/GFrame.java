@@ -6,8 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GFrame extends JFrame {
+    GPanel gPanel;
     public GFrame() throws HeadlessException {
-        GPanel gPanel = new GPanel();
+        gPanel = new GPanel();
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setResizable(false);
@@ -21,7 +22,6 @@ public class GFrame extends JFrame {
         gPanel.startGame();
 
     }
-
 
 }
 

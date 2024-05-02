@@ -30,7 +30,6 @@ public class GPanel extends JPanel implements Runnable{
     private int maxCol;
     private int maxRow;
     private boolean running;
-    private boolean isButtonVisible = false;
 
     private int gameState;
     private int play = 1;
@@ -105,12 +104,12 @@ public class GPanel extends JPanel implements Runnable{
         this.npc = npc;
     }
 
-    public boolean isButtonVisible() {
-        return isButtonVisible;
+    public Settings getSettings() {
+        return settings;
     }
 
-    public void setButtonVisible(boolean buttonVisible) {
-        isButtonVisible = buttonVisible;
+    public void setSettings(Settings settings) {
+        this.settings = settings;
     }
 
     public GPanel(){
@@ -148,7 +147,6 @@ public class GPanel extends JPanel implements Runnable{
     private void update(){
         if (gameState == play){
             player.update();
-
         }
     }
 
@@ -157,14 +155,14 @@ public class GPanel extends JPanel implements Runnable{
         Graphics2D graphics2D = (Graphics2D)graphics;
 
         bGround.draw(graphics2D);
-        for (int i = 0; i < items.size(); i++) {
-            if (items.get(i) != null){
-                items.get(i).drawItem(graphics2D, this);
+        for (Item item : items) {
+            if (item != null) {
+                item.drawItem(graphics2D, this);
             }
         }
-        for (int i = 0; i < npc.size(); i++) {
-            if (npc.get(i) != null){
-                npc.get(i).drawEntity(graphics2D);
+        for (Entity entity : npc) {
+            if (entity != null) {
+                entity.drawEntity(graphics2D);
             }
         }
         player.draw(graphics2D);
@@ -178,7 +176,6 @@ public class GPanel extends JPanel implements Runnable{
 
         double drawInterval = 1000000000/FPS;
         double nextDrawTime = System.nanoTime() + drawInterval;
-
 
         while (running){
             update();
@@ -218,8 +215,6 @@ public class GPanel extends JPanel implements Runnable{
         int y = screenHeight/2 - tileSize;
 
         graphics2D.drawString(text, x, y);
-
-
     }
 
 

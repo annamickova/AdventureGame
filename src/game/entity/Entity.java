@@ -74,6 +74,17 @@ public class Entity {
         }
     }
 
+    public Rectangle entityAreaAround(){
+        Rectangle rec = new Rectangle(x-gPanel.getTileSize(), y-gPanel.getTileSize(),
+                gPanel.getTileSize()*3, gPanel.getTileSize()*3);
+        return rec;
+    }
+
+    public Rectangle entityArea(){
+        Rectangle rec = new Rectangle(x, y, gPanel.getTileSize(), gPanel.getTileSize());
+        return rec;
+    }
+
     public void action(){}
     public void update(){
         action();
