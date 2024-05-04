@@ -71,7 +71,9 @@ public class CollisionDetect {
             }
         }
         if (n != 0){
-            gPanel.getPlayer().setInteraction(true);
+            if (gPanel.getPlayer().isInteraction()){
+                gPanel.setGameState(gPanel.getDialog());
+            }
         }
     }
 }

@@ -160,9 +160,6 @@ public class GPanel extends JPanel implements Runnable{
     private void update(){
         if (gameState == play){
             player.update();
-            if (player.isInteraction()){
-                setGameState(dialog);
-            }
             for (Entity entity : npc) {
                 if (entity != null) {
                     entity.update();

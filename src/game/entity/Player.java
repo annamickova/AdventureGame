@@ -83,6 +83,7 @@ public class Player extends Entity {
                 y = newY;
             }
             collisionDetect.npcMeetPlayer();
+
         }
        gPanel.getSettings().collectItem();
     }

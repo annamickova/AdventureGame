@@ -20,19 +20,28 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        switch (e.getKeyCode()){
-            case KeyEvent.VK_W, KeyEvent.VK_UP -> moveUp = true;
-            case KeyEvent.VK_S, KeyEvent.VK_DOWN -> moveDown = true;
-            case KeyEvent.VK_A, KeyEvent.VK_LEFT -> moveLeft = true;
-            case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> moveRight = true;
-            case KeyEvent.VK_P -> {
-                if (gPanel.getGameState() == gPanel.getPlay()) {
-                    gPanel.setGameState(gPanel.getStop());
-                }else if (gPanel.getGameState() == gPanel.getStop()) {
-                    gPanel.setGameState(gPanel.getPlay());
-                }
+        if (gPanel.getGameState() == gPanel.getPlay()){
+            switch (e.getKeyCode()){
+                case KeyEvent.VK_W, KeyEvent.VK_UP -> moveUp = true;
+                case KeyEvent.VK_S, KeyEvent.VK_DOWN -> moveDown = true;
+                case KeyEvent.VK_A, KeyEvent.VK_LEFT -> moveLeft = true;
+                case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> moveRight = true;
+                case KeyEvent.VK_P -> gPanel.setGameState(gPanel.getStop());
+            }
+            gPanel.getPlayer().setInteraction(true);
+        }
+         else if (gPanel.getGameState() == gPanel.getStop()){
+             if (e.getKeyCode() == KeyEvent.VK_P){
+                 gPanel.setGameState(gPanel.getPlay());
+             }
+        }
+         else if (gPanel.getGameState() == gPanel.getDialog()){
+            if (e.getKeyCode() == KeyEvent.VK_M){
+                gPanel.getPlayer().setInteraction(false);
+                gPanel.setGameState(gPanel.getPlay());
             }
         }
+
     }
 
     @Override
