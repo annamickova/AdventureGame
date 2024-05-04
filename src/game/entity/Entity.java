@@ -16,6 +16,7 @@ public class Entity {
 
     protected BufferedImage playerImage;
     protected String direction;
+    protected boolean interaction;
 
     public Entity(GPanel gPanel) {
         this.gPanel = gPanel;
@@ -61,6 +62,14 @@ public class Entity {
 
     public void setDirection(String direction) {
         this.direction = direction;
+    }
+
+    public boolean isInteraction() {
+        return interaction;
+    }
+
+    public void setInteraction(boolean interaction) {
+        this.interaction = interaction;
     }
 
     public void drawEntity(Graphics2D graphics2D){

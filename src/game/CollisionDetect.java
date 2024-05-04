@@ -62,4 +62,16 @@ public class CollisionDetect {
         }
         return num != 0;
     }
+
+    public void npcMeetPlayer(){
+        int n = 0;
+        for (int i = 0; i < gPanel.getNpc().size(); i++) {
+            if (gPanel.getPlayer().entityArea().intersects(gPanel.getNpc().get(i).entityAreaAround())){
+             n++;
+            }
+        }
+        if (n != 0){
+            gPanel.getPlayer().setInteraction(true);
+        }
+    }
 }

@@ -37,6 +37,18 @@ public class GPanel extends JPanel implements Runnable{
     private int dialog = 2;
     DrawStates drawStates = new DrawStates(this);
 
+    public DrawStates getDrawStates() {
+        return drawStates;
+    }
+
+    public int getDialog() {
+        return dialog;
+    }
+
+    public void setDialog(int dialog) {
+        this.dialog = dialog;
+    }
+
     public int getGameState() {
         return gameState;
     }
@@ -148,6 +160,9 @@ public class GPanel extends JPanel implements Runnable{
     private void update(){
         if (gameState == play){
             player.update();
+            if (player.isInteraction()){
+                setGameState(dialog);
+            }
             for (Entity entity : npc) {
                 if (entity != null) {
                     entity.update();
@@ -205,13 +220,13 @@ public class GPanel extends JPanel implements Runnable{
     }
 
     private void setState(Graphics2D graphics2D){
-        graphics2D.setColor(Color.white);
+        graphics2D.setColor(new Color(250,250,250));
         if (gameState == play){
         }
         if (gameState == stop ) {
             drawStates.pauseScreen(graphics2D);
         }if (gameState == dialog){
-
+            drawStates.dialogScreen(graphics2D);
         }
     }
 

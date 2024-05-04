@@ -85,16 +85,16 @@ public class Player extends Entity {
                 x = newX;
                 y = newY;
             }
+            collisionDetect.npcMeetPlayer();
         }
        gPanel.getSettings().collectItem();
     }
 
 
 
-
-
     public void draw(Graphics2D graphics2D) {
-        graphics2D.drawImage(playerImage, getScreenX(), getScreenY(), gPanel.getTileSize(), gPanel.getTileSize(), null);
+        graphics2D.drawImage(playerImage, getScreenX(), getScreenY(),
+                gPanel.getTileSize(), gPanel.getTileSize(), null);
     }
 
 }

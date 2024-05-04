@@ -18,4 +18,17 @@ public class DrawStates {
 
         graphics2D.drawString(text, x, y);
     }
+
+    public void dialogScreen(Graphics2D graphics2D){
+        String text;
+        int windowX = gPanel.getTileSize() * 6 - gPanel.getTileSize()/2;
+        int windowY = gPanel.getTileSize()/2;
+        int windowWidth = gPanel.getScreenWidth() - (gPanel.getTileSize()*6);
+        int windowHeight =gPanel.getTileSize() * 4;
+        graphics2D.fillRoundRect(windowX,windowY,windowWidth,windowHeight, 20,20);
+
+
+    }
+
+
 }
