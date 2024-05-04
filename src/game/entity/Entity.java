@@ -88,6 +88,10 @@ public class Entity {
         Rectangle rec = new Rectangle(x, y, gPanel.getTileSize(), gPanel.getTileSize());
         return rec;
     }
+    public Rectangle playerNewArea(int newX, int newY){
+        Rectangle rec = new Rectangle(newX, newY, gPanel.getTileSize(), gPanel.getTileSize());
+        return rec;
+    }
 
 
 

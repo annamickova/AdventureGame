@@ -73,13 +73,20 @@ public class Player extends Entity {
             direction = "right";
         }
 
+        int num = 0;
+
         if (!collisionDetect.hasCollision(direction,x,y, this)){
-            x = newX;
-            y = newY;
+            for (int i = 0; i < gPanel.getNpc().size(); i++) {
+                if (playerNewArea(newX, newY).intersects(gPanel.getNpc().get(i).entityArea())){
+                    num++;
+                }
+            }
+            if (num == 0){
+                x = newX;
+                y = newY;
+            }
         }
        gPanel.getSettings().collectItem();
-
-
     }
 
 
