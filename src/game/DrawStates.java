@@ -21,11 +21,15 @@ public class DrawStates {
 
     public void dialogScreen(Graphics2D graphics2D){
         String text;
-        int windowX = gPanel.getTileSize() * 6 - gPanel.getTileSize()/2;
-        int windowY = gPanel.getTileSize()/2;
-        int windowWidth = gPanel.getScreenWidth() - (gPanel.getTileSize()*6);
-        int windowHeight =gPanel.getTileSize() * 4;
-        graphics2D.fillRoundRect(windowX,windowY,windowWidth,windowHeight, 20,20);
+        graphics2D.setColor(new Color(250,250,250,200));
+        int wX = gPanel.getTileSize() * 6 - gPanel.getTileSize()/2;
+        int wY = gPanel.getTileSize()/2;
+        int wWidth = gPanel.getScreenWidth() - (gPanel.getTileSize()*6);
+        int wHeight =gPanel.getTileSize() * 4;
+        graphics2D.fillRoundRect(wX,wY,wWidth,wHeight, 20,20);
+        graphics2D.setColor(new Color(0,0,0));
+        graphics2D.setStroke(new BasicStroke(5));
+        graphics2D.drawRoundRect(wX+5, wY+5, wWidth-10, wHeight -10, 20, 20);
 
 
     }

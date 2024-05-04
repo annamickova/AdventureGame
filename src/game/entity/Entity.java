@@ -5,6 +5,11 @@ import game.GPanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class Entity {
 
@@ -17,10 +22,12 @@ public class Entity {
     protected BufferedImage playerImage;
     protected String direction;
     protected boolean interaction;
+    protected ArrayList<String> dialogues;
 
     public Entity(GPanel gPanel) {
         this.gPanel = gPanel;
         this.collisionDetect = new CollisionDetect(gPanel);
+        this.dialogues = new ArrayList<>();
     }
 
 
@@ -100,6 +107,19 @@ public class Entity {
     public Rectangle playerNewArea(int newX, int newY){
         Rectangle rec = new Rectangle(newX, newY, gPanel.getTileSize(), gPanel.getTileSize());
         return rec;
+    }
+
+    public void setDialogues(String fileName){
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))){
+            String line;
+            while ((line = br.readLine()) != null){
+                dialogues.add(line);
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

@@ -17,6 +17,8 @@ public class NPC extends Entity {
         direction = "down";
         speedP = 1;
         getImage();
+        setDialogues("npc.txt");
+        System.out.println(dialogues);
     }
 
     private void getImage() {
