@@ -1,13 +1,10 @@
 package game.entity;
 
-import game.CollisionDetect;
 import game.GPanel;
 import game.KeyHandler;
-import game.background.Tile;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -77,7 +74,7 @@ public class Player extends Entity {
 
         if (!collisionDetect.hasCollision(direction,x,y, this)){
             for (int i = 0; i < gPanel.getNpc().size(); i++) {
-                if (playerNewArea(newX, newY).intersects(gPanel.getNpc().get(i).entityArea())){
+                if (entityNewArea(newX, newY).intersects(gPanel.getNpc().get(i).entityArea())){
                     num++;
                 }
             }

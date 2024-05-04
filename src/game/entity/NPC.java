@@ -18,7 +18,6 @@ public class NPC extends Entity {
         speedP = 1;
         getImage();
         setDialogues("npc.txt");
-        System.out.println(dialogues);
     }
 
     private void getImage() {

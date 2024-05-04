@@ -47,30 +47,6 @@ public class Entity {
         this.y = y;
     }
 
-    public int getSpeedP() {
-        return speedP;
-    }
-
-    public void setSpeedP(int speedP) {
-        this.speedP = speedP;
-    }
-
-    public BufferedImage getPlayerImage() {
-        return playerImage;
-    }
-
-    public void setPlayerImage(BufferedImage playerImage) {
-        this.playerImage = playerImage;
-    }
-
-    public String getDirection() {
-        return direction;
-    }
-
-    public void setDirection(String direction) {
-        this.direction = direction;
-    }
-
     public boolean isInteraction() {
         return interaction;
     }
@@ -79,9 +55,15 @@ public class Entity {
         this.interaction = interaction;
     }
 
-    public void drawEntity(Graphics2D graphics2D){
-        BufferedImage im = null;
+    public ArrayList<String> getDialogues() {
+        return dialogues;
+    }
 
+    public void setDialogues(ArrayList<String> dialogues) {
+        this.dialogues = dialogues;
+    }
+
+    public void drawEntity(Graphics2D graphics2D){
         int screenX = x - gPanel.getPlayer().getX() + gPanel.getPlayer().getScreenX();
         int screenY = y - gPanel.getPlayer().getY()+ gPanel.getPlayer().getScreenY();
 
@@ -104,7 +86,7 @@ public class Entity {
         Rectangle rec = new Rectangle(x, y, gPanel.getTileSize(), gPanel.getTileSize());
         return rec;
     }
-    public Rectangle playerNewArea(int newX, int newY){
+    public Rectangle entityNewArea(int newX, int newY){
         Rectangle rec = new Rectangle(newX, newY, gPanel.getTileSize(), gPanel.getTileSize());
         return rec;
     }

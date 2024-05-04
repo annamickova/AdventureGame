@@ -17,7 +17,7 @@ public class Background {
         this.tiles = new Tile[15];
         this.tileMap = new int[60][60];
         loadTiles();
-        loadMap();
+        loadMap("map.txt");
     }
 
     public Tile getTile(int col, int row) {
@@ -25,9 +25,9 @@ public class Background {
         return tiles[tileNum];
     }
 
-    private void loadMap() {
+    private void loadMap(String fileName) {
 
-        try (BufferedReader br = new BufferedReader(new FileReader("map.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             for (int row = 0; row < gPanel.getMaxRow(); row++) {
                 String line = br.readLine();
                 String[] map = line.split(" ");
