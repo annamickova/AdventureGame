@@ -10,8 +10,7 @@ import java.util.Random;
 
 
 public class NPC extends Entity {
-    int counter = 0;
-    String name;
+   private String name;
     public NPC(GPanel gPanel) {
         super(gPanel);
         direction = "down";
@@ -76,4 +75,7 @@ public class NPC extends Entity {
     public String toString() {
         return "name: " + name;
     }
+
+
+
 }

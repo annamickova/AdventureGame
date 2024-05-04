@@ -23,6 +23,8 @@ public class Entity {
     protected String direction;
     protected boolean interaction;
     protected ArrayList<String> dialogues;
+    protected int counter = 0;
+    protected int dialogIndex = 0;
 
     public Entity(GPanel gPanel) {
         this.gPanel = gPanel;
@@ -62,6 +64,8 @@ public class Entity {
     public void setDialogues(ArrayList<String> dialogues) {
         this.dialogues = dialogues;
     }
+
+
 
     public void drawEntity(Graphics2D graphics2D){
         int screenX = x - gPanel.getPlayer().getX() + gPanel.getPlayer().getScreenX();
@@ -105,7 +109,13 @@ public class Entity {
     }
 
 
+    public void setText(){
+        if (dialogIndex < dialogues.size()){
+            gPanel.getDrawStates().setCurrDialog(dialogues.get(dialogIndex));
+            dialogIndex++;
+        }
 
+    }
     public void act(){}
     public void update(){
         act();

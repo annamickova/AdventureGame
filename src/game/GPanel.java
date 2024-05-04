@@ -35,7 +35,8 @@ public class GPanel extends JPanel implements Runnable{
     private int play = 1;
     private int stop = 0;
     private int dialog = 2;
-    DrawStates drawStates = new DrawStates(this);
+    private DrawStates drawStates = new DrawStates(this);
+
 
     public DrawStates getDrawStates() {
         return drawStates;
@@ -219,11 +220,14 @@ public class GPanel extends JPanel implements Runnable{
     private void setState(Graphics2D graphics2D){
         graphics2D.setColor(new Color(250,250,250));
         if (gameState == play){
+
         }
         if (gameState == stop ) {
             drawStates.pauseScreen(graphics2D);
+
         }if (gameState == dialog){
             drawStates.dialogScreen(graphics2D);
+
         }
     }
 

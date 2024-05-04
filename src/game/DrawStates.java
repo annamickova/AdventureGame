@@ -10,6 +10,14 @@ public class DrawStates {
         this.gPanel = gPanel;
     }
 
+    public String getCurrDialog() {
+        return currDialog;
+    }
+
+    public void setCurrDialog(String currDialog) {
+        this.currDialog = currDialog;
+    }
+
     public void pauseScreen(Graphics2D graphics2D){
         String text = "PAUSED";
         graphics2D.setFont(new Font("Arial", Font.PLAIN, 60));
@@ -21,7 +29,6 @@ public class DrawStates {
     }
 
     public void dialogScreen(Graphics2D graphics2D){
-        currDialog = gPanel.getNpc().get(0).getDialogues().get(0);
         graphics2D.setColor(new Color(250,250,250,215));
         int wX = gPanel.getTileSize() * 6 - gPanel.getTileSize()/2;
         int wY = gPanel.getTileSize()/2;
@@ -30,6 +37,7 @@ public class DrawStates {
         graphics2D.fillRoundRect(wX,wY,wWidth,wHeight, 20,20);
 
         displayDialogue(graphics2D,wX,wY,wWidth,wHeight);
+
     }
 
     private void displayDialogue(Graphics2D graphics2D, int wX, int wY, int wWidth, int wHeight){
@@ -38,6 +46,8 @@ public class DrawStates {
         graphics2D.drawRoundRect(wX+5, wY+5, wWidth-10, wHeight -10, 20, 20);
         graphics2D.drawString(currDialog, wX + gPanel.getTileSize(), wY + gPanel.getTileSize());
     }
+
+
 
 
 }

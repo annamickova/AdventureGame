@@ -65,14 +65,17 @@ public class CollisionDetect {
 
     public void npcMeetPlayer(){
         int n = 0;
+        int j = 0;
         for (int i = 0; i < gPanel.getNpc().size(); i++) {
             if (gPanel.getPlayer().entityArea().intersects(gPanel.getNpc().get(i).entityAreaAround())){
-             n++;
+                n++;
+                j = i;
             }
         }
         if (n != 0){
             if (gPanel.getPlayer().isInteraction()){
                 gPanel.setGameState(gPanel.getDialog());
+                gPanel.getNpc().get(j).setText();
             }
         }
     }
