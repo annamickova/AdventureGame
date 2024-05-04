@@ -2,8 +2,6 @@ package game;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class GFrame extends JFrame {
     GPanel gPanel;

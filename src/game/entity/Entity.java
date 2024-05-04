@@ -89,19 +89,7 @@ public class Entity {
         return rec;
     }
 
-    public boolean hit(Entity e1, Entity e2){
-        return e1.entityArea().intersects(e2.entityArea());
-    }
 
-    public boolean hit2(Entity e){
-        int num = 0;
-        for (int i = 0; i < gPanel.getNpc().size(); i++) {
-            if (hit(e, gPanel.getNpc().get(i))){
-                num++;
-            }
-        }
-        return num != 0;
-    }
 
     public void act(){}
     public void update(){

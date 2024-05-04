@@ -73,7 +73,7 @@ public class Player extends Entity {
             direction = "right";
         }
 
-        if (!collisionDetect.hasCollision(direction,x,y, this) ){
+        if (!collisionDetect.hasCollision(direction,x,y, this)){
             x = newX;
             y = newY;
         }

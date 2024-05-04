@@ -12,9 +12,8 @@ import java.util.Random;
 public class NPC extends Entity {
     int counter = 0;
     String name;
-    public NPC(GPanel gPanel, String name) {
+    public NPC(GPanel gPanel) {
         super(gPanel);
-        this.name = name;
         direction = "down";
         speedP = 1;
         getImage();
@@ -22,6 +21,7 @@ public class NPC extends Entity {
 
     private void getImage() {
         try {
+            name = "karel";
             playerImage = ImageIO.read(new File("cat.jpeg"));
         } catch (IOException e) {
             e.printStackTrace();
@@ -65,7 +65,7 @@ public class NPC extends Entity {
             case "right" -> newX += speedP;
         }
 
-        if (!collisionDetect.hasCollision(direction,newX,newY, this) && !hit(this, gPanel.getPlayer())){
+        if (!collisionDetect.hasCollision(direction,newX,newY, this) && !collisionDetect.hit(this, gPanel.getPlayer())){
             x = newX;
             y = newY;
         }

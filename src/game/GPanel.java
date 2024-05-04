@@ -34,6 +34,8 @@ public class GPanel extends JPanel implements Runnable{
     private int gameState;
     private int play = 1;
     private int stop = 0;
+    private int dialog = 2;
+    DrawStates drawStates = new DrawStates(this);
 
     public int getGameState() {
         return gameState;
@@ -170,7 +172,7 @@ public class GPanel extends JPanel implements Runnable{
             }
         }
         player.draw(graphics2D);
-        pause(graphics2D);
+        setState(graphics2D);
 
         graphics2D.dispose();
     }
@@ -202,24 +204,18 @@ public class GPanel extends JPanel implements Runnable{
         }
     }
 
-    private void pause(Graphics2D graphics2D){
+    private void setState(Graphics2D graphics2D){
         graphics2D.setColor(Color.white);
         if (gameState == play){
         }
         if (gameState == stop ) {
-            pauseScreen(graphics2D);
+            drawStates.pauseScreen(graphics2D);
+        }if (gameState == dialog){
+
         }
     }
 
-    private void pauseScreen(Graphics2D graphics2D){
-        String text = "PAUSED";
-        graphics2D.setFont(new Font("Arial", Font.PLAIN, 60));
-        int l = (int)graphics2D.getFontMetrics().getStringBounds(text, graphics2D).getWidth();
-        int x = screenWidth/2 - l/2;
-        int y = screenHeight/2 - tileSize;
 
-        graphics2D.drawString(text, x, y);
-    }
 
 
 

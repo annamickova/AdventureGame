@@ -13,7 +13,7 @@ public class Settings {
     }
 
 
-    public void setItems(){
+    private void setItems(){
         Flower flower = new Flower(gPanel);
         flower.setItemX(gPanel.getTileSize()*21);
         flower.setItemY(gPanel.getTileSize()*23);
@@ -28,12 +28,11 @@ public class Settings {
             }
         }
     }
-    public void setNPC(){
-        NPC npc1 = new NPC(gPanel, "karel");
+    private void setNPC(){
+        NPC npc1 = new NPC(gPanel);
         npc1.setX(gPanel.getTileSize()*21);
         npc1.setY(gPanel.getTileSize()*21);
         gPanel.getNpc().add(npc1);
-        System.out.println(gPanel.getNpc());
 
     }
 
