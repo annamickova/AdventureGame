@@ -14,7 +14,6 @@ import java.io.IOException;
 public class Player extends Entity {
 
     private KeyHandler keyHandler;
-    private CollisionDetect collisionDetect;
 
     private int screenX;
     private int screenY;
@@ -30,7 +29,6 @@ public class Player extends Entity {
     public Player(GPanel gPanel, KeyHandler keyHandler) {
         super(gPanel);
         this.keyHandler = keyHandler;
-        collisionDetect = new CollisionDetect(gPanel);
 
         defValues();
         getImage();
@@ -75,7 +73,7 @@ public class Player extends Entity {
             direction = "right";
         }
 
-        if (!collisionDetect.hasCollision(direction,x,y)){
+        if (!collisionDetect.hasCollision(direction,x,y, this) ){
             x = newX;
             y = newY;
         }
@@ -83,6 +81,8 @@ public class Player extends Entity {
 
 
     }
+
+
 
 
 

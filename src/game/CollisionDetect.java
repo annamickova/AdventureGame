@@ -1,5 +1,6 @@
 package game;
 import game.background.Tile;
+import game.entity.Entity;
 
 public class CollisionDetect {
 
@@ -9,14 +10,14 @@ public class CollisionDetect {
         this.gPanel = gPanel;
     }
 
-    public boolean hasCollision(String direction, int x, int y) {
-        int aX = x + (gPanel.getTileSize()/2);
-        int bX = x + gPanel.getTileSize();
-        int dX = x;
+    public boolean hasCollision(String direction, int x, int y , Entity entity) {
+        int aX = entity.getX() + (gPanel.getTileSize()/2);
+        int bX = entity.getX() + gPanel.getTileSize();
+        int dX = entity.getX();
 
-        int aY = y;
-        int bY = y + (gPanel.getTileSize()/2);
-        int cY = y + gPanel.getTileSize();
+        int aY = entity.getY();
+        int bY = entity.getY() + (gPanel.getTileSize()/2);
+        int cY = entity.getY() + gPanel.getTileSize();
 
         int tileX = 0;
         int tileY = 0;

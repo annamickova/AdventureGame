@@ -29,9 +29,12 @@ public class Settings {
         }
     }
     public void setNPC(){
-        gPanel.getNpc().add(0, new NPC(gPanel));
-        gPanel.getNpc().get(0).setX(gPanel.getTileSize()*21);
-        gPanel.getNpc().get(0).setY(gPanel.getTileSize()*21);
+        NPC npc1 = new NPC(gPanel, "karel");
+        npc1.setX(gPanel.getTileSize()*21);
+        npc1.setY(gPanel.getTileSize()*21);
+        gPanel.getNpc().add(npc1);
+        System.out.println(gPanel.getNpc());
+
     }
 
 

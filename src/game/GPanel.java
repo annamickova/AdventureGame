@@ -124,7 +124,6 @@ public class GPanel extends JPanel implements Runnable{
 
         speed = 5;
         bGround = new Background(this);
-        settings.setNPC();
         gPanelSettings();
     }
     private void gPanelSettings(){
@@ -147,6 +146,11 @@ public class GPanel extends JPanel implements Runnable{
     private void update(){
         if (gameState == play){
             player.update();
+            for (Entity entity : npc) {
+                if (entity != null) {
+                    entity.update();
+                }
+            }
         }
     }
 

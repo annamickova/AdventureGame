@@ -1,5 +1,6 @@
 package game.entity;
 
+import game.CollisionDetect;
 import game.GPanel;
 
 import java.awt.*;
@@ -11,13 +12,16 @@ public class Entity {
     protected int x;
     protected int y;
     protected int speedP;
+    protected CollisionDetect collisionDetect;
 
     protected BufferedImage playerImage;
     protected String direction;
 
     public Entity(GPanel gPanel) {
         this.gPanel = gPanel;
+        this.collisionDetect = new CollisionDetect(gPanel);
     }
+
 
     public int getX() {
         return x;
@@ -85,8 +89,22 @@ public class Entity {
         return rec;
     }
 
-    public void action(){}
+    public boolean hit(Entity e1, Entity e2){
+        return e1.entityArea().intersects(e2.entityArea());
+    }
+
+    public boolean hit2(Entity e){
+        int num = 0;
+        for (int i = 0; i < gPanel.getNpc().size(); i++) {
+            if (hit(e, gPanel.getNpc().get(i))){
+                num++;
+            }
+        }
+        return num != 0;
+    }
+
+    public void act(){}
     public void update(){
-        action();
+        act();
     }
 }
