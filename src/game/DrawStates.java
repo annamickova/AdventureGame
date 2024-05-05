@@ -44,7 +44,12 @@ public class DrawStates {
         graphics2D.setColor(new Color(0,0,0));
         graphics2D.setStroke(new BasicStroke(5));
         graphics2D.drawRoundRect(wX+5, wY+5, wWidth-10, wHeight -10, 20, 20);
-        graphics2D.drawString(currDialog, wX + gPanel.getTileSize(), wY + gPanel.getTileSize());
+
+        for (String line: currDialog.split("/")){
+            graphics2D.drawString(line, wX + gPanel.getTileSize(), wY + gPanel.getTileSize());
+            wY += 40;
+        }
+
     }
 
 

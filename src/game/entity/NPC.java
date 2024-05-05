@@ -5,6 +5,7 @@ import game.GPanel;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -34,7 +35,7 @@ public class NPC extends Entity {
         move();
     }
 
-    @Override
+   @Override
     public void act() {
 
         counter++;
@@ -49,10 +50,9 @@ public class NPC extends Entity {
             }
             counter = 0;
         }
-
-
-
     }
+
+
 
     public void move(){
         int newX = x;
