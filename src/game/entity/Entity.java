@@ -65,7 +65,13 @@ public class Entity {
         this.dialogues = dialogues;
     }
 
+    public int getDialogIndex() {
+        return dialogIndex;
+    }
 
+    public void setDialogIndex(int dialogIndex) {
+        this.dialogIndex = dialogIndex;
+    }
 
     public void drawEntity(Graphics2D graphics2D){
         int screenX = x - gPanel.getPlayer().getX() + gPanel.getPlayer().getScreenX();
@@ -110,10 +116,13 @@ public class Entity {
 
 
     public void setText(){
-        if (dialogIndex < dialogues.size()){
-            gPanel.getDrawStates().setCurrDialog(dialogues.get(dialogIndex));
-            dialogIndex++;
+        if (gPanel.getCurrDialogIndex() == dialogIndex){
+            if (dialogIndex < dialogues.size()){
+                gPanel.getDrawStates().setCurrDialog(dialogues.get(dialogIndex));
+                dialogIndex++;
+            }
         }
+
 
     }
     public void act(){}

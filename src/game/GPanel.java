@@ -36,7 +36,15 @@ public class GPanel extends JPanel implements Runnable{
     private int stop = 0;
     private int dialog = 2;
     private DrawStates drawStates = new DrawStates(this);
+    private int currDialogIndex;
 
+    public int getCurrDialogIndex() {
+        return currDialogIndex;
+    }
+
+    public void setCurrDialogIndex(int currDialogIndex) {
+        this.currDialogIndex = currDialogIndex;
+    }
 
     public DrawStates getDrawStates() {
         return drawStates;
@@ -128,6 +136,7 @@ public class GPanel extends JPanel implements Runnable{
     }
 
     public GPanel(){
+        currDialogIndex = 0;
         gameState = play;
         running = true;
         maxRow = 60;
@@ -226,7 +235,26 @@ public class GPanel extends JPanel implements Runnable{
             drawStates.pauseScreen(graphics2D);
 
         }if (gameState == dialog){
+            changeIndex();
             drawStates.dialogScreen(graphics2D);
+        }
+    }
+
+    public void changeIndex(){
+        int n = 0;
+        int howMany = 0;
+        for (Entity entity : npc) {
+            if (entity.getDialogIndex() == currDialogIndex + 1) {
+                n++;
+            }
+            if (entity.getDialogues().size() > howMany) {
+                howMany = entity.getDialogues().size() - 1;
+            }
+        }
+        if (n == npc.size()){
+            if (currDialogIndex <= howMany-1){
+                currDialogIndex++;
+            }
 
         }
     }
