@@ -2,6 +2,8 @@ package game;
 import game.background.Tile;
 import game.entity.Entity;
 
+import java.awt.*;
+
 public class CollisionDetect {
 
     GPanel gPanel;
@@ -10,7 +12,7 @@ public class CollisionDetect {
         this.gPanel = gPanel;
     }
 
-    public boolean hasCollision(String direction, int x, int y , Entity entity) {
+    public boolean hasCollision(String direction, Entity entity) {
         int aX = entity.getX() + (gPanel.getTileSize()/2);
         int bX = entity.getX() + gPanel.getTileSize();
         int dX = entity.getX();
@@ -54,13 +56,15 @@ public class CollisionDetect {
     }
 
     public boolean hit2(Entity e){
-        int num = 0;
+        int n = 0;
         for (int i = 0; i < gPanel.getNpc().size(); i++) {
-            if (hit(e, gPanel.getNpc().get(i))){
-                num++;
+            if (!gPanel.getNpc().get(i).equals(e)){
+                if (e.entityArea().intersects(gPanel.getNpc().get(i).entityArea())){
+                    n++;
+                }
             }
         }
-        return num != 0;
+        return n != 0;
     }
 
     public void npcMeetPlayer(){

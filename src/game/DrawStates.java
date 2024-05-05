@@ -47,7 +47,7 @@ public class DrawStates {
 
         for (String line: currDialog.split("/")){
             graphics2D.drawString(line, wX + gPanel.getTileSize(), wY + gPanel.getTileSize());
-            wY += 40;
+            wY += gPanel.getTileSize();
         }
 
     }

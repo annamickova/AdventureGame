@@ -23,7 +23,6 @@ public class Entity {
     protected String direction;
     protected boolean interaction;
     protected ArrayList<String> dialogues;
-    protected int counter = 0;
     protected int dialogIndex = 0;
 
     public Entity(GPanel gPanel) {

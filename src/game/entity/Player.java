@@ -72,7 +72,7 @@ public class Player extends Entity {
 
         int num = 0;
 
-        if (!collisionDetect.hasCollision(direction,x,y, this)){
+        if (!collisionDetect.hasCollision(direction, this)){
             for (int i = 0; i < gPanel.getNpc().size(); i++) {
                 if (entityNewArea(newX, newY).intersects(gPanel.getNpc().get(i).entityArea())){
                     num++;

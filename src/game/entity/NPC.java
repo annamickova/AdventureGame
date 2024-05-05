@@ -5,13 +5,14 @@ import game.GPanel;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Random;
 
 
 
 public class NPC extends Entity {
    private String name;
+    private long lastMoveTime;
+    private long moveInterval = 2000;
     public NPC(GPanel gPanel) {
         super(gPanel);
         direction = "down";
@@ -38,23 +39,23 @@ public class NPC extends Entity {
    @Override
     public void act() {
 
-        counter++;
-        if (counter == 90){
-            Random random = new Random () ;
-            int i = random.nextInt (4);
-            switch (i){
-                case 0 -> this.direction = "up";
-                case 1 -> this.direction = "down";
-                case 2 -> this.direction = "left";
-                case 3 -> this.direction = "right";
-            }
-            counter = 0;
-        }
+       long currentTime = System.currentTimeMillis();
+       if (currentTime - lastMoveTime >= moveInterval) {
+           Random random = new Random();
+           int i = random.nextInt(4);
+           switch (i) {
+               case 0 -> this.direction = "up";
+               case 1 -> this.direction = "down";
+               case 2 -> this.direction = "left";
+               case 3 -> this.direction = "right";
+           }
+           lastMoveTime = currentTime;
+       }
     }
 
 
 
-    public void move(){
+   /* public void move(){
         int newX = x;
         int newY = y;
 
@@ -66,6 +67,31 @@ public class NPC extends Entity {
         }
 
         if (!collisionDetect.hasCollision(direction,newX,newY, this) && !collisionDetect.hit(this, gPanel.getPlayer())){
+            x = newX;
+            y = newY;
+        }
+    }*/
+
+    public void move() {
+        int newX = x;
+        int newY = y;
+        Random rd = new Random();
+        switch (this.direction) {
+            case "up" -> newY -= speedP;
+            case "down" -> newY += speedP;
+            case "left" -> newX -= speedP;
+            case "right" -> newX += speedP;
+        }
+
+        if (collisionDetect.hasCollision(direction, this)){
+            int i = rd.nextInt(4);
+            switch (i) {
+                case 0 -> direction = "up";
+                case 1 -> direction = "down";
+                case 2 -> direction = "left";
+                case 3 -> direction = "right";
+            }
+        } else if (!collisionDetect.hit(this, gPanel.getPlayer())) {
             x = newX;
             y = newY;
         }

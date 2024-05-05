@@ -26,7 +26,6 @@ public class Background {
     }
 
     private void loadMap(String fileName) {
-
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             for (int row = 0; row < gPanel.getMaxRow(); row++) {
                 String line = br.readLine();
@@ -97,9 +96,6 @@ public class Background {
             }
         }
     }
-
-
-
 
 
 }
