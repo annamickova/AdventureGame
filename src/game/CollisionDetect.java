@@ -55,16 +55,16 @@ public class CollisionDetect {
         return e1.entityArea().intersects(e2.entityArea());
     }
 
-    public boolean hit2(Entity e){
-        int n = 0;
+    public boolean collisionWithOtherNPCs(int x, int y){
+        Rectangle e = new Rectangle(x, y, gPanel.getTileSize(), gPanel.getTileSize());
         for (int i = 0; i < gPanel.getNpc().size(); i++) {
-            if (!gPanel.getNpc().get(i).equals(e)){
-                if (e.entityArea().intersects(gPanel.getNpc().get(i).entityArea())){
-                    n++;
+
+                if (e.intersects(gPanel.getNpc().get(i).entityArea())){
+                    return true;
                 }
-            }
+
         }
-        return n != 0;
+        return false;
     }
 
     public void npcMeetPlayer(){
