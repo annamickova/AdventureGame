@@ -2,6 +2,7 @@ package game;
 
 import game.background.Background;
 import game.entity.Entity;
+import game.entity.NPC;
 import game.entity.Player;
 import game.items.Item;
 
@@ -23,7 +24,7 @@ public class GPanel extends JPanel implements Runnable{
 
     private Player player = new Player(this, keyHandler);
     private ArrayList<Item> items = new ArrayList<>();
-    private ArrayList<Entity> npc = new ArrayList<>();
+    private ArrayList<NPC> npc = new ArrayList<>();
     private Settings settings = new Settings(this);
     private int speed;
     private Background bGround;
@@ -119,11 +120,11 @@ public class GPanel extends JPanel implements Runnable{
         this.items = items;
     }
 
-    public ArrayList<Entity> getNpc() {
+    public ArrayList<NPC> getNpc() {
         return npc;
     }
 
-    public void setNpc(ArrayList<Entity> npc) {
+    public void setNpc(ArrayList<NPC> npc) {
         this.npc = npc;
     }
 
@@ -243,12 +244,12 @@ public class GPanel extends JPanel implements Runnable{
     public void changeIndex(){
         int n = 0;
         int howMany = 0;
-        for (Entity entity : npc) {
-            if (entity.getDialogIndex() == currDialogIndex + 1) {
+        for (NPC npc : npc) {
+            if (npc.getDialogIndex() == currDialogIndex + 1) {
                 n++;
             }
-            if (entity.getDialogues().size() > howMany) {
-                howMany = entity.getDialogues().size() - 1;
+            if (npc.getDialogues().size() > howMany) {
+                howMany = npc.getDialogues().size() - 1;
             }
         }
         if (n == npc.size()){
