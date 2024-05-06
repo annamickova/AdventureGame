@@ -20,12 +20,12 @@ public class GPanel extends JPanel implements Runnable{
     private int FPS;
 
     Thread thread;
-    KeyHandler keyHandler = new KeyHandler(this);
+    KeyHandler keyHandler;
 
-    private Player player = new Player(this, keyHandler);
-    private ArrayList<Item> items = new ArrayList<>();
-    private ArrayList<NPC> npc = new ArrayList<>();
-    private Settings settings = new Settings(this);
+    private Player player;
+    private ArrayList<Item> items;
+    private ArrayList<NPC> npc;
+    private Settings settings;
     private int speed;
     private Background bGround;
     private int maxCol;
@@ -36,7 +36,7 @@ public class GPanel extends JPanel implements Runnable{
     private int play = 1;
     private int stop = 0;
     private int dialog = 2;
-    private DrawStates drawStates = new DrawStates(this);
+    private DrawStates drawStates;
     private int currDialogIndex;
 
     public int getCurrDialogIndex() {
@@ -137,19 +137,37 @@ public class GPanel extends JPanel implements Runnable{
     }
 
     public GPanel(){
+        keyHandler = new KeyHandler(this);
         currDialogIndex = 0;
         gameState = play;
         running = true;
+
+        setPanelSize();
+
+        setPlayersStuff();
+        setAssets();
+        gPanelSettings();
+    }
+
+    private void setPlayersStuff(){
+        player = new Player(this, keyHandler);
+        speed = 5;
+    }
+
+    private void setAssets(){
+        bGround = new Background(this);
+        settings = new Settings(this);
+        items = new ArrayList<>();
+        npc = new ArrayList<>();
+        drawStates = new DrawStates(this);
+    }
+
+    private void setPanelSize(){
         maxRow = 60;
         maxCol = 60;
-
         screenWidth = tileSize * 16;
         screenHeight = tileSize * 16;
         FPS = 60;
-
-        speed = 5;
-        bGround = new Background(this);
-        gPanelSettings();
     }
     private void gPanelSettings(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
