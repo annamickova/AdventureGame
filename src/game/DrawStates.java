@@ -20,7 +20,7 @@ public class DrawStates {
 
     public void pauseScreen(Graphics2D graphics2D){
         String text = "PAUSED";
-        graphics2D.setFont(new Font("Arial", Font.PLAIN, 60));
+        graphics2D.setFont(new Font("Arial", Font.BOLD, 60));
         int l = (int)graphics2D.getFontMetrics().getStringBounds(text, graphics2D).getWidth();
         int x = gPanel.getScreenWidth()/2 - l/2;
         int y = gPanel.getScreenHeight()/2 - gPanel.getTileSize();
@@ -53,7 +53,10 @@ public class DrawStates {
     }
 
     public void homeScreen(Graphics2D graphics2D){
-
+        String text = "hello";
+        graphics2D.setFont(new Font("Arial", Font.BOLD, 40));
+        int hX = (int)graphics2D.getFontMetrics().getStringBounds(text, graphics2D).getWidth();
+        int hY = gPanel.getTileSize()*4;
     }
 
 

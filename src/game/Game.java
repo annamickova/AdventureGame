@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class Game {
 
-    GPanel gPanel;
+    private GPanel gPanel;
 
     public Game(GPanel gPanel) {
         this.gPanel = gPanel;
@@ -27,6 +27,23 @@ public class Game {
             if (gPanel.getCurrDialogIndex() <= howMany-1){
                 gPanel.setCurrDialogIndex(gPanel.getCurrDialogIndex()+1);
             }
+        }
+    }
+
+    public void setState(Graphics2D graphics2D){
+        graphics2D.setColor(new Color(250,250,250));
+        if (gPanel.getGameState() == gPanel.getHome()){
+
+        }
+        if (gPanel.getGameState() == gPanel.getPlay()){
+
+        }
+        if (gPanel.getGameState() == gPanel.getStop() ) {
+            gPanel.getDrawStates().pauseScreen(graphics2D);
+
+        }if (gPanel.getGameState() == gPanel.getDialog()){
+            changeIndex();
+            gPanel.getDrawStates().dialogScreen(graphics2D);
         }
     }
 }

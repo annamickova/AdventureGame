@@ -43,6 +43,10 @@ public class GPanel extends JPanel implements Runnable{
         this.currDialogIndex = currDialogIndex;
     }
 
+    public int getHome() {
+        return home;
+    }
+
     public int getCurrDialogIndex() {
         return currDialogIndex;
     }
@@ -176,7 +180,7 @@ public class GPanel extends JPanel implements Runnable{
         Graphics2D graphics2D = (Graphics2D)graphics;
 
         if (gameState == home){
-            setState(graphics2D);
+            game.setState(graphics2D);
         }else {
             bGround.draw(graphics2D);
             for (Item item : items) {
@@ -190,7 +194,7 @@ public class GPanel extends JPanel implements Runnable{
                 }
             }
             player.draw(graphics2D);
-            setState(graphics2D);
+            game.setState(graphics2D);
         }
         graphics2D.dispose();
     }
@@ -221,22 +225,7 @@ public class GPanel extends JPanel implements Runnable{
         }
     }
 
-    private void setState(Graphics2D graphics2D){
-        graphics2D.setColor(new Color(250,250,250));
-        if (gameState == home){
 
-        }
-        if (gameState == play){
-
-        }
-        if (gameState == stop ) {
-            drawStates.pauseScreen(graphics2D);
-
-        }if (gameState == dialog){
-            game.changeIndex();
-            drawStates.dialogScreen(graphics2D);
-        }
-    }
 
 
 
