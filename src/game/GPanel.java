@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class GPanel extends JPanel implements Runnable{
 
+    Game game = new Game(this);
     private final int tileSize = 48;
     private int screenWidth;
     private int screenHeight;
@@ -37,6 +38,10 @@ public class GPanel extends JPanel implements Runnable{
     private final int home = 3;
     private DrawStates drawStates;
     private int currDialogIndex;
+
+    public void setCurrDialogIndex(int currDialogIndex) {
+        this.currDialogIndex = currDialogIndex;
+    }
 
     public int getCurrDialogIndex() {
         return currDialogIndex;
@@ -228,28 +233,12 @@ public class GPanel extends JPanel implements Runnable{
             drawStates.pauseScreen(graphics2D);
 
         }if (gameState == dialog){
-            changeIndex();
+            game.changeIndex();
             drawStates.dialogScreen(graphics2D);
         }
     }
 
-    private void changeIndex(){
-        int n = 0;
-        int howMany = 0;
-        for (NPC npc : npc) {
-            if (npc.getDialogIndex() == currDialogIndex + 1) {
-                n++;
-            }
-            if (npc.getDialogues().size() > howMany) {
-                howMany = npc.getDialogues().size() - 1;
-            }
-        }
-        if (n == npc.size()){
-            if (currDialogIndex <= howMany-1){
-                currDialogIndex++;
-            }
-        }
-    }
+
 
 
 

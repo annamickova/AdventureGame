@@ -52,7 +52,7 @@ public class DrawStates {
 
     }
 
-    public void homeScreen(){
+    public void homeScreen(Graphics2D graphics2D){
 
     }
 

@@ -23,6 +23,7 @@ public class Entity {
     protected String direction;
     protected boolean interaction;
 
+
     public Entity(GPanel gPanel) {
         this.gPanel = gPanel;
         this.collisionDetect = new CollisionDetect(gPanel);
@@ -54,6 +55,8 @@ public class Entity {
         this.interaction = interaction;
     }
 
+
+
     public void drawEntity(Graphics2D graphics2D){
         int screenX = x - gPanel.getPlayer().getX() + gPanel.getPlayer().getScreenX();
         int screenY = y - gPanel.getPlayer().getY()+ gPanel.getPlayer().getScreenY();
@@ -68,21 +71,23 @@ public class Entity {
     }
 
     public Rectangle entityAreaAround(){
-        return new Rectangle(x-gPanel.getTileSize(), y-gPanel.getTileSize(),
+        Rectangle rec = new Rectangle(x-gPanel.getTileSize(), y-gPanel.getTileSize(),
                 gPanel.getTileSize()*3, gPanel.getTileSize()*3);
+        return rec;
     }
 
     public Rectangle entityArea(){
-        return new Rectangle(x, y, gPanel.getTileSize(), gPanel.getTileSize());
+        Rectangle rec = new Rectangle(x, y, gPanel.getTileSize(), gPanel.getTileSize());
+        return rec;
     }
     public Rectangle entityNewArea(int newX, int newY){
-        return new Rectangle(newX, newY, gPanel.getTileSize(), gPanel.getTileSize());
+        Rectangle rec = new Rectangle(newX, newY, gPanel.getTileSize(), gPanel.getTileSize());
+        return rec;
     }
 
 
-
-    public void changeDirection(){}
+    public void act(){}
     public void update(){
-        changeDirection();
+        act();
     }
 }

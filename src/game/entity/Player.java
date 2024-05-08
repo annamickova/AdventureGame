@@ -1,6 +1,7 @@
 package game.entity;
 
 import game.GPanel;
+import game.Game;
 import game.KeyHandler;
 
 import javax.imageio.ImageIO;

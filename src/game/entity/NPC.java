@@ -10,18 +10,27 @@ import java.util.Random;
 
 
 public class NPC extends Entity {
-    protected String name;
+   private String name;
     private long lastMoveTime;
+    private long moveInterval = 2000;
     protected ArrayList<String> dialogues;
     protected int dialogIndex = 0;
-    private final long moveInterval = 2000;
     public NPC(GPanel gPanel) {
         super(gPanel);
         direction = "down";
         speedP = 1;
         this.dialogues = new ArrayList<>();
+        getImage();
     }
 
+    private void getImage() {
+        try {
+            name = "karel";
+            playerImage = ImageIO.read(new File("cat.jpeg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public ArrayList<String> getDialogues() {
         return dialogues;
     }
@@ -38,36 +47,6 @@ public class NPC extends Entity {
         this.dialogIndex = dialogIndex;
     }
 
-    public void setText(){
-        if (gPanel.getCurrDialogIndex() == dialogIndex){
-            if (dialogIndex < dialogues.size()){
-                gPanel.getDrawStates().setCurrDialog(dialogues.get(dialogIndex));
-                dialogIndex++;
-            }
-        }
-    }
-
-    void loadImage(String fileName) {
-        try {
-            playerImage = ImageIO.read(new File(fileName));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        if (name.matches("[a-zA-Z]{2,}")){
-            this.name = name;
-        }else {
-            this.name = "npc";
-        }
-
-    }
-
     @Override
     public void update() {
         super.update();
@@ -75,7 +54,7 @@ public class NPC extends Entity {
     }
 
    @Override
-    public void changeDirection() {
+    public void act() {
 
        long currentTime = System.currentTimeMillis();
        if (currentTime - lastMoveTime >= moveInterval) {
@@ -91,7 +70,13 @@ public class NPC extends Entity {
        }
     }
 
-
+    void loadImage(String fileName) {
+        try {
+            playerImage = ImageIO.read(new File(fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
    /* public void move(){
         int newX = x;
@@ -135,6 +120,15 @@ public class NPC extends Entity {
         }
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "name: " + name;
+    }
+
     public void setDialogues(String fileName){
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))){
             String line;
@@ -148,11 +142,16 @@ public class NPC extends Entity {
         }
     }
 
-    @Override
-    public String toString() {
-        return "name: " + name;
+
+    public void setText(){
+        if (gPanel.getCurrDialogIndex() == dialogIndex){
+            if (dialogIndex < dialogues.size()){
+                gPanel.getDrawStates().setCurrDialog(dialogues.get(dialogIndex));
+                dialogIndex++;
+            }
+        }
+
+
     }
-
-
 
 }
