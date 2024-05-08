@@ -33,9 +33,11 @@ public class GPanel extends JPanel implements Runnable{
     private boolean running;
 
     private int gameState;
-    private int play = 1;
-    private int stop = 0;
-    private int dialog = 2;
+    private final int stop = 0;
+    private final int play = 1;
+    private final int dialog = 2;
+    private final int home = 3;
+
     private DrawStates drawStates;
     private int currDialogIndex;
 
@@ -55,10 +57,6 @@ public class GPanel extends JPanel implements Runnable{
         return dialog;
     }
 
-    public void setDialog(int dialog) {
-        this.dialog = dialog;
-    }
-
     public int getGameState() {
         return gameState;
     }
@@ -71,16 +69,8 @@ public class GPanel extends JPanel implements Runnable{
         return play;
     }
 
-    public void setPlay(int play) {
-        this.play = play;
-    }
-
     public int getStop() {
         return stop;
-    }
-
-    public void setStop(int stop) {
-        this.stop = stop;
     }
 
     public Background getbGround() {
@@ -156,9 +146,9 @@ public class GPanel extends JPanel implements Runnable{
 
     private void setAssets(){
         bGround = new Background(this);
-        settings = new Settings(this);
         items = new ArrayList<>();
         npc = new ArrayList<>();
+        settings = new Settings(this);
         drawStates = new DrawStates(this);
     }
 
@@ -201,18 +191,24 @@ public class GPanel extends JPanel implements Runnable{
         super.paintComponent(graphics);
         Graphics2D graphics2D = (Graphics2D)graphics;
 
-        bGround.draw(graphics2D);
-        for (Item item : items) {
-            if (item != null) {
-                item.drawItem(graphics2D, this);
+        if (gameState == home){
+
+        }else {
+            bGround.draw(graphics2D);
+            for (Item item : items) {
+                if (item != null) {
+                    item.drawItem(graphics2D, this);
+                }
             }
-        }
-        for (Entity entity : npc) {
-            if (entity != null) {
-                entity.drawEntity(graphics2D);
+            for (Entity entity : npc) {
+                if (entity != null) {
+                    entity.drawEntity(graphics2D);
+                }
             }
+            player.draw(graphics2D);
         }
-        player.draw(graphics2D);
+
+
         setState(graphics2D);
 
         graphics2D.dispose();
