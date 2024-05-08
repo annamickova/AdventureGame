@@ -8,7 +8,7 @@ public class Cat extends NPC{
         super(gPanel);
 
         setName("cici");
-        setDialogues("npc.txt");
+        setDialogues("cat.txt");
         loadImage("cat.jpeg");
     }
 }

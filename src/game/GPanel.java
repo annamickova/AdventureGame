@@ -12,8 +12,6 @@ import java.util.ArrayList;
 
 public class GPanel extends JPanel implements Runnable{
 
-
-    // screen settings
     private final int tileSize = 48;
     private int screenWidth;
     private int screenHeight;
@@ -37,16 +35,11 @@ public class GPanel extends JPanel implements Runnable{
     private final int play = 1;
     private final int dialog = 2;
     private final int home = 3;
-
     private DrawStates drawStates;
     private int currDialogIndex;
 
     public int getCurrDialogIndex() {
         return currDialogIndex;
-    }
-
-    public void setCurrDialogIndex(int currDialogIndex) {
-        this.currDialogIndex = currDialogIndex;
     }
 
     public DrawStates getDrawStates() {
@@ -93,7 +86,6 @@ public class GPanel extends JPanel implements Runnable{
         return maxCol;
     }
 
-
     public int getMaxRow() {
         return maxRow;
     }
@@ -105,25 +97,12 @@ public class GPanel extends JPanel implements Runnable{
     public ArrayList<Item> getItems() {
         return items;
     }
-
-    public void setItems(ArrayList<Item> items) {
-        this.items = items;
-    }
-
     public ArrayList<NPC> getNpc() {
         return npc;
     }
 
-    public void setNpc(ArrayList<NPC> npc) {
-        this.npc = npc;
-    }
-
     public Settings getSettings() {
         return settings;
-    }
-
-    public void setSettings(Settings settings) {
-        this.settings = settings;
     }
 
     public GPanel(){
@@ -136,7 +115,7 @@ public class GPanel extends JPanel implements Runnable{
 
         setPlayersStuff();
         setAssets();
-        gPanelSettings();
+        setgPanelSettings();
     }
 
     private void setPlayersStuff(){
@@ -159,7 +138,7 @@ public class GPanel extends JPanel implements Runnable{
         screenHeight = tileSize * 16;
         FPS = 60;
     }
-    private void gPanelSettings(){
+    private void setgPanelSettings(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
@@ -192,7 +171,7 @@ public class GPanel extends JPanel implements Runnable{
         Graphics2D graphics2D = (Graphics2D)graphics;
 
         if (gameState == home){
-
+            setState(graphics2D);
         }else {
             bGround.draw(graphics2D);
             for (Item item : items) {
@@ -206,17 +185,13 @@ public class GPanel extends JPanel implements Runnable{
                 }
             }
             player.draw(graphics2D);
+            setState(graphics2D);
         }
-
-
-        setState(graphics2D);
-
         graphics2D.dispose();
     }
 
     @Override
     public void run() {
-
         double drawInterval = 1000000000/FPS;
         double nextDrawTime = System.nanoTime() + drawInterval;
 
@@ -243,6 +218,9 @@ public class GPanel extends JPanel implements Runnable{
 
     private void setState(Graphics2D graphics2D){
         graphics2D.setColor(new Color(250,250,250));
+        if (gameState == home){
+
+        }
         if (gameState == play){
 
         }
@@ -255,7 +233,7 @@ public class GPanel extends JPanel implements Runnable{
         }
     }
 
-    public void changeIndex(){
+    private void changeIndex(){
         int n = 0;
         int howMany = 0;
         for (NPC npc : npc) {
@@ -270,7 +248,6 @@ public class GPanel extends JPanel implements Runnable{
             if (currDialogIndex <= howMany-1){
                 currDialogIndex++;
             }
-
         }
     }
 

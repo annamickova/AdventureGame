@@ -32,12 +32,12 @@ public class Settings {
     private void setNPC(){
         NPC npc1 = new Cat(gPanel);
         npc1.setX(gPanel.getTileSize()*21);
-        npc1.setY(gPanel.getTileSize()*21);
+        npc1.setY(gPanel.getTileSize()*40);
         gPanel.getNpc().add(npc1);
 
         NPC npc2 = new Cat(gPanel);
-        npc2.setX(gPanel.getTileSize()*23);
-        npc2.setY(gPanel.getTileSize()*23);
+        npc2.setX(gPanel.getTileSize()*16);
+        npc2.setY(gPanel.getTileSize()*21);
         npc2.setName("haf");
         gPanel.getNpc().add(npc2);
 
