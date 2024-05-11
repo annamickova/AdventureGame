@@ -5,9 +5,11 @@ import java.awt.*;
 public class DrawStates {
     private GPanel gPanel;
     private String currDialog;
+    private int number;
 
     public DrawStates(GPanel gPanel) {
         this.gPanel = gPanel;
+        this.number = 0;
     }
 
     public String getCurrDialog() {
@@ -54,9 +56,40 @@ public class DrawStates {
 
     public void homeScreen(Graphics2D graphics2D){
         String text = "hello";
-        graphics2D.setFont(new Font("Arial", Font.BOLD, 40));
-        int hX = (int)graphics2D.getFontMetrics().getStringBounds(text, graphics2D).getWidth();
+        graphics2D.setFont(new Font("Arial", Font.BOLD, 50));
+
+        int x = gPanel.getScreenWidth()/2;
+        int hX =  x - textCentred(graphics2D, text)/2;
         int hY = gPanel.getTileSize()*4;
+        graphics2D.setColor(new Color(70,80,120));
+        graphics2D.fillRect(0,0, gPanel.getScreenWidth(), gPanel.getScreenHeight());
+
+        graphics2D.setColor(Color.black);
+        graphics2D.drawString(text, hX+5,hY+5);
+
+        graphics2D.setColor(Color.white);
+        graphics2D.drawString(text, hX,hY);
+        String menuT1 = "new game";
+        String menuT2 = "continue";
+
+        homeScreenMenu(graphics2D, x - textCentred(graphics2D,menuT1)/2, hY+3*gPanel.getTileSize(), menuT1);
+        homeScreenMenu(graphics2D, x - textCentred(graphics2D,menuT2)/2, hY+5*gPanel.getTileSize(), menuT2);
+
+        switch (number){
+            case 0 -> homeScreenMenu(graphics2D, (x - textCentred(graphics2D,menuT1)/2) - gPanel.getTileSize(),
+                    hY+3*gPanel.getTileSize(), ">");
+            case 1 -> homeScreenMenu(graphics2D, (x - textCentred(graphics2D,menuT2)/2) - gPanel.getTileSize(),
+                    hY+5*gPanel.getTileSize(), ">");
+        }
+    }
+
+    private void homeScreenMenu(Graphics2D graphics2D, int hX, int mY, String text){
+        graphics2D.setFont(new Font("Arial", Font.BOLD, 50));
+        graphics2D.drawString(text, hX, mY);
+    }
+
+    private int textCentred(Graphics2D graphics2D, String text){
+       return (int)graphics2D.getFontMetrics().getStringBounds(text, graphics2D).getWidth();
     }
 
 

@@ -28,7 +28,8 @@ public class Game {
 
     public Game(GPanel gPanel) {
         this.gPanel = gPanel;
-        gameState = play;
+        gameState = home;
+
         drawStates = new DrawStates(gPanel);
     }
     public DrawStates getDrawStates() {
@@ -78,6 +79,8 @@ public class Game {
         }if (gameState == dialog){
             changeIndex();
             drawStates.dialogScreen(graphics2D);
+        }if (gameState == home){
+            drawStates.homeScreen(graphics2D);
         }
     }
 }
