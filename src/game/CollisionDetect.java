@@ -79,7 +79,7 @@ public class CollisionDetect {
         if (n != 0){
             if (gPanel.getPlayer().isInteraction()){
                 if (gPanel.getCurrDialogIndex() == gPanel.getNpc().get(j).getDialogIndex()){
-                    gPanel.setGameState(gPanel.getDialog());
+                    gPanel.getGame().setGameState(gPanel.getGame().getDialog());
                     gPanel.getNpc().get(j).setText();
                 }
             }

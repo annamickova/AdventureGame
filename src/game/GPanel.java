@@ -30,13 +30,6 @@ public class GPanel extends JPanel implements Runnable{
     private int maxCol;
     private int maxRow;
     private boolean running;
-
-    private int gameState;
-    private final int stop = 0;
-    private final int play = 1;
-    private final int dialog = 2;
-    private final int home = 3;
-
     private int currDialogIndex;
 
     public Game getGame() {
@@ -47,34 +40,8 @@ public class GPanel extends JPanel implements Runnable{
         this.currDialogIndex = currDialogIndex;
     }
 
-    public int getHome() {
-        return home;
-    }
-
     public int getCurrDialogIndex() {
         return currDialogIndex;
-    }
-
-
-
-    public int getDialog() {
-        return dialog;
-    }
-
-    public int getGameState() {
-        return gameState;
-    }
-
-    public void setGameState(int gameState) {
-        this.gameState = gameState;
-    }
-
-    public int getPlay() {
-        return play;
-    }
-
-    public int getStop() {
-        return stop;
     }
 
     public Background getbGround() {
@@ -119,7 +86,7 @@ public class GPanel extends JPanel implements Runnable{
     public GPanel(){
         keyHandler = new KeyHandler(this);
         currDialogIndex = 0;
-        gameState = play;
+
         running = true;
 
         setPanelSize();
@@ -167,7 +134,7 @@ public class GPanel extends JPanel implements Runnable{
     }
 
     private void update(){
-        if (gameState == play){
+        if (game.getGameState() == game.getPlay()){
             player.update();
             for (Entity entity : npc) {
                 if (entity != null) {
@@ -181,7 +148,7 @@ public class GPanel extends JPanel implements Runnable{
         super.paintComponent(graphics);
         Graphics2D graphics2D = (Graphics2D)graphics;
 
-        if (gameState == home){
+        if (game.getGameState() == game.getHome()){
             game.setState(graphics2D);
         }else {
             bGround.draw(graphics2D);

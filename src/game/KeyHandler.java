@@ -20,25 +20,25 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (gPanel.getGameState() == gPanel.getPlay()){
+        if (gPanel.getGame().getGameState() == gPanel.getGame().getPlay()){
             switch (e.getKeyCode()){
                 case KeyEvent.VK_W, KeyEvent.VK_UP -> moveUp = true;
                 case KeyEvent.VK_S, KeyEvent.VK_DOWN -> moveDown = true;
                 case KeyEvent.VK_A, KeyEvent.VK_LEFT -> moveLeft = true;
                 case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> moveRight = true;
-                case KeyEvent.VK_P -> gPanel.setGameState(gPanel.getStop());
+                case KeyEvent.VK_P -> gPanel.getGame().setGameState(gPanel.getGame().getStop());
             }
             gPanel.getPlayer().setInteraction(true);
         }
-         else if (gPanel.getGameState() == gPanel.getStop()){
+         else if (gPanel.getGame().getGameState() == gPanel.getGame().getStop()){
              if (e.getKeyCode() == KeyEvent.VK_P){
-                 gPanel.setGameState(gPanel.getPlay());
+                 gPanel.getGame().setGameState(gPanel.getGame().getPlay());
              }
         }
-         else if (gPanel.getGameState() == gPanel.getDialog()){
+         else if (gPanel.getGame().getGameState() == gPanel.getGame().getDialog()){
             if (e.getKeyCode() == KeyEvent.VK_M){
                 gPanel.getPlayer().setInteraction(false);
-                gPanel.setGameState(gPanel.getPlay());
+                gPanel.getGame().setGameState(gPanel.getGame().getPlay());
             }
         }
 
