@@ -6,6 +6,7 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener {
 
     private GPanel gPanel;
+    private Game game;
     public boolean moveUp;
     public boolean moveDown;
     public boolean moveLeft;
@@ -13,6 +14,7 @@ public class KeyHandler implements KeyListener {
 
     public KeyHandler(GPanel gPanel){
         this.gPanel = gPanel;
+        this.game = gPanel.getGame();
     }
     @Override
     public void keyTyped(KeyEvent e) {
@@ -20,25 +22,36 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (gPanel.getGame().getGameState() == gPanel.getGame().getPlay()){
+        if (game.getGameState() == game.getPlay()){
             switch (e.getKeyCode()){
                 case KeyEvent.VK_W, KeyEvent.VK_UP -> moveUp = true;
                 case KeyEvent.VK_S, KeyEvent.VK_DOWN -> moveDown = true;
                 case KeyEvent.VK_A, KeyEvent.VK_LEFT -> moveLeft = true;
                 case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> moveRight = true;
-                case KeyEvent.VK_P -> gPanel.getGame().setGameState(gPanel.getGame().getStop());
+                case KeyEvent.VK_P -> game.setGameState(game.getStop());
             }
             gPanel.getPlayer().setInteraction(true);
         }
-         else if (gPanel.getGame().getGameState() == gPanel.getGame().getStop()){
+         else if (game.getGameState() == game.getStop()){
              if (e.getKeyCode() == KeyEvent.VK_P){
-                 gPanel.getGame().setGameState(gPanel.getGame().getPlay());
+                 game.setGameState(game.getPlay());
              }
         }
-         else if (gPanel.getGame().getGameState() == gPanel.getGame().getDialog()){
+         else if (game.getGameState() == game.getDialog()){
             if (e.getKeyCode() == KeyEvent.VK_M){
                 gPanel.getPlayer().setInteraction(false);
-                gPanel.getGame().setGameState(gPanel.getGame().getPlay());
+                game.setGameState(game.getPlay());
+            }
+        } else if (game.getGameState() == game.getHome()) {
+            switch (e.getKeyCode()){
+                case KeyEvent.VK_W, KeyEvent.VK_UP -> {game.getDrawStates()
+                        .setPointer(game.getDrawStates().getPointer()-1);
+                    game.getDrawStates().resetPointer();
+                }
+                case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {game.getDrawStates()
+                        .setPointer(game.getDrawStates().getPointer()+1);
+                    game.getDrawStates().resetPointer();
+                }
             }
         }
 

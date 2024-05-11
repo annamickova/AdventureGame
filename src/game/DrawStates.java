@@ -5,11 +5,12 @@ import java.awt.*;
 public class DrawStates {
     private GPanel gPanel;
     private String currDialog;
-    private int number;
+    private int pointer;
+    private int textCount = 2;
 
     public DrawStates(GPanel gPanel) {
         this.gPanel = gPanel;
-        this.number = 0;
+        this.pointer = 0;
     }
 
     public String getCurrDialog() {
@@ -18,6 +19,14 @@ public class DrawStates {
 
     public void setCurrDialog(String currDialog) {
         this.currDialog = currDialog;
+    }
+
+    public int getPointer() {
+        return pointer;
+    }
+
+    public void setPointer(int pointer) {
+        this.pointer = pointer;
     }
 
     public void pauseScreen(Graphics2D graphics2D){
@@ -75,11 +84,11 @@ public class DrawStates {
         homeScreenMenu(graphics2D, x - textCentred(graphics2D,menuT1)/2, hY+3*gPanel.getTileSize(), menuT1);
         homeScreenMenu(graphics2D, x - textCentred(graphics2D,menuT2)/2, hY+5*gPanel.getTileSize(), menuT2);
 
-        switch (number){
+        switch (pointer){
             case 0 -> homeScreenMenu(graphics2D, (x - textCentred(graphics2D,menuT1)/2) - gPanel.getTileSize(),
-                    hY+3*gPanel.getTileSize(), ">");
+                    hY+3*gPanel.getTileSize(), "•");
             case 1 -> homeScreenMenu(graphics2D, (x - textCentred(graphics2D,menuT2)/2) - gPanel.getTileSize(),
-                    hY+5*gPanel.getTileSize(), ">");
+                    hY+5*gPanel.getTileSize(), "•");
         }
     }
 
@@ -90,6 +99,15 @@ public class DrawStates {
 
     private int textCentred(Graphics2D graphics2D, String text){
        return (int)graphics2D.getFontMetrics().getStringBounds(text, graphics2D).getWidth();
+    }
+
+    public void resetPointer(){
+        if (pointer < 0){
+            pointer = textCount-1;
+        }
+        if (pointer > textCount-1){
+            pointer = 0;
+        }
     }
 
 
