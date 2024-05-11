@@ -146,7 +146,7 @@ public class NPC extends Entity {
     public void setText(){
         if (gPanel.getCurrDialogIndex() == dialogIndex){
             if (dialogIndex < dialogues.size()){
-                gPanel.getDrawStates().setCurrDialog(dialogues.get(dialogIndex));
+                gPanel.getGame().getDrawStates().setCurrDialog(dialogues.get(dialogIndex));
                 dialogIndex++;
             }
         }

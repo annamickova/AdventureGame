@@ -7,9 +7,14 @@ import java.awt.*;
 public class Game {
 
     private GPanel gPanel;
+    private DrawStates drawStates;
 
     public Game(GPanel gPanel) {
         this.gPanel = gPanel;
+        drawStates = new DrawStates(gPanel);
+    }
+    public DrawStates getDrawStates() {
+        return drawStates;
     }
 
     public void changeIndex(){
@@ -39,11 +44,11 @@ public class Game {
 
         }
         if (gPanel.getGameState() == gPanel.getStop() ) {
-            gPanel.getDrawStates().pauseScreen(graphics2D);
+            drawStates.pauseScreen(graphics2D);
 
         }if (gPanel.getGameState() == gPanel.getDialog()){
             changeIndex();
-            gPanel.getDrawStates().dialogScreen(graphics2D);
+            drawStates.dialogScreen(graphics2D);
         }
     }
 }

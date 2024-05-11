@@ -36,8 +36,12 @@ public class GPanel extends JPanel implements Runnable{
     private final int play = 1;
     private final int dialog = 2;
     private final int home = 3;
-    private DrawStates drawStates;
+
     private int currDialogIndex;
+
+    public Game getGame() {
+        return game;
+    }
 
     public void setCurrDialogIndex(int currDialogIndex) {
         this.currDialogIndex = currDialogIndex;
@@ -51,9 +55,7 @@ public class GPanel extends JPanel implements Runnable{
         return currDialogIndex;
     }
 
-    public DrawStates getDrawStates() {
-        return drawStates;
-    }
+
 
     public int getDialog() {
         return dialog;
@@ -137,7 +139,7 @@ public class GPanel extends JPanel implements Runnable{
         items = new ArrayList<>();
         npc = new ArrayList<>();
         settings = new Settings(this);
-        drawStates = new DrawStates(this);
+
     }
 
     private void setPanelSize(){
@@ -224,15 +226,5 @@ public class GPanel extends JPanel implements Runnable{
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
 
 }
