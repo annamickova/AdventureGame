@@ -60,6 +60,15 @@ public class DrawStates {
             graphics2D.drawString(line, wX + gPanel.getTileSize(), wY + gPanel.getTileSize());
             wY += gPanel.getTileSize();
         }
+    }
+
+    public void funcScreen(Graphics2D graphics2D){
+        graphics2D.setColor(new Color(120,120,255,150));
+        int wX = gPanel.getTileSize() * 7 - gPanel.getTileSize()/2;
+        int wY = gPanel.getTileSize()/2;
+        int wWidth = gPanel.getScreenWidth() - (gPanel.getTileSize()*9);
+        int wHeight =gPanel.getTileSize() * 4;
+        graphics2D.fillRoundRect(wX,wY,wWidth,wHeight, 20,20);
 
     }
 
@@ -110,6 +119,48 @@ public class DrawStates {
         }
     }
 
+
+
+
+
+    private boolean teleporting = false;
+    private boolean walking = false;
+
+    public boolean isTeleporting() {
+        return teleporting;
+    }
+
+    public boolean isWalking() {
+        return walking;
+    }
+
+    public void setWalking(boolean walking) {
+        this.walking = walking;
+    }
+
+    public void setTeleporting(boolean teleporting) {
+        this.teleporting = teleporting;
+    }
+
+    public void teleport(){
+        gPanel.getPlayer().setX(gPanel.getTileSize() * 21);
+        gPanel.getPlayer().setY(gPanel.getTileSize() * 21);
+    }
+
+    public void setPlayersWalkThrough(){
+        gPanel.getPlayer().setWalkThrough(true);
+    }
+
+    public void funcAbilities(){
+        if (isTeleporting()){
+            teleport();
+            setTeleporting(false);
+
+        }if (isWalking()){
+            setPlayersWalkThrough();
+            setWalking(false);
+        }
+    }
 
 
 

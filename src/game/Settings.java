@@ -1,6 +1,7 @@
 package game;
 
 import game.entity.Cat;
+import game.entity.NPC;
 import game.items.Flower;
 
 public class Settings {
@@ -29,17 +30,16 @@ public class Settings {
         }
     }
     private void setNPC(){
-        Cat npc1 = new Cat(gPanel);
+        NPC npc1 = new Cat(gPanel);
         npc1.setX(gPanel.getTileSize()*21);
-        npc1.setY(gPanel.getTileSize()*40);
+        npc1.setY(gPanel.getTileSize()*21);
         gPanel.getNpc().add(npc1);
 
-        Cat npc2 = new Cat(gPanel);
-        npc2.setX(gPanel.getTileSize()*16);
-        npc2.setY(gPanel.getTileSize()*21);
+        NPC npc2 = new Cat(gPanel);
+        npc2.setX(gPanel.getTileSize()*23);
+        npc2.setY(gPanel.getTileSize()*23);
         npc2.setName("haf");
         gPanel.getNpc().add(npc2);
-
     }
 
 

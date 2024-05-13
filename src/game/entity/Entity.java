@@ -1,15 +1,13 @@
 package game.entity;
 
-import game.CollisionDetect;
+import game.CheckCollision;
 import game.GPanel;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Entity {
 
@@ -17,16 +15,15 @@ public class Entity {
     protected int x;
     protected int y;
     protected int speedP;
-    protected CollisionDetect collisionDetect;
+    protected CheckCollision checkCollision;
 
     protected BufferedImage playerImage;
     protected String direction;
     protected boolean interaction;
 
-
     public Entity(GPanel gPanel) {
         this.gPanel = gPanel;
-        this.collisionDetect = new CollisionDetect(gPanel);
+        this.checkCollision = new CheckCollision(gPanel);
 
     }
 
@@ -55,8 +52,6 @@ public class Entity {
         this.interaction = interaction;
     }
 
-
-
     public void drawEntity(Graphics2D graphics2D){
         int screenX = x - gPanel.getPlayer().getX() + gPanel.getPlayer().getScreenX();
         int screenY = y - gPanel.getPlayer().getY()+ gPanel.getPlayer().getScreenY();
@@ -71,23 +66,27 @@ public class Entity {
     }
 
     public Rectangle entityAreaAround(){
-        Rectangle rec = new Rectangle(x-gPanel.getTileSize(), y-gPanel.getTileSize(),
+        return new Rectangle(x-gPanel.getTileSize(), y-gPanel.getTileSize(),
                 gPanel.getTileSize()*3, gPanel.getTileSize()*3);
-        return rec;
     }
 
     public Rectangle entityArea(){
-        Rectangle rec = new Rectangle(x, y, gPanel.getTileSize(), gPanel.getTileSize());
-        return rec;
+        return new Rectangle(x, y, gPanel.getTileSize(), gPanel.getTileSize());
     }
     public Rectangle entityNewArea(int newX, int newY){
-        Rectangle rec = new Rectangle(newX, newY, gPanel.getTileSize(), gPanel.getTileSize());
-        return rec;
+        return new Rectangle(newX, newY, gPanel.getTileSize(), gPanel.getTileSize());
     }
 
+    public void loadImage(String fileName) {
+        try {
+            playerImage = ImageIO.read(new File(fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-    public void act(){}
+    public void changeDirection(){}
     public void update(){
-        act();
+        changeDirection();
     }
 }

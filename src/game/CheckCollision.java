@@ -4,11 +4,11 @@ import game.entity.Entity;
 
 import java.awt.*;
 
-public class CollisionDetect {
+public class CheckCollision {
 
     GPanel gPanel;
 
-    public CollisionDetect(GPanel gPanel) {
+    public CheckCollision(GPanel gPanel) {
         this.gPanel = gPanel;
     }
 
