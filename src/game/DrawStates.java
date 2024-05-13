@@ -61,14 +61,26 @@ public class DrawStates {
 
     }
 
-    private boolean teleportUsed = false;
 
-    public boolean isTeleportUsed() {
-        return teleportUsed;
+
+
+    private boolean teleporting = false;
+    private boolean walking = false;
+
+    public boolean isTeleporting() {
+        return teleporting;
     }
 
-    public void setTeleportUsed(boolean teleportUsed) {
-        this.teleportUsed = teleportUsed;
+    public boolean isWalking() {
+        return walking;
+    }
+
+    public void setWalking(boolean walking) {
+        this.walking = walking;
+    }
+
+    public void setTeleporting(boolean teleporting) {
+        this.teleporting = teleporting;
     }
 
     public void teleport(){
@@ -76,13 +88,18 @@ public class DrawStates {
         gPanel.getPlayer().setY(gPanel.getTileSize() * 21);
     }
 
-    public void walkThrough(){
-
+    public void setPlayersWalkThrough(){
+        gPanel.getPlayer().setWalkThrough(true);
     }
 
-    public void func(){
-        if (isTeleportUsed()){
+    public void funcAbilities(){
+        if (isTeleporting()){
             teleport();
+            setTeleporting(false);
+
+        }if (isWalking()){
+            setPlayersWalkThrough();
+            setWalking(false);
         }
     }
 
