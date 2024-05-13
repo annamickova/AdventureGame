@@ -49,7 +49,6 @@ public class Background {
 
             tiles[1] = new Tile();
             tiles[1].setImage(ImageIO.read(new File("wall.jpg")));
-            ;
             tiles[1].setCollision(true);
 
             tiles[2] = new Tile();

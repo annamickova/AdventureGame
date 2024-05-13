@@ -52,7 +52,7 @@ public class DrawStates {
     }
 
     public void funcScreen(Graphics2D graphics2D){
-        graphics2D.setColor(new Color(120,120,255,215));
+        graphics2D.setColor(new Color(120,120,255,150));
         int wX = gPanel.getTileSize() * 7 - gPanel.getTileSize()/2;
         int wY = gPanel.getTileSize()/2;
         int wWidth = gPanel.getScreenWidth() - (gPanel.getTileSize()*9);

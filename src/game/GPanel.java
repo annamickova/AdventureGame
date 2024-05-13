@@ -156,9 +156,9 @@ public class GPanel extends JPanel implements Runnable{
 
     private void setAssets(){
         bGround = new Background(this);
-        settings = new Settings(this);
         items = new ArrayList<>();
         npc = new ArrayList<>();
+        settings = new Settings(this);
         drawStates = new DrawStates(this);
     }
 

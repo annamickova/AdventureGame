@@ -3,8 +3,11 @@ package game.entity;
 import game.CheckCollision;
 import game.GPanel;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class Entity {
 
@@ -74,7 +77,13 @@ public class Entity {
         return new Rectangle(newX, newY, gPanel.getTileSize(), gPanel.getTileSize());
     }
 
-
+    public void loadImage(String fileName) {
+        try {
+            playerImage = ImageIO.read(new File(fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void changeDirection(){}
     public void update(){

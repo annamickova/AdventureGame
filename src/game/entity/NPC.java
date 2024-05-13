@@ -47,14 +47,6 @@ public class NPC extends Entity {
         }
     }
 
-    void loadImage(String fileName) {
-        try {
-            playerImage = ImageIO.read(new File(fileName));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public String getName() {
         return name;
     }

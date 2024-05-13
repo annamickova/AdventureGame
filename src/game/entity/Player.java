@@ -21,7 +21,7 @@ public class Player extends Entity {
         this.keyHandler = keyHandler;
 
         defValues();
-        getImage();
+        loadImage("cat.jpeg");
     }
 
     private void defValues(){
@@ -30,14 +30,6 @@ public class Player extends Entity {
         walkThrough = false;
         speedP = 4;
         direction = "down";
-    }
-
-    private void getImage() {
-        try {
-            playerImage = ImageIO.read(new File("cat.jpeg"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public int getScreenX() {
@@ -78,8 +70,6 @@ public class Player extends Entity {
             newX += speedP;
             direction = "right";
         }
-
-
 
        if (!walkThrough) {
            coll(newX, newY);
