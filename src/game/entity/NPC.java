@@ -121,7 +121,7 @@ public class NPC extends Entity {
             case "right" -> newX += speedP;
         }
 
-        if (collisionDetect.hasCollision(direction, this)){
+        if (checkCollision.hasCollision(direction, this)){
             int i = rd.nextInt(4);
             switch (i) {
                 case 0 -> direction = "up";
@@ -129,7 +129,7 @@ public class NPC extends Entity {
                 case 2 -> direction = "left";
                 case 3 -> direction = "right";
             }
-        } else if (!collisionDetect.hit(this, gPanel.getPlayer())) {
+        } else if (!checkCollision.hit(this, gPanel.getPlayer())) {
             x = newX;
             y = newY;
         }

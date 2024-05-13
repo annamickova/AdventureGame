@@ -1,15 +1,10 @@
 package game.entity;
 
-import game.CollisionDetect;
+import game.CheckCollision;
 import game.GPanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class Entity {
 
@@ -17,7 +12,7 @@ public class Entity {
     protected int x;
     protected int y;
     protected int speedP;
-    protected CollisionDetect collisionDetect;
+    protected CheckCollision checkCollision;
 
     protected BufferedImage playerImage;
     protected String direction;
@@ -25,7 +20,7 @@ public class Entity {
 
     public Entity(GPanel gPanel) {
         this.gPanel = gPanel;
-        this.collisionDetect = new CollisionDetect(gPanel);
+        this.checkCollision = new CheckCollision(gPanel);
 
     }
 
