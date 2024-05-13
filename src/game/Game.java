@@ -68,10 +68,8 @@ public class Game {
     public void setState(Graphics2D graphics2D){
         graphics2D.setColor(new Color(250,250,250));
         if (gameState == home){
-
         }
         if (gameState == play){
-
         }
         if (gameState == stop) {
             drawStates.pauseScreen(graphics2D);
