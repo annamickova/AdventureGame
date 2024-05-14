@@ -9,7 +9,7 @@ public class DrawStates {
     private String currDialog;
     private int pointer;
     private int textCount;
-    private String font = "Arial";
+    private String font = "Rockwell";
     private int funcPointer;
     private int funcCount = 2;
 
@@ -69,6 +69,7 @@ public class DrawStates {
     private void displayDialogue(Graphics2D graphics2D, int wX, int wY, int wWidth, int wHeight){
         graphics2D.setColor(new Color(0,0,0));
         graphics2D.setStroke(new BasicStroke(5));
+        graphics2D.setFont(new Font(font, Font.BOLD, 12));
         graphics2D.drawRoundRect(wX+5, wY+5, wWidth-10, wHeight -10, 20, 20);
 
         for (String line: currDialog.split("/")){

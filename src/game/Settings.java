@@ -36,8 +36,8 @@ public class Settings {
         gPanel.getNpc().add(npc1);
 
         NPC npc2 = new Cat(gPanel);
-        npc2.setX(gPanel.getTileSize()*23);
-        npc2.setY(gPanel.getTileSize()*23);
+        npc2.setX(gPanel.getTileSize()*18);
+        npc2.setY(gPanel.getTileSize()*39);
         npc2.setName("haf");
         gPanel.getNpc().add(npc2);
     }
