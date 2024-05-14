@@ -37,9 +37,28 @@ public class KeyHandler implements KeyListener {
                  game.setGameState(game.getPlay());
              }
         }else if (game.getGameState() == game.getFunctions()){
-             if (e.getKeyCode() == KeyEvent.VK_F){
-                 game.setGameState(game.getPlay());
-             }
+            switch (e.getKeyCode()){
+                case KeyEvent.VK_F -> game.setGameState(game.getPlay());
+                case KeyEvent.VK_W, KeyEvent.VK_UP -> {game.getDrawStates()
+                        .setFuncPointer(game.getDrawStates().getFuncPointer()-1);
+                    game.getDrawStates().resetFuncPointer();
+                }
+                case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {game.getDrawStates()
+                        .setFuncPointer(game.getDrawStates().getFuncPointer()+1);
+                    game.getDrawStates().resetFuncPointer();
+                }
+                case KeyEvent.VK_ENTER -> {
+                    if (game.getDrawStates().getFuncPointer() == 0){
+
+                    }
+                    if (game.getDrawStates().getFuncPointer() == 1){
+
+                    }
+
+                }
+
+            }
+
         }else if (game.getGameState() == game.getDialog()){
             if (e.getKeyCode() == KeyEvent.VK_M){
                 gPanel.getPlayer().setInteraction(false);

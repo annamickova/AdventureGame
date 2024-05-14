@@ -7,11 +7,15 @@ public class DrawStates {
     private String currDialog;
     private int pointer;
     private int textCount;
+    private String font = "Arial";
+    private int funcPointer;
+    private int funcCount = 2;
 
     public DrawStates(GPanel gPanel) {
         this.gPanel = gPanel;
         this.textCount = 3;
         this.pointer = 0;
+        this.funcPointer = 0;
     }
 
     public String getCurrDialog() {
@@ -20,6 +24,14 @@ public class DrawStates {
 
     public void setCurrDialog(String currDialog) {
         this.currDialog = currDialog;
+    }
+
+    public int getFuncPointer() {
+        return funcPointer;
+    }
+
+    public void setFuncPointer(int funcPointer) {
+        this.funcPointer = funcPointer;
     }
 
     public int getPointer() {
@@ -32,7 +44,7 @@ public class DrawStates {
 
     public void pauseScreen(Graphics2D graphics2D){
         String text = "PAUSED";
-        graphics2D.setFont(new Font("Arial", Font.BOLD, 60));
+        graphics2D.setFont(new Font(font, Font.BOLD, 60));
         int l = (int)graphics2D.getFontMetrics().getStringBounds(text, graphics2D).getWidth();
         int x = gPanel.getScreenWidth()/2 - l/2;
         int y = gPanel.getScreenHeight()/2 - gPanel.getTileSize();
@@ -66,7 +78,7 @@ public class DrawStates {
 
     public void homeScreen(Graphics2D graphics2D){
         String text = "hello";
-        graphics2D.setFont(new Font("Arial", Font.BOLD, 50));
+        graphics2D.setFont(new Font(font, Font.BOLD, 50));
 
         int x = gPanel.getScreenWidth()/2;
         int hX =  x - textCentred(graphics2D, text)/2;
@@ -83,22 +95,22 @@ public class DrawStates {
         String menuT2 = "continue";
         String menuT3 = "end";
 
-        homeScreenMenu(graphics2D, x - textCentred(graphics2D,menuT1)/2, hY+3*gPanel.getTileSize(), menuT1);
-        homeScreenMenu(graphics2D, x - textCentred(graphics2D,menuT2)/2, hY+5*gPanel.getTileSize(), menuT2);
-        homeScreenMenu(graphics2D, x - textCentred(graphics2D,menuT3)/2, hY+7*gPanel.getTileSize(), menuT3);
+        drawText(graphics2D, x - textCentred(graphics2D,menuT1)/2, hY+3*gPanel.getTileSize(), menuT1,50);
+        drawText(graphics2D, x - textCentred(graphics2D,menuT2)/2, hY+5*gPanel.getTileSize(), menuT2,50);
+        drawText(graphics2D, x - textCentred(graphics2D,menuT3)/2, hY+7*gPanel.getTileSize(), menuT3,50);
 
         switch (pointer){
-            case 0 -> homeScreenMenu(graphics2D, (x - textCentred(graphics2D,menuT1)/2) - gPanel.getTileSize(),
-                    hY+3*gPanel.getTileSize(), "•");
-            case 1 -> homeScreenMenu(graphics2D, (x - textCentred(graphics2D,menuT2)/2) - gPanel.getTileSize(),
-                    hY+5*gPanel.getTileSize(), "•");
-            case 2 -> homeScreenMenu(graphics2D, (x - textCentred(graphics2D,menuT3)/2) - gPanel.getTileSize(),
-                    hY+7*gPanel.getTileSize(), "•");
+            case 0 -> drawText(graphics2D, (x - textCentred(graphics2D,menuT1)/2) - gPanel.getTileSize(),
+                    hY+3*gPanel.getTileSize(), "•", 50);
+            case 1 -> drawText(graphics2D, (x - textCentred(graphics2D,menuT2)/2) - gPanel.getTileSize(),
+                    hY+5*gPanel.getTileSize(), "•", 50);
+            case 2 -> drawText(graphics2D, (x - textCentred(graphics2D,menuT3)/2) - gPanel.getTileSize(),
+                    hY+7*gPanel.getTileSize(), "•", 50);
         }
     }
 
-    private void homeScreenMenu(Graphics2D graphics2D, int hX, int mY, String text){
-        graphics2D.setFont(new Font("Arial", Font.BOLD, 50));
+    private void drawText(Graphics2D graphics2D, int hX, int mY, String text, int size){
+        graphics2D.setFont(new Font(font, Font.BOLD, size));
         graphics2D.drawString(text, hX, mY);
     }
 
@@ -114,6 +126,14 @@ public class DrawStates {
             pointer = 0;
         }
     }
+    public void resetFuncPointer(){
+        if (funcPointer < 0){
+            funcPointer = funcCount-1;
+        }
+        if (funcPointer > funcCount-1){
+            funcPointer = 0;
+        }
+    }
 
 
     public void funcScreen(Graphics2D graphics2D){
@@ -123,7 +143,20 @@ public class DrawStates {
         int wWidth = gPanel.getScreenWidth() - (gPanel.getTileSize()*12);
         int wHeight = gPanel.getTileSize() * 6;
         graphics2D.fillRoundRect(wX,wY,wWidth,wHeight, 20,20);
+        availableFunc(graphics2D);
+    }
 
+    private void availableFunc(Graphics2D graphics2D){
+        int x = gPanel.getTileSize()*12;
+        int y = gPanel.getTileSize();
+        graphics2D.setColor(Color.BLACK);
+        drawText(graphics2D, x, y, "teleport", 15);
+        drawText(graphics2D, x, y + gPanel.getTileSize()/2, "walking", 15);
+        switch (funcPointer){
+            case 0 -> drawText(graphics2D, x - 8 , y, "•", 12);
+            case 1 -> drawText(graphics2D, x - 8, y + gPanel.getTileSize()/2, "•", 12);
+
+        }
     }
 
 
