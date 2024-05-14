@@ -113,10 +113,10 @@ public class DrawStates {
 
     public void funcScreen(Graphics2D graphics2D){
         graphics2D.setColor(new Color(120,120,255,150));
-        int wX = gPanel.getTileSize() * 7 - gPanel.getTileSize()/2;
+        int wX = gPanel.getTileSize() * 12 - gPanel.getTileSize()/2;
         int wY = gPanel.getTileSize()/2;
-        int wWidth = gPanel.getScreenWidth() - (gPanel.getTileSize()*9);
-        int wHeight =gPanel.getTileSize() * 4;
+        int wWidth = gPanel.getScreenWidth() - (gPanel.getTileSize()*12);
+        int wHeight = gPanel.getTileSize() * 6;
         graphics2D.fillRoundRect(wX,wY,wWidth,wHeight, 20,20);
 
     }

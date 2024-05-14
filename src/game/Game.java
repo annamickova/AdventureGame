@@ -14,6 +14,7 @@ public class Game {
     private final int play = 1;
     private final int dialog = 2;
     private final int home = 3;
+    private final int functions = 4;
     private boolean teleporting = false;
     private boolean walking = false;
 
@@ -62,6 +63,10 @@ public class Game {
 
     public void setTeleporting(boolean teleporting) {
         this.teleporting = teleporting;
+    }
+
+    public int getFunctions() {
+        return functions;
     }
 
     public void teleport(){
@@ -118,6 +123,8 @@ public class Game {
             drawStates.dialogScreen(graphics2D);
         }if (gameState == home){
             drawStates.homeScreen(graphics2D);
+        }if (gameState == functions){
+            drawStates.funcScreen(graphics2D);
         }
     }
 }

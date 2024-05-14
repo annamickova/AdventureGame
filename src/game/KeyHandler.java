@@ -29,12 +29,16 @@ public class KeyHandler implements KeyListener {
                 case KeyEvent.VK_A, KeyEvent.VK_LEFT -> moveLeft = true;
                 case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> moveRight = true;
                 case KeyEvent.VK_P -> game.setGameState(game.getStop());
-                case KeyEvent.VK_T -> game.teleport();
+                case KeyEvent.VK_F -> game.setGameState(game.getFunctions());
             }
             gPanel.getPlayer().setInteraction(true);
         }
          else if (game.getGameState() == game.getStop()){
              if (e.getKeyCode() == KeyEvent.VK_P){
+                 game.setGameState(game.getPlay());
+             }
+        }else if (game.getGameState() == game.getFunctions()){
+             if (e.getKeyCode() == KeyEvent.VK_F){
                  game.setGameState(game.getPlay());
              }
         }
