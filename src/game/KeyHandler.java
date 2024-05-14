@@ -32,22 +32,20 @@ public class KeyHandler implements KeyListener {
                 case KeyEvent.VK_F -> game.setGameState(game.getFunctions());
             }
             gPanel.getPlayer().setInteraction(true);
-        }
-         else if (game.getGameState() == game.getStop()){
+        }if (game.getGameState() == game.getStop()){
              if (e.getKeyCode() == KeyEvent.VK_P){
                  game.setGameState(game.getPlay());
              }
-        }else if (game.getGameState() == game.getFunctions()){
+        }if (game.getGameState() == game.getFunctions()){
              if (e.getKeyCode() == KeyEvent.VK_F){
                  game.setGameState(game.getPlay());
              }
-        }
-         else if (game.getGameState() == game.getDialog()){
+        }if (game.getGameState() == game.getDialog()){
             if (e.getKeyCode() == KeyEvent.VK_M){
                 gPanel.getPlayer().setInteraction(false);
                 game.setGameState(game.getPlay());
             }
-        } else if (game.getGameState() == game.getHome()) {
+        }if (game.getGameState() == game.getHome()) {
             switch (e.getKeyCode()){
                 case KeyEvent.VK_W, KeyEvent.VK_UP -> {game.getDrawStates()
                         .setPointer(game.getDrawStates().getPointer()-1);
@@ -56,6 +54,17 @@ public class KeyHandler implements KeyListener {
                 case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {game.getDrawStates()
                         .setPointer(game.getDrawStates().getPointer()+1);
                     game.getDrawStates().resetPointer();
+                }
+                case KeyEvent.VK_ENTER -> {
+                    if (game.getDrawStates().getPointer() == 0){
+                        game.setGameState(game.getPlay());
+                    }
+                    if (game.getDrawStates().getPointer() == 1){
+
+                    }
+                    if (game.getDrawStates().getPointer() == 2){
+                        System.exit(0);
+                    }
                 }
             }
         }

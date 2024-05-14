@@ -6,7 +6,7 @@ public class DrawStates {
     private GPanel gPanel;
     private String currDialog;
     private int pointer;
-    private int textCount = 2;
+    private int textCount = 3;
 
     public DrawStates(GPanel gPanel) {
         this.gPanel = gPanel;
@@ -80,15 +80,19 @@ public class DrawStates {
         graphics2D.drawString(text, hX,hY);
         String menuT1 = "new game";
         String menuT2 = "continue";
+        String menuT3 = "end";
 
         homeScreenMenu(graphics2D, x - textCentred(graphics2D,menuT1)/2, hY+3*gPanel.getTileSize(), menuT1);
         homeScreenMenu(graphics2D, x - textCentred(graphics2D,menuT2)/2, hY+5*gPanel.getTileSize(), menuT2);
+        homeScreenMenu(graphics2D, x - textCentred(graphics2D,menuT3)/2, hY+7*gPanel.getTileSize(), menuT3);
 
         switch (pointer){
             case 0 -> homeScreenMenu(graphics2D, (x - textCentred(graphics2D,menuT1)/2) - gPanel.getTileSize(),
                     hY+3*gPanel.getTileSize(), "•");
             case 1 -> homeScreenMenu(graphics2D, (x - textCentred(graphics2D,menuT2)/2) - gPanel.getTileSize(),
                     hY+5*gPanel.getTileSize(), "•");
+            case 2 -> homeScreenMenu(graphics2D, (x - textCentred(graphics2D,menuT3)/2) - gPanel.getTileSize(),
+                    hY+7*gPanel.getTileSize(), "•");
         }
     }
 
@@ -112,7 +116,7 @@ public class DrawStates {
 
 
     public void funcScreen(Graphics2D graphics2D){
-        graphics2D.setColor(new Color(120,120,255,150));
+        graphics2D.setColor(new Color(255,255,255,255));
         int wX = gPanel.getTileSize() * 12 - gPanel.getTileSize()/2;
         int wY = gPanel.getTileSize()/2;
         int wWidth = gPanel.getScreenWidth() - (gPanel.getTileSize()*12);

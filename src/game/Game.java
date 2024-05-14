@@ -20,7 +20,7 @@ public class Game {
 
     public Game(GPanel gPanel) {
         this.gPanel = gPanel;
-        gameState = play;
+        gameState = home;
 
         drawStates = new DrawStates(gPanel);
     }
