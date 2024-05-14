@@ -1,7 +1,6 @@
 package game.entity;
 
 import game.GPanel;
-import game.Game;
 
 public class Cat extends NPC{
 

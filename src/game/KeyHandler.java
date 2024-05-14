@@ -1,5 +1,7 @@
 package game;
 
+import game.screenStates.Game;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -49,10 +51,10 @@ public class KeyHandler implements KeyListener {
                 }
                 case KeyEvent.VK_ENTER -> {
                     if (game.getDrawStates().getFuncPointer() == 0){
-
+                        game.teleport();
                     }
                     if (game.getDrawStates().getFuncPointer() == 1){
-
+                        game.setPlayersWalkThrough();
                     }
 
                 }

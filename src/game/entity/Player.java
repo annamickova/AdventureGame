@@ -1,13 +1,9 @@
 package game.entity;
 
 import game.GPanel;
-import game.Game;
 import game.KeyHandler;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 
 public class Player extends Entity {
 

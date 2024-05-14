@@ -1,5 +1,6 @@
-package game;
+package game.screenStates;
 
+import game.GPanel;
 import game.entity.NPC;
 
 import java.awt.*;
@@ -72,10 +73,12 @@ public class Game {
     public void teleport(){
         gPanel.getPlayer().setX(gPanel.getTileSize() * 23);
         gPanel.getPlayer().setY(gPanel.getTileSize() * 21);
+        gameState = play;
     }
 
     public void setPlayersWalkThrough(){
         gPanel.getPlayer().setWalkThrough(true);
+        gameState = play;
     }
 
     public void funcAbilities(){

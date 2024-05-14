@@ -5,6 +5,7 @@ import game.entity.Entity;
 import game.entity.NPC;
 import game.entity.Player;
 import game.items.Item;
+import game.screenStates.Game;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,6 @@
-package game;
+package game.screenStates;
+
+import game.GPanel;
 
 import java.awt.*;
 
