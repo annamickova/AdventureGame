@@ -32,20 +32,20 @@ public class KeyHandler implements KeyListener {
                 case KeyEvent.VK_F -> game.setGameState(game.getFunctions());
             }
             gPanel.getPlayer().setInteraction(true);
-        }if (game.getGameState() == game.getStop()){
+        }else if (game.getGameState() == game.getStop()){
              if (e.getKeyCode() == KeyEvent.VK_P){
                  game.setGameState(game.getPlay());
              }
-        }if (game.getGameState() == game.getFunctions()){
+        }else if (game.getGameState() == game.getFunctions()){
              if (e.getKeyCode() == KeyEvent.VK_F){
                  game.setGameState(game.getPlay());
              }
-        }if (game.getGameState() == game.getDialog()){
+        }else if (game.getGameState() == game.getDialog()){
             if (e.getKeyCode() == KeyEvent.VK_M){
                 gPanel.getPlayer().setInteraction(false);
                 game.setGameState(game.getPlay());
             }
-        }if (game.getGameState() == game.getHome()) {
+        }else if (game.getGameState() == game.getHome()) {
             switch (e.getKeyCode()){
                 case KeyEvent.VK_W, KeyEvent.VK_UP -> {game.getDrawStates()
                         .setPointer(game.getDrawStates().getPointer()-1);

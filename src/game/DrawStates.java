@@ -6,10 +6,11 @@ public class DrawStates {
     private GPanel gPanel;
     private String currDialog;
     private int pointer;
-    private int textCount = 3;
+    private int textCount;
 
     public DrawStates(GPanel gPanel) {
         this.gPanel = gPanel;
+        this.textCount = 3;
         this.pointer = 0;
     }
 
