@@ -20,17 +20,11 @@ public class NPC extends Entity {
         direction = "down";
         speedP = 1;
         this.dialogues = new ArrayList<>();
-        getImage();
+        name = "karel";
+        loadImage("cat.jpeg");
     }
 
-    private void getImage() {
-        try {
-            name = "karel";
-            playerImage = ImageIO.read(new File("cat.jpeg"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
     public ArrayList<String> getDialogues() {
         return dialogues;
     }
@@ -53,7 +47,7 @@ public class NPC extends Entity {
         move();
     }
 
-   @Override
+  // @Override
     public void act() {
 
        long currentTime = System.currentTimeMillis();
@@ -70,13 +64,7 @@ public class NPC extends Entity {
        }
     }
 
-    void loadImage(String fileName) {
-        try {
-            playerImage = ImageIO.read(new File(fileName));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 
    /* public void move(){
         int newX = x;
@@ -106,7 +94,7 @@ public class NPC extends Entity {
             case "right" -> newX += speedP;
         }
 
-        if (collisionDetect.hasCollision(direction, this)){
+        if (checkCollision.hasCollision(direction, this)){
             int i = rd.nextInt(4);
             switch (i) {
                 case 0 -> direction = "up";
@@ -114,7 +102,7 @@ public class NPC extends Entity {
                 case 2 -> direction = "left";
                 case 3 -> direction = "right";
             }
-        } else if (!collisionDetect.hit(this, gPanel.getPlayer())) {
+        } else if (!checkCollision.hit(this, gPanel.getPlayer())) {
             x = newX;
             y = newY;
         }

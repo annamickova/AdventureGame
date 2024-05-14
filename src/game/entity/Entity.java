@@ -85,6 +85,7 @@ public class Entity {
         }
     }
 
+
     public void changeDirection(){}
     public void update(){
         changeDirection();

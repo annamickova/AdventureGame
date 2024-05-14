@@ -29,6 +29,7 @@ public class KeyHandler implements KeyListener {
                 case KeyEvent.VK_A, KeyEvent.VK_LEFT -> moveLeft = true;
                 case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> moveRight = true;
                 case KeyEvent.VK_P -> game.setGameState(game.getStop());
+                case KeyEvent.VK_T -> game.teleport();
             }
             gPanel.getPlayer().setInteraction(true);
         }

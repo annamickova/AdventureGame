@@ -14,6 +14,15 @@ public class Game {
     private final int play = 1;
     private final int dialog = 2;
     private final int home = 3;
+    private boolean teleporting = false;
+    private boolean walking = false;
+
+    public Game(GPanel gPanel) {
+        this.gPanel = gPanel;
+        gameState = play;
+
+        drawStates = new DrawStates(gPanel);
+    }
 
     public int getGameState() {
         return gameState;
@@ -24,13 +33,6 @@ public class Game {
     }
     public int getPlay() {
         return play;
-    }
-
-    public Game(GPanel gPanel) {
-        this.gPanel = gPanel;
-        gameState = home;
-
-        drawStates = new DrawStates(gPanel);
     }
     public DrawStates getDrawStates() {
         return drawStates;
@@ -45,6 +47,43 @@ public class Game {
     public int getHome() {
         return home;
     }
+
+    public boolean isTeleporting() {
+        return teleporting;
+    }
+
+    public boolean isWalking() {
+        return walking;
+    }
+
+    public void setWalking(boolean walking) {
+        this.walking = walking;
+    }
+
+    public void setTeleporting(boolean teleporting) {
+        this.teleporting = teleporting;
+    }
+
+    public void teleport(){
+        gPanel.getPlayer().setX(gPanel.getTileSize() * 23);
+        gPanel.getPlayer().setY(gPanel.getTileSize() * 21);
+    }
+
+    public void setPlayersWalkThrough(){
+        gPanel.getPlayer().setWalkThrough(true);
+    }
+
+    public void funcAbilities(){
+        if (isTeleporting()){
+            teleport();
+            setTeleporting(false);
+
+        }if (isWalking()){
+            setPlayersWalkThrough();
+            setWalking(false);
+        }
+    }
+
 
 
     public void changeIndex(){
