@@ -6,12 +6,12 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 
-public class Flower extends Item{
+public class Walk extends Item{
 
-    public Flower(GPanel gPanel) {
+    public Walk(GPanel gPanel) {
         super(gPanel);
         try {
-            itemImage = ImageIO.read(new File("flower2.png"));
+            itemImage = ImageIO.read(new File("flower.jpg"));
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -19,6 +19,6 @@ public class Flower extends Item{
 
     @Override
     public void action() {
-        gPanel.getGame().teleport();
+        gPanel.getGame().setPlayersWalkThrough();
     }
 }

@@ -16,8 +16,7 @@ public class Game {
     private final int dialog = 2;
     private final int home = 3;
     private final int functions = 4;
-    private boolean teleporting = false;
-    private boolean walking = false;
+
 
     public Game(GPanel gPanel) {
         this.gPanel = gPanel;
@@ -50,21 +49,6 @@ public class Game {
         return home;
     }
 
-    public boolean isTeleporting() {
-        return teleporting;
-    }
-
-    public boolean isWalking() {
-        return walking;
-    }
-
-    public void setWalking(boolean walking) {
-        this.walking = walking;
-    }
-
-    public void setTeleporting(boolean teleporting) {
-        this.teleporting = teleporting;
-    }
 
     public int getFunctions() {
         return functions;
@@ -81,16 +65,6 @@ public class Game {
         gameState = play;
     }
 
-    public void funcAbilities(){
-        if (isTeleporting()){
-            teleport();
-            setTeleporting(false);
-
-        }if (isWalking()){
-            setPlayersWalkThrough();
-            setWalking(false);
-        }
-    }
 
 
 

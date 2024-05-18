@@ -2,7 +2,8 @@ package game;
 
 import game.entity.Cat;
 import game.entity.NPC;
-import game.items.Flower;
+import game.items.FlowerTeleport;
+import game.items.Walk;
 
 public class Settings {
     GPanel gPanel;
@@ -15,13 +16,13 @@ public class Settings {
 
 
     private void setItems(){
-        Flower flower = new Flower(gPanel);
-        flower.setName("teleport");
-        flower.setItemX(gPanel.getTileSize()*21);
-        flower.setItemY(gPanel.getTileSize()*23);
-        gPanel.getItems().add(0, flower);
+        FlowerTeleport flowerTeleport = new FlowerTeleport(gPanel);
+        flowerTeleport.setName("teleport");
+        flowerTeleport.setItemX(gPanel.getTileSize()*21);
+        flowerTeleport.setItemY(gPanel.getTileSize()*23);
+        gPanel.getItems().add(0, flowerTeleport);
 
-        Flower walk = new Flower(gPanel);
+        Walk walk = new Walk(gPanel);
         walk.setName("walk through");
         walk.setItemX(gPanel.getTileSize()*21);
         walk.setItemY(gPanel.getTileSize()*20);

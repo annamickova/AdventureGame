@@ -15,10 +15,6 @@ public class Item {
     protected int itemY;
     protected Rectangle area;
 
-    public Item(String name) {
-        this.name = name;
-    }
-
     public Item(GPanel gPanel) {
         this.gPanel = gPanel;
     }
