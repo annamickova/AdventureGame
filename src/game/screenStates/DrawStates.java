@@ -141,16 +141,16 @@ public class DrawStates {
 
     public void funcScreen(Graphics2D graphics2D){
         graphics2D.setColor(new Color(255,255,255,255));
-        int wX = gPanel.getTileSize() * 12 - gPanel.getTileSize()/2;
+        int wX = gPanel.getTileSize() * 13 - gPanel.getTileSize()/2;
         int wY = gPanel.getTileSize()/2;
-        int wWidth = gPanel.getScreenWidth() - (gPanel.getTileSize()*12);
+        int wWidth = gPanel.getScreenWidth() - (gPanel.getTileSize()*13);
         int wHeight = gPanel.getTileSize() * 6;
         graphics2D.fillRoundRect(wX,wY,wWidth,wHeight, 20,20);
         availableFunc(graphics2D);
     }
 
     private void availableFunc(Graphics2D graphics2D){
-        int x = gPanel.getTileSize()*12;
+        int x = gPanel.getTileSize()*13;
         int y = gPanel.getTileSize();
         graphics2D.setColor(Color.BLACK);
         funcCount = gPanel.getCollectedItems().size();
@@ -159,6 +159,8 @@ public class DrawStates {
                 funcCount = 0;
             }
                 for (int i = 0; i < gPanel.getCollectedItems().size(); i++) {
+                    graphics2D.drawImage(gPanel.getCollectedItems().get(i).getItemImage(), x, y,gPanel.getTileSize(), gPanel.getTileSize(), null);
+                    y += 3*gPanel.getTileSize()/2;
                     drawText(graphics2D, x, y, gPanel.getCollectedItems().get(i).getName(), 15);
                     if (funcPointer == i){
                         drawText(graphics2D, x - 8 , y, "•", 12);
