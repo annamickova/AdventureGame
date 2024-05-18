@@ -50,13 +50,10 @@ public class KeyHandler implements KeyListener {
                     game.getDrawStates().resetFuncPointer();
                 }
                 case KeyEvent.VK_ENTER -> {
-                    if (game.getDrawStates().getFuncPointer() == 0){
-                        game.teleport();
+                    if (gPanel.getCollectedItems().size()!= 0){
+                        gPanel.getCollectedItems().get(game.getDrawStates().getFuncPointer()).action();
+                        gPanel.getCollectedItems().remove(game.getDrawStates().getFuncPointer());
                     }
-                    if (game.getDrawStates().getFuncPointer() == 1){
-                        game.setPlayersWalkThrough();
-                    }
-
                 }
 
             }

@@ -10,11 +10,15 @@ public class Flower extends Item{
 
     public Flower(GPanel gPanel) {
         super(gPanel);
-        name = "flower";
         try {
             itemImage = ImageIO.read(new File("flower2.png"));
         }catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void action() {
+        gPanel.getGame().teleport();
     }
 }

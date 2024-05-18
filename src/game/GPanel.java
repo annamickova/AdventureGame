@@ -24,6 +24,7 @@ public class GPanel extends JPanel implements Runnable{
 
     private Player player;
     private ArrayList<Item> items;
+    private ArrayList<Item> collectedItems = new ArrayList<>();
     private ArrayList<NPC> npc;
     private Settings settings;
     private int speed;
@@ -76,6 +77,11 @@ public class GPanel extends JPanel implements Runnable{
     public ArrayList<Item> getItems() {
         return items;
     }
+
+    public ArrayList<Item> getCollectedItems() {
+        return collectedItems;
+    }
+
     public ArrayList<NPC> getNpc() {
         return npc;
     }

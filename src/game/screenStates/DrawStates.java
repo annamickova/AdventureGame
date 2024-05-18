@@ -11,7 +11,7 @@ public class DrawStates {
     private int textCount;
     private String font = "Rockwell";
     private int funcPointer;
-    private int funcCount = 2;
+    private int funcCount;
 
     public DrawStates(GPanel gPanel) {
         this.gPanel = gPanel;
@@ -153,15 +153,22 @@ public class DrawStates {
         int x = gPanel.getTileSize()*12;
         int y = gPanel.getTileSize();
         graphics2D.setColor(Color.BLACK);
-        drawText(graphics2D, x, y, "teleport", 15);
-        drawText(graphics2D, x, y + gPanel.getTileSize()/2, "walking", 15);
-        switch (funcPointer){
-            case 0 -> drawText(graphics2D, x - 8 , y, "•", 12);
-            case 1 -> drawText(graphics2D, x - 8, y + gPanel.getTileSize()/2, "•", 12);
-
+        funcCount = gPanel.getCollectedItems().size();
+        if (funcCount != 0){
+            for (int i = 0; i < gPanel.getCollectedItems().size(); i++) {
+                drawText(graphics2D, x, y, gPanel.getCollectedItems().get(i).getName(), 15);
+                y += gPanel.getTileSize()/2;
+            }
+            switch (funcPointer){
+                case 0 -> drawText(graphics2D, x - 8 , y, "•", 12);
+                case 1 -> drawText(graphics2D, x - 8, y + gPanel.getTileSize()/2, "•", 12);
+            }
+        }else {
+            drawText(graphics2D, x, y, "no functions", 15);
         }
-    }
 
+
+    }
 
 
 

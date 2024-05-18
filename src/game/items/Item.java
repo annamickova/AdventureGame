@@ -44,11 +44,7 @@ public class Item {
     }
 
     public void setName(String name) {
-        if (name.matches("^[a-zA-Z]{2,}$")){
-            this.name = name;
-        }else{
-            this.name = "item";
-        }
+        this.name = name;
     }
 
     public BufferedImage getItemImage() {
@@ -81,8 +77,9 @@ public class Item {
                 itemY - gPanel.getTileSize() < gPanel.getPlayer().getY() + gPanel.getPlayer().getScreenY()){
             g2.drawImage(itemImage, screenX, screenY, gPanel.getTileSize(), gPanel.getTileSize(), null);
         }
+    }
 
-
+    public void action(){
     }
 
 }
