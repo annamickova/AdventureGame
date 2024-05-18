@@ -155,14 +155,16 @@ public class DrawStates {
         graphics2D.setColor(Color.BLACK);
         funcCount = gPanel.getCollectedItems().size();
         if (funcCount != 0){
-            for (int i = 0; i < gPanel.getCollectedItems().size(); i++) {
-                drawText(graphics2D, x, y, gPanel.getCollectedItems().get(i).getName(), 15);
-                y += gPanel.getTileSize()/2;
+            if (funcCount > gPanel.getCollectedItems().size()){
+                funcCount = 0;
             }
-            switch (funcPointer){
-                case 0 -> drawText(graphics2D, x - 8 , y, "•", 12);
-                case 1 -> drawText(graphics2D, x - 8, y + gPanel.getTileSize()/2, "•", 12);
-            }
+                for (int i = 0; i < gPanel.getCollectedItems().size(); i++) {
+                    drawText(graphics2D, x, y, gPanel.getCollectedItems().get(i).getName(), 15);
+                    if (funcPointer == i){
+                        drawText(graphics2D, x - 8 , y, "•", 12);
+                    }
+                    y += gPanel.getTileSize()/2;
+                }
         }else {
             drawText(graphics2D, x, y, "no functions", 15);
         }

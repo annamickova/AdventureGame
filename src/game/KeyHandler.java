@@ -53,6 +53,7 @@ public class KeyHandler implements KeyListener {
                     if (gPanel.getCollectedItems().size()!= 0){
                         gPanel.getCollectedItems().get(game.getDrawStates().getFuncPointer()).action();
                         gPanel.getCollectedItems().remove(game.getDrawStates().getFuncPointer());
+                        game.getDrawStates().setFuncPointer(0);
                     }
                 }
 
