@@ -27,6 +27,13 @@ public class Entity {
 
     }
 
+    public String getDirection() {
+        return direction;
+    }
+
+    public CheckCollision getCheckCollision() {
+        return checkCollision;
+    }
 
     public int getX() {
         return x;
@@ -89,5 +96,8 @@ public class Entity {
     public void changeDirection(){}
     public void update(){
         changeDirection();
+    }
+
+    public void act() {
     }
 }

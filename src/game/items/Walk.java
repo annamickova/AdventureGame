@@ -5,6 +5,7 @@ import game.GPanel;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 public class Walk extends Item{
 
@@ -21,4 +22,6 @@ public class Walk extends Item{
     public void action() {
         gPanel.getGame().setPlayersWalkThrough();
     }
+
+
 }

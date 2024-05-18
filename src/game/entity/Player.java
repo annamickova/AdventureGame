@@ -45,6 +45,7 @@ public class Player extends Entity {
         this.walkThrough = walkThrough;
     }
 
+
     @Override
     public void update() {
 

@@ -2,7 +2,6 @@ package game.entity;
 
 import game.GPanel;
 
-import javax.imageio.ImageIO;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
@@ -11,8 +10,7 @@ import java.util.Random;
 
 public class NPC extends Entity {
    private String name;
-    private long lastMoveTime;
-    private long moveInterval = 2000;
+
     protected ArrayList<String> dialogues;
     protected int dialogIndex = 0;
     public NPC(GPanel gPanel) {
@@ -47,22 +45,7 @@ public class NPC extends Entity {
         move();
     }
 
-  // @Override
-    public void act() {
 
-       long currentTime = System.currentTimeMillis();
-       if (currentTime - lastMoveTime >= moveInterval) {
-           Random random = new Random();
-           int i = random.nextInt(4);
-           switch (i) {
-               case 0 -> this.direction = "up";
-               case 1 -> this.direction = "down";
-               case 2 -> this.direction = "left";
-               case 3 -> this.direction = "right";
-           }
-           lastMoveTime = currentTime;
-       }
-    }
 
 
 
