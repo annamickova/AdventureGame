@@ -11,7 +11,6 @@ public class Ghost extends NPC{
         setName("ghost");
         setDialogues("cat.txt");
         loadImage("cat.jpeg");
-        speedP = 1;
     }
 
     @Override
