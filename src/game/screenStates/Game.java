@@ -69,7 +69,7 @@ public class Game {
    public void turnOffWalking() {
         if (gPanel.getPlayer().isWalkThrough()){
             if (count >= 600) {
-                if (!gPanel.getPlayer().getCheckCollision().hasCollision(gPanel.getPlayer().getDirection(),gPanel.getPlayer())){
+                if (!gPanel.getPlayer().getCheckCollision().hasCollision(gPanel.getPlayer())){
                     gPanel.getPlayer().setWalkThrough(false);
                     count = 0;
                 }

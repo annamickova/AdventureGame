@@ -12,7 +12,7 @@ public class CheckCollision {
         this.gPanel = gPanel;
     }
 
-    public boolean hasCollision(String direction, Entity entity) {
+    public boolean hasCollision(Entity entity) {
         int aX = entity.getX() + (gPanel.getTileSize()/2);
         int bX = entity.getX() + gPanel.getTileSize();
         int dX = entity.getX();
@@ -24,7 +24,7 @@ public class CheckCollision {
         int tileX = 0;
         int tileY = 0;
 
-        switch (direction){
+        switch (entity.getDirection()){
             case "up" -> {
                 tileX = aX;
                 tileY = aY;
@@ -84,5 +84,44 @@ public class CheckCollision {
                 }
             }
         }
+    }
+
+    public boolean collisionWithout(Entity entity, String tileName){
+        int aX = entity.getX() + (gPanel.getTileSize()/2);
+        int bX = entity.getX() + gPanel.getTileSize();
+        int dX = entity.getX();
+
+        int aY = entity.getY();
+        int bY = entity.getY() + (gPanel.getTileSize()/2);
+        int cY = entity.getY() + gPanel.getTileSize();
+
+        int tileX = 0;
+        int tileY = 0;
+
+        switch (entity.getDirection()){
+            case "up" -> {
+                tileX = aX;
+                tileY = aY;
+            }
+            case "down" -> {
+                tileX = aX;
+                tileY = cY;
+            }
+            case "left" -> {
+                tileX = dX;
+                tileY = bY;
+            }
+            case "right" -> {
+                tileX = bX;
+                tileY = bY;
+            }
+        }
+
+        tileX = tileX/ gPanel.getTileSize();
+        tileY = tileY/ gPanel.getTileSize();
+
+        String tile = gPanel.getbGround().getTile(tileX, tileY).getName();
+
+        return tile.equals(tileName);
     }
 }

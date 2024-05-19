@@ -27,7 +27,7 @@ public class Ghost extends NPC{
         }
 
         Random rd = new Random();
-        if (checkCollision.hasCollision(direction, this)){
+        if (checkCollision.collisionWithout(this, "wall")){
             int i = rd.nextInt(4);
             switch (i) {
                 case 0 -> direction = "up";

@@ -1,6 +1,7 @@
 package game;
 
 import game.entity.Cat;
+import game.entity.Ghost;
 import game.entity.NPC;
 import game.items.FlowerTeleport;
 import game.items.Walk;
@@ -54,6 +55,11 @@ public class Settings {
         npc2.setY(gPanel.getTileSize()*39);
         npc2.setName("haf");
         gPanel.getNpc().add(npc2);
+
+        Ghost ghost = new Ghost(gPanel);
+        ghost.setX(gPanel.getTileSize()*21);
+        ghost.setY(gPanel.getTileSize()*25);
+        gPanel.getNpc().add(ghost);
     }
 
 
