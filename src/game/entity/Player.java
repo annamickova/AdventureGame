@@ -71,9 +71,11 @@ public class Player extends Entity {
 
        if (!walkThrough) {
            coll(newX, newY);
-       }else {
-           x = newX;
-           y = newY;
+       } if (walkThrough){
+           if (!getCheckCollision().collisionWithout(this, "wall")){
+               x = newX;
+               y = newY;
+           }
        }
         checkCollision.npcMeetPlayer();
 
