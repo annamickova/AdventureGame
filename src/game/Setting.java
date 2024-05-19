@@ -7,10 +7,10 @@ import game.entity.NPC;
 import game.items.FlowerTeleport;
 import game.items.Walk;
 
-public class Settings {
+public class Setting {
     GPanel gPanel;
 
-    public Settings(GPanel gPanel) {
+    public Setting(GPanel gPanel) {
         this.gPanel = gPanel;
         setItems();
         setNPC();
@@ -49,7 +49,7 @@ public class Settings {
     private void setNPC(){
         NPC npc1 = new Witch(gPanel);
         npc1.setX(gPanel.getTileSize()*21);
-        npc1.setY(gPanel.getTileSize()*21);
+        npc1.setY(gPanel.getTileSize()*38);
         gPanel.getNpc().add(npc1);
 
         NPC npc2 = new Witch(gPanel);
@@ -59,8 +59,8 @@ public class Settings {
         gPanel.getNpc().add(npc2);
 
         Ghost ghost = new Ghost(gPanel);
-        ghost.setX(gPanel.getTileSize()*21);
-        ghost.setY(gPanel.getTileSize()*25);
+        ghost.setX(gPanel.getTileSize()*10);
+        ghost.setY(gPanel.getTileSize()*10);
         gPanel.getNpc().add(ghost);
     }
 

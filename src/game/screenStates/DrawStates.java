@@ -188,9 +188,12 @@ public class DrawStates {
                 y += 3*gPanel.getTileSize()/2;
                 drawText(graphics2D, x, y, gPanel.getCaughtAnimals().get(i).getName(), 15);
                 y += gPanel.getTileSize()/2;
+                drawText(graphics2D, x,y , gPanel.getLostAnimals().size() + " left animals", 15);
+                y += gPanel.getTileSize()/2;
             }
         }else {
             drawText(graphics2D, x,gPanel.getTileSize() * 7/2 , "no animals", 15);
+            drawText(graphics2D, x,gPanel.getTileSize() * 9/2 , gPanel.getLostAnimals().size() + " animals left", 15);
         }
     }
 

@@ -29,7 +29,7 @@ public class GPanel extends JPanel implements Runnable{
     private ArrayList<Animal> lostAnimals = new ArrayList<>();
     private ArrayList<Animal> caughtAnimals = new ArrayList<>();
     private ArrayList<NPC> npc;
-    private Settings settings;
+    private Setting setting;
     private int speed;
     private Background bGround;
     private int maxCol;
@@ -97,8 +97,16 @@ public class GPanel extends JPanel implements Runnable{
         return npc;
     }
 
-    public Settings getSettings() {
-        return settings;
+    public Setting getSettings() {
+        return setting;
+    }
+
+    public boolean isRunning() {
+        return running;
+    }
+
+    public void setRunning(boolean running) {
+        this.running = running;
     }
 
     public GPanel(){
@@ -123,7 +131,7 @@ public class GPanel extends JPanel implements Runnable{
         bGround = new Background(this);
         items = new ArrayList<>();
         npc = new ArrayList<>();
-        settings = new Settings(this);
+        setting = new Setting(this);
 
     }
 

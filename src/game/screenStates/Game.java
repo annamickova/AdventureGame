@@ -17,6 +17,7 @@ public class Game {
     private final int home = 3;
     private final int functions = 4;
     private final int catchingAnimal = 5;
+    private final int end = 6;
 
 
     public Game(GPanel gPanel) {
@@ -115,6 +116,15 @@ public class Game {
             drawStates.funcScreen(graphics2D);
         }if (gameState == catchingAnimal){
             drawStates.animalsScreen(graphics2D);
+
+        }if (gameState == end){
+
         }
+    }
+
+    public void end(){
+       if (gPanel.getLostAnimals().size() == 0){
+           gPanel.setRunning(false);
+       }
     }
 }
