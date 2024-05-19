@@ -100,7 +100,7 @@ public class Player extends Entity {
     }
 
     public void draw(Graphics2D graphics2D) {
-        graphics2D.drawImage(playerImage, getScreenX(), getScreenY(),
+        graphics2D.drawImage(entityImage, getScreenX(), getScreenY(),
                 gPanel.getTileSize(), gPanel.getTileSize(), null);
     }
 

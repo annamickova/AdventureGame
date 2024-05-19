@@ -69,8 +69,7 @@ public class Settings {
             if (gPanel.getLostAnimals().get(i).entityArea().intersects(gPanel.getPlayer().entityArea())){
                 gPanel.getCaughtAnimals().add(gPanel.getLostAnimals().get(i));
                 gPanel.getLostAnimals().remove(gPanel.getLostAnimals().get(i));
-                System.out.println("you caught " + gPanel.getCaughtAnimals().get(i));
-                System.out.println(gPanel.getLostAnimals().size() + " left animals");
+                gPanel.getGame().setGameState(gPanel.getGame().getCatchingAnimal());
             }
         }
     }

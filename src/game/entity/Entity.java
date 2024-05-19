@@ -17,7 +17,7 @@ public class Entity {
     protected int speedP;
     protected CheckCollision checkCollision;
 
-    protected BufferedImage playerImage;
+    protected BufferedImage entityImage;
     protected String direction;
     protected boolean interaction;
 
@@ -59,6 +59,10 @@ public class Entity {
         this.interaction = interaction;
     }
 
+    public BufferedImage getEntityImage() {
+        return entityImage;
+    }
+
     public void drawEntity(Graphics2D graphics2D){
         int screenX = x - gPanel.getPlayer().getX() + gPanel.getPlayer().getScreenX();
         int screenY = y - gPanel.getPlayer().getY()+ gPanel.getPlayer().getScreenY();
@@ -67,7 +71,7 @@ public class Entity {
                 x - gPanel.getTileSize() < gPanel.getPlayer().getX() + gPanel.getPlayer().getScreenX() &&
                 y + gPanel.getTileSize() > gPanel.getPlayer().getY() - gPanel.getPlayer().getScreenY() &&
                 y - gPanel.getTileSize() < gPanel.getPlayer().getY() + gPanel.getPlayer().getScreenY()){
-            graphics2D.drawImage(playerImage, screenX, screenY, gPanel.getTileSize(), gPanel.getTileSize(), null);
+            graphics2D.drawImage(entityImage, screenX, screenY, gPanel.getTileSize(), gPanel.getTileSize(), null);
 
         }
     }
@@ -86,7 +90,7 @@ public class Entity {
 
     public void loadImage(String fileName) {
         try {
-            playerImage = ImageIO.read(new File(fileName));
+            entityImage = ImageIO.read(new File(fileName));
         } catch (IOException e) {
             e.printStackTrace();
         }

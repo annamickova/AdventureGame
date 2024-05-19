@@ -16,6 +16,7 @@ public class Game {
     private final int dialog = 2;
     private final int home = 3;
     private final int functions = 4;
+    private final int catchingAnimal = 5;
 
 
     public Game(GPanel gPanel) {
@@ -48,10 +49,12 @@ public class Game {
     public int getHome() {
         return home;
     }
-
-
     public int getFunctions() {
         return functions;
+    }
+
+    public int getCatchingAnimal() {
+        return catchingAnimal;
     }
 
     public void teleport(){
@@ -110,6 +113,8 @@ public class Game {
             drawStates.homeScreen(graphics2D);
         }if (gameState == functions){
             drawStates.funcScreen(graphics2D);
+        }if (gameState == catchingAnimal){
+            drawStates.animalsScreen(graphics2D);
         }
     }
 }

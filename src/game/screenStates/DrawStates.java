@@ -139,13 +139,17 @@ public class DrawStates {
     }
 
 
-    public void funcScreen(Graphics2D graphics2D){
+    public void smallScreen(Graphics2D graphics2D){
         graphics2D.setColor(new Color(255,255,255,255));
         int wX = gPanel.getTileSize() * 13 - gPanel.getTileSize()/2;
         int wY = gPanel.getTileSize()/2;
         int wWidth = gPanel.getScreenWidth() - (gPanel.getTileSize()*13);
         int wHeight = gPanel.getTileSize() * 7;
         graphics2D.fillRoundRect(wX,wY,wWidth,wHeight, 20,20);
+    }
+
+    public void funcScreen(Graphics2D graphics2D){
+        smallScreen(graphics2D);
         availableFunc(graphics2D);
     }
 
@@ -170,8 +174,24 @@ public class DrawStates {
         }else {
             drawText(graphics2D, x,gPanel.getTileSize() * 7/2 , "no functions", 15);
         }
+    }
 
-
+    public void animalsScreen(Graphics2D graphics2D){
+        smallScreen(graphics2D);
+        int x = gPanel.getTileSize()*13;
+        int y = gPanel.getTileSize();
+        graphics2D.setColor(Color.BLACK);
+        int animalCount = gPanel.getCaughtAnimals().size();
+        if (animalCount != 0){
+            for (int i = 0; i < animalCount; i++) {
+                graphics2D.drawImage(gPanel.getCaughtAnimals().get(i).getEntityImage(), x, y,gPanel.getTileSize(), gPanel.getTileSize(), null);
+                y += 3*gPanel.getTileSize()/2;
+                drawText(graphics2D, x, y, gPanel.getCaughtAnimals().get(i).getName(), 15);
+                y += gPanel.getTileSize()/2;
+            }
+        }else {
+            drawText(graphics2D, x,gPanel.getTileSize() * 7/2 , "no animals", 15);
+        }
     }
 
 

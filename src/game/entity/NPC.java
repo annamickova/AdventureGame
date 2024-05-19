@@ -28,6 +28,10 @@ public class NPC extends Entity {
         return dialogIndex;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setName(String name) {
         this.name = name;
     }

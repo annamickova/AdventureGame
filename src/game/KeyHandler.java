@@ -35,12 +35,13 @@ public class KeyHandler implements KeyListener {
             }
             gPanel.getPlayer().setInteraction(true);
         }else if (game.getGameState() == game.getStop()){
-             if (e.getKeyCode() == KeyEvent.VK_P){
+             if (e.getKeyCode() == KeyEvent.VK_P || e.getKeyCode() == KeyEvent.VK_ESCAPE){
                  game.setGameState(game.getPlay());
              }
         }else if (game.getGameState() == game.getFunctions()){
             switch (e.getKeyCode()){
                 case KeyEvent.VK_F -> game.setGameState(game.getPlay());
+                case KeyEvent.VK_ESCAPE -> game.setGameState(game.getPlay());
                 case KeyEvent.VK_W, KeyEvent.VK_UP -> {game.getDrawStates()
                         .setFuncPointer(game.getDrawStates().getFuncPointer()-1);
                     game.getDrawStates().resetFuncPointer();
@@ -57,11 +58,14 @@ public class KeyHandler implements KeyListener {
 
                     }
                 }
-
             }
 
-        }else if (game.getGameState() == game.getDialog()){
-            if (e.getKeyCode() == KeyEvent.VK_M){
+        } else if (game.getGameState() == game.getCatchingAnimal()) {
+            if (e.getKeyCode() == KeyEvent.VK_F || e.getKeyCode() == KeyEvent.VK_ESCAPE){
+                game.setGameState(game.getPlay());
+            }
+        } else if (game.getGameState() == game.getDialog()){
+            if (e.getKeyCode() == KeyEvent.VK_M || e.getKeyCode() == KeyEvent.VK_ESCAPE){
                 gPanel.getPlayer().setInteraction(false);
                 game.setGameState(game.getPlay());
             }
