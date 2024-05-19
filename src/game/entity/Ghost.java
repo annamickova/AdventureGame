@@ -9,8 +9,8 @@ public class Ghost extends NPC{
     public Ghost(GPanel gPanel) {
         super(gPanel);
         setName("ghost");
-        setDialogues("cat.txt");
-        loadImage("cat.jpeg");
+        setDialogues("ghost.txt");
+        loadImage("ghostOg.jpg");
     }
 
     @Override
@@ -34,7 +34,7 @@ public class Ghost extends NPC{
                 case 2 -> direction = "left";
                 case 3 -> direction = "right";
             }
-        } else if (!checkCollision.hit(this, gPanel.getPlayer())) {
+        } else {
             x = newX;
             y = newY;
         }
