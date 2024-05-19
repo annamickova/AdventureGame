@@ -79,9 +79,6 @@ public class Game {
     }
 
 
-
-
-
     public void changeIndex(){
         int n = 0;
         int howMany = 0;
@@ -106,7 +103,6 @@ public class Game {
         }
         if (gameState == stop) {
             drawStates.pauseScreen(graphics2D);
-
         }if (gameState == dialog){
             changeIndex();
             drawStates.dialogScreen(graphics2D);

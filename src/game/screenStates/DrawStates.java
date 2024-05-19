@@ -144,7 +144,7 @@ public class DrawStates {
         int wX = gPanel.getTileSize() * 13 - gPanel.getTileSize()/2;
         int wY = gPanel.getTileSize()/2;
         int wWidth = gPanel.getScreenWidth() - (gPanel.getTileSize()*13);
-        int wHeight = gPanel.getTileSize() * 6;
+        int wHeight = gPanel.getTileSize() * 7;
         graphics2D.fillRoundRect(wX,wY,wWidth,wHeight, 20,20);
         availableFunc(graphics2D);
     }
@@ -168,7 +168,7 @@ public class DrawStates {
                     y += gPanel.getTileSize()/2;
                 }
         }else {
-            drawText(graphics2D, x, y, "no functions", 15);
+            drawText(graphics2D, x,gPanel.getTileSize() * 7/2 , "no functions", 15);
         }
 
 

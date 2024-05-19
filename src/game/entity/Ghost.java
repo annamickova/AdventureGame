@@ -4,14 +4,14 @@ import game.GPanel;
 
 import java.util.Random;
 
-public class Cat extends NPC{
+public class Ghost extends NPC{
 
-    public Cat(GPanel gPanel) {
+    public Ghost(GPanel gPanel) {
         super(gPanel);
-
-        setName("cici");
+        setName("ghost");
         setDialogues("cat.txt");
         loadImage("cat.jpeg");
+        speedP = 1;
     }
 
     @Override

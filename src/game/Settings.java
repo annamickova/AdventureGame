@@ -20,13 +20,19 @@ public class Settings {
         flowerTeleport.setName("teleport");
         flowerTeleport.setItemX(gPanel.getTileSize()*21);
         flowerTeleport.setItemY(gPanel.getTileSize()*23);
-        gPanel.getItems().add(0, flowerTeleport);
+        gPanel.getItems().add(flowerTeleport);
+
+        FlowerTeleport flowerTeleport2 = new FlowerTeleport(gPanel);
+        flowerTeleport2.setName("teleport");
+        flowerTeleport2.setItemX(gPanel.getTileSize()*38);
+        flowerTeleport2.setItemY(gPanel.getTileSize()*40);
+        gPanel.getItems().add( flowerTeleport2);
 
         Walk walk = new Walk(gPanel);
         walk.setName("walk through");
         walk.setItemX(gPanel.getTileSize()*21);
         walk.setItemY(gPanel.getTileSize()*20);
-        gPanel.getItems().add(1, walk);
+        gPanel.getItems().add( walk);
     }
 
     public void collectItem(){
