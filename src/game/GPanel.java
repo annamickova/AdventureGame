@@ -1,6 +1,7 @@
 package game;
 
 import game.background.Background;
+import game.entity.Animal;
 import game.entity.Entity;
 import game.entity.NPC;
 import game.entity.Player;
@@ -25,6 +26,8 @@ public class GPanel extends JPanel implements Runnable{
     private Player player;
     private ArrayList<Item> items;
     private ArrayList<Item> collectedItems = new ArrayList<>();
+    private ArrayList<Animal> lostAnimals = new ArrayList<>();
+    private ArrayList<Animal> caughtAnimals = new ArrayList<>();
     private ArrayList<NPC> npc;
     private Settings settings;
     private int speed;
@@ -33,6 +36,14 @@ public class GPanel extends JPanel implements Runnable{
     private int maxRow;
     private boolean running;
     private int currDialogIndex;
+
+    public ArrayList<Animal> getLostAnimals() {
+        return lostAnimals;
+    }
+
+    public ArrayList<Animal> getCaughtAnimals() {
+        return caughtAnimals;
+    }
 
     public Game getGame() {
         return game;
@@ -149,6 +160,11 @@ public class GPanel extends JPanel implements Runnable{
                     entity.update();
                 }
             }
+            for (Animal lostAnimal : lostAnimals) {
+                if (lostAnimal != null) {
+                    lostAnimal.update();
+                }
+            }
         }
     }
 
@@ -168,6 +184,11 @@ public class GPanel extends JPanel implements Runnable{
             for (Entity entity : npc) {
                 if (entity != null) {
                     entity.drawEntity(graphics2D);
+                }
+            }
+            for (Animal lostAnimal : lostAnimals) {
+                if (lostAnimal != null) {
+                    lostAnimal.drawEntity(graphics2D);
                 }
             }
             player.draw(graphics2D);

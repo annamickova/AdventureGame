@@ -2,14 +2,14 @@ package game.entity;
 
 import game.GPanel;
 
-import java.util.Random;
+import java.util.ArrayList;
 
-public class Cat extends NPC{
+public class Witch extends NPC{
 
-    public Cat(GPanel gPanel) {
+    public Witch(GPanel gPanel) {
         super(gPanel);
-        setName("cat");
-        setDialogues("cat.txt");
+        setName("witch");
+        setDialogues("witch.txt");
         loadImage("cat.jpeg");
     }
 

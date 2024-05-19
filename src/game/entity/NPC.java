@@ -16,7 +16,7 @@ public class NPC extends Entity {
         super(gPanel);
         direction = "down";
         speedP = 1;
-        this.dialogues = new ArrayList<>();
+        dialogues = new ArrayList<>();
         moveInterval = 1200;
     }
 

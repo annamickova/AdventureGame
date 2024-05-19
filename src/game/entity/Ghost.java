@@ -2,6 +2,7 @@ package game.entity;
 
 import game.GPanel;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Ghost extends NPC{
@@ -11,6 +12,7 @@ public class Ghost extends NPC{
         setName("ghost");
         setDialogues("ghost.txt");
         loadImage("ghostOg.jpg");
+        speedP = 1;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package game;
 
-import game.entity.Cat;
+import game.entity.Animal;
+import game.entity.Witch;
 import game.entity.Ghost;
 import game.entity.NPC;
 import game.items.FlowerTeleport;
@@ -13,6 +14,7 @@ public class Settings {
         this.gPanel = gPanel;
         setItems();
         setNPC();
+        setAnimals();
     }
 
 
@@ -45,12 +47,12 @@ public class Settings {
         }
     }
     private void setNPC(){
-        NPC npc1 = new Cat(gPanel);
+        NPC npc1 = new Witch(gPanel);
         npc1.setX(gPanel.getTileSize()*21);
         npc1.setY(gPanel.getTileSize()*21);
         gPanel.getNpc().add(npc1);
 
-        NPC npc2 = new Cat(gPanel);
+        NPC npc2 = new Witch(gPanel);
         npc2.setX(gPanel.getTileSize()*20);
         npc2.setY(gPanel.getTileSize()*39);
         npc2.setName("haf");
@@ -60,6 +62,24 @@ public class Settings {
         ghost.setX(gPanel.getTileSize()*21);
         ghost.setY(gPanel.getTileSize()*25);
         gPanel.getNpc().add(ghost);
+    }
+
+    public void catchAnimal(){
+        for (int i = 0; i < gPanel.getLostAnimals().size(); i++) {
+            if (gPanel.getLostAnimals().get(i).entityArea().intersects(gPanel.getPlayer().entityArea())){
+                gPanel.getCaughtAnimals().add(gPanel.getLostAnimals().get(i));
+                gPanel.getLostAnimals().remove(gPanel.getLostAnimals().get(i));
+                System.out.println("you caught " + gPanel.getCaughtAnimals().get(i));
+                System.out.println(gPanel.getLostAnimals().size() + " left animals");
+            }
+        }
+    }
+
+    private void setAnimals(){
+        Animal mouse = new Animal(gPanel, "mouse", "mouse.jpg");
+        mouse.setX(gPanel.getTileSize()*16);
+        mouse.setY(gPanel.getTileSize()*20);
+        gPanel.getLostAnimals().add(mouse);
     }
 
 
