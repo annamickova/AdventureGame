@@ -91,6 +91,25 @@ public class KeyHandler implements KeyListener {
                     }
                 }
             }
+        }else if (game.getGameState() == game.getEnd()) {
+            switch (e.getKeyCode()){
+                case KeyEvent.VK_W, KeyEvent.VK_UP -> {game.getDrawStates()
+                        .setPointer(game.getDrawStates().getPointer()-1);
+                    game.getDrawStates().resetPointer();
+                }
+                case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {game.getDrawStates()
+                        .setPointer(game.getDrawStates().getPointer()+1);
+                    game.getDrawStates().resetPointer();
+                }
+                case KeyEvent.VK_ENTER -> {
+                    if (game.getDrawStates().getPointer() == 0){
+                        game.setGameState(game.getPlay());
+                    }
+                    if (game.getDrawStates().getPointer() == 1){
+                        System.exit(0);
+                    }
+                }
+            }
         }
 
     }

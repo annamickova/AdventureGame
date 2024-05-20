@@ -198,7 +198,43 @@ public class DrawStates {
     }
 
 
+    public void endScreen(Graphics2D graphics2D){
+        String gameOver = "game over";
+        String text = "";
+        if (gPanel.getGame().isVictory()){
+            text = "you found all your missing creatures";
+        }else {
+            text = "you lost, try again";
+        }
+        graphics2D.setFont(new Font(font, Font.BOLD, 50));
 
+        int x = gPanel.getScreenWidth()/2;
+        int hX =  x - textCentred(graphics2D, gameOver)/2;
+        int hY = gPanel.getTileSize()*4;
+        graphics2D.setColor(new Color(70,80,120));
+        graphics2D.fillRect(0,0, gPanel.getScreenWidth(), gPanel.getScreenHeight());
+
+        graphics2D.setColor(Color.black);
+        graphics2D.drawString(gameOver, hX+5,hY+5);
+
+        graphics2D.setColor(Color.white);
+        graphics2D.drawString(gameOver, hX,hY);
+        graphics2D.setFont(new Font(font, Font.BOLD, 30));
+        graphics2D.drawString(text, x - textCentred(graphics2D,text)/2,hY+3*gPanel.getTileSize()/2);
+        String newGame = "new game";
+        String ending = "end";
+
+        graphics2D.setFont(new Font(font, Font.BOLD, 50));
+        graphics2D.drawString(newGame, x - textCentred(graphics2D,newGame)/2,hY+3*gPanel.getTileSize());
+        graphics2D.drawString(ending, x - textCentred(graphics2D,ending)/2,hY+5*gPanel.getTileSize());
+
+        switch (pointer){
+            case 0 -> drawText(graphics2D, (x - textCentred(graphics2D,newGame)/2) - gPanel.getTileSize(),
+                    hY+3*gPanel.getTileSize(), "•", 50);
+            case 1 -> drawText(graphics2D, (x - textCentred(graphics2D,ending)/2) - gPanel.getTileSize(),
+                    hY+5*gPanel.getTileSize(), "•", 50);
+        }
+    }
 
 
 

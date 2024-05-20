@@ -18,6 +18,7 @@ public class Game {
     private final int functions = 4;
     private final int catchingAnimal = 5;
     private final int end = 6;
+    private boolean victory = false;
 
 
     public Game(GPanel gPanel) {
@@ -56,6 +57,18 @@ public class Game {
 
     public int getCatchingAnimal() {
         return catchingAnimal;
+    }
+
+    public int getEnd() {
+        return end;
+    }
+
+    public boolean isVictory() {
+        return victory;
+    }
+
+    public void setVictory(boolean victory) {
+        this.victory = victory;
     }
 
     public void teleport(){
@@ -103,6 +116,7 @@ public class Game {
 
     public void setState(Graphics2D graphics2D){
         graphics2D.setColor(new Color(250,250,250));
+        end();
         if (gameState == play){
         }
         if (gameState == stop) {
@@ -118,13 +132,14 @@ public class Game {
             drawStates.animalsScreen(graphics2D);
 
         }if (gameState == end){
-
+            drawStates.endScreen(graphics2D);
         }
     }
 
     public void end(){
        if (gPanel.getLostAnimals().size() == 0){
-           gPanel.setRunning(false);
+           victory = true;
+           gameState = end;
        }
     }
 }
