@@ -1,6 +1,6 @@
 package game;
 
-import game.entity.Animal;
+import game.entity.Creature;
 import game.entity.Witch;
 import game.entity.Ghost;
 import game.entity.NPC;
@@ -14,7 +14,7 @@ public class Setting {
         this.gPanel = gPanel;
         setItems();
         setNPC();
-        setAnimals();
+        setCreatures();
     }
 
 
@@ -64,7 +64,7 @@ public class Setting {
         gPanel.getNpc().add(ghost);
     }
 
-    public void catchAnimal(){
+    public void catchCreature(){
         for (int i = 0; i < gPanel.getLostAnimals().size(); i++) {
             if (gPanel.getLostAnimals().get(i).entityArea().intersects(gPanel.getPlayer().entityArea())){
                 gPanel.getCaughtAnimals().add(gPanel.getLostAnimals().get(i));
@@ -74,11 +74,17 @@ public class Setting {
         }
     }
 
-    private void setAnimals(){
-        Animal mouse = new Animal(gPanel, "mouse", "mouse.jpg");
+
+    private void setCreatures(){
+        Creature mouse = new Creature(gPanel, "mouse", "mouse.jpg");
         mouse.setX(gPanel.getTileSize()*16);
         mouse.setY(gPanel.getTileSize()*20);
         gPanel.getLostAnimals().add(mouse);
+
+        Creature butterfly = new Creature(gPanel, "butterfly", "butterfly.jpg");
+        butterfly.setX(gPanel.getTileSize()*16);
+        butterfly.setY(gPanel.getTileSize()*21);
+        gPanel.getLostAnimals().add(butterfly);
     }
 
 

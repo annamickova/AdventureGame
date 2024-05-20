@@ -221,7 +221,7 @@ public class DrawStates {
         graphics2D.drawString(gameOver, hX,hY);
         graphics2D.setFont(new Font(font, Font.BOLD, 30));
         graphics2D.drawString(text, x - textCentred(graphics2D,text)/2,hY+3*gPanel.getTileSize()/2);
-        String newGame = "new game";
+        String newGame = "try again";
         String ending = "end";
 
         graphics2D.setFont(new Font(font, Font.BOLD, 50));

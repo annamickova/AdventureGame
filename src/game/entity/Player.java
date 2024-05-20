@@ -80,7 +80,7 @@ public class Player extends Entity {
         checkCollision.npcMeetPlayer();
 
        gPanel.getSettings().collectItem();
-       gPanel.getSettings().catchAnimal();
+       gPanel.getSettings().catchCreature();
     }
 
 

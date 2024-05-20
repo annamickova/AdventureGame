@@ -1,7 +1,7 @@
 package game;
 
 import game.background.Background;
-import game.entity.Animal;
+import game.entity.Creature;
 import game.entity.Entity;
 import game.entity.NPC;
 import game.entity.Player;
@@ -26,8 +26,8 @@ public class GPanel extends JPanel implements Runnable{
     private Player player;
     private ArrayList<Item> items;
     private ArrayList<Item> collectedItems = new ArrayList<>();
-    private ArrayList<Animal> lostAnimals = new ArrayList<>();
-    private ArrayList<Animal> caughtAnimals = new ArrayList<>();
+    private ArrayList<Creature> lostCreatures = new ArrayList<>();
+    private ArrayList<Creature> caughtCreatures = new ArrayList<>();
     private ArrayList<NPC> npc;
     private Setting setting;
     private int speed;
@@ -37,12 +37,12 @@ public class GPanel extends JPanel implements Runnable{
     private boolean running;
     private int currDialogIndex;
 
-    public ArrayList<Animal> getLostAnimals() {
-        return lostAnimals;
+    public ArrayList<Creature> getLostAnimals() {
+        return lostCreatures;
     }
 
-    public ArrayList<Animal> getCaughtAnimals() {
-        return caughtAnimals;
+    public ArrayList<Creature> getCaughtAnimals() {
+        return caughtCreatures;
     }
 
     public Game getGame() {
@@ -168,9 +168,9 @@ public class GPanel extends JPanel implements Runnable{
                     entity.update();
                 }
             }
-            for (Animal lostAnimal : lostAnimals) {
-                if (lostAnimal != null) {
-                    lostAnimal.update();
+            for (Creature lostCreature : lostCreatures) {
+                if (lostCreature != null) {
+                    lostCreature.update();
                 }
             }
         }
@@ -194,9 +194,9 @@ public class GPanel extends JPanel implements Runnable{
                     entity.drawEntity(graphics2D);
                 }
             }
-            for (Animal lostAnimal : lostAnimals) {
-                if (lostAnimal != null) {
-                    lostAnimal.drawEntity(graphics2D);
+            for (Creature lostCreature : lostCreatures) {
+                if (lostCreature != null) {
+                    lostCreature.drawEntity(graphics2D);
                 }
             }
             player.draw(graphics2D);

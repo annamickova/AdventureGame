@@ -103,6 +103,7 @@ public class KeyHandler implements KeyListener {
                 }
                 case KeyEvent.VK_ENTER -> {
                     if (game.getDrawStates().getPointer() == 0){
+                        GFrame frame = new GFrame();
                         game.setGameState(game.getPlay());
                     }
                     if (game.getDrawStates().getPointer() == 1){
