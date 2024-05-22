@@ -3,7 +3,7 @@ package game.entity;
 import game.GPanel;
 
 public class Enemy extends NPC{
-    public Enemy(GPanel gPanel) {
+    public Enemy(GPanel gPanel) throws Exception{
         super(gPanel);
         setName("enemy");
         loadImage("pigeon.jpg");
@@ -14,10 +14,10 @@ public class Enemy extends NPC{
     @Override
     public void update() {
         super.update();
-        takeCreature();
+        stealCreature();
     }
 
-    private void takeCreature(){
+    private void stealCreature(){
         int last = gPanel.getCaughtAnimals().size()-1;
         if (gPanel.getPlayer().entityArea().intersects(this.entityArea())){
             if (gPanel.getCaughtAnimals().size() != 0){

@@ -7,7 +7,7 @@ import game.items.Walk;
 public class Setting {
     GPanel gPanel;
 
-    public Setting(GPanel gPanel) {
+    public Setting(GPanel gPanel) throws Exception{
         this.gPanel = gPanel;
         setItems();
         setNPC();
@@ -43,7 +43,7 @@ public class Setting {
             }
         }
     }
-    private void setNPC(){
+    private void setNPC() throws Exception{
         NPC npc1 = new Witch(gPanel);
         npc1.setX(gPanel.getTileSize()*21);
         npc1.setY(gPanel.getTileSize()*38);
@@ -73,7 +73,7 @@ public class Setting {
     }
 
 
-    private void setCreatures(){
+    private void setCreatures() throws Exception{
         Creature mouse = new Creature(gPanel, "mouse", "mouse.jpg");
         mouse.setX(gPanel.getTileSize()*16);
         mouse.setY(gPanel.getTileSize()*20);

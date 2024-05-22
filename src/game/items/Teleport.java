@@ -19,6 +19,10 @@ public class Teleport extends Item{
 
     @Override
     public void action() {
-        gPanel.getGame().teleport();
+        try {
+            gPanel.getGame().teleport();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

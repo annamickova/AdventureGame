@@ -7,6 +7,7 @@ import game.screenStates.Game;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GPanel extends JPanel implements Runnable{
@@ -25,7 +26,7 @@ public class GPanel extends JPanel implements Runnable{
     private ArrayList<Item> collectedItems = new ArrayList<>();
     private ArrayList<Creature> lostCreatures = new ArrayList<>();
     private ArrayList<Creature> caughtCreatures = new ArrayList<>();
-    private Enemy enemy = new Enemy(this);
+    private Enemy enemy;
     private ArrayList<NPC> npc;
     private Setting setting;
     private int speed;
@@ -126,10 +127,16 @@ public class GPanel extends JPanel implements Runnable{
     }
 
     private void setAssets(){
-        bGround = new Background(this);
-        items = new ArrayList<>();
-        npc = new ArrayList<>();
-        setting = new Setting(this);
+        try {
+            bGround = new Background(this);
+            items = new ArrayList<>();
+            npc = new ArrayList<>();
+            enemy = new Enemy(this);
+            setting = new Setting(this);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
 

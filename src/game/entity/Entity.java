@@ -39,16 +39,25 @@ public class Entity {
         return x;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public void setX(int x) throws Exception{
+        if (x >= 0){
+            this.x = x;
+        }else {
+            throw new IOException();
+        }
     }
 
     public int getY() {
         return y;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public void setY(int y) throws Exception{
+        if (y >= 0){
+            this.y = y;
+        }else {
+            throw new IOException();
+        }
+
     }
 
     public boolean isInteraction() {

@@ -71,7 +71,7 @@ public class Game {
         this.victory = victory;
     }
 
-    public void teleport(){
+    public void teleport() throws Exception{
         gPanel.getPlayer().setX(gPanel.getTileSize() * 23);
         gPanel.getPlayer().setY(gPanel.getTileSize() * 21);
         gameState = play;
