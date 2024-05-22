@@ -1,10 +1,7 @@
 package game;
 
 import game.background.Background;
-import game.entity.Creature;
-import game.entity.Entity;
-import game.entity.NPC;
-import game.entity.Player;
+import game.entity.*;
 import game.items.Item;
 import game.screenStates.Game;
 
@@ -28,6 +25,7 @@ public class GPanel extends JPanel implements Runnable{
     private ArrayList<Item> collectedItems = new ArrayList<>();
     private ArrayList<Creature> lostCreatures = new ArrayList<>();
     private ArrayList<Creature> caughtCreatures = new ArrayList<>();
+    private Enemy enemy = new Enemy(this);
     private ArrayList<NPC> npc;
     private Setting setting;
     private int speed;
@@ -173,6 +171,7 @@ public class GPanel extends JPanel implements Runnable{
                     lostCreature.update();
                 }
             }
+            enemy.update();
         }
     }
 
@@ -199,6 +198,7 @@ public class GPanel extends JPanel implements Runnable{
                     lostCreature.drawEntity(graphics2D);
                 }
             }
+            enemy.drawEntity(graphics2D);
             player.draw(graphics2D);
             game.setState(graphics2D);
         }

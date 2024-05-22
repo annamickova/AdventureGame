@@ -1,9 +1,6 @@
 package game;
 
-import game.entity.Creature;
-import game.entity.Witch;
-import game.entity.Ghost;
-import game.entity.NPC;
+import game.entity.*;
 import game.items.Teleport;
 import game.items.Walk;
 
@@ -62,6 +59,7 @@ public class Setting {
         ghost.setX(gPanel.getTileSize()*10);
         ghost.setY(gPanel.getTileSize()*10);
         gPanel.getNpc().add(ghost);
+
     }
 
     public void catchCreature(){

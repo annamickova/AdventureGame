@@ -101,11 +101,13 @@ public class Game {
         int howMany = 0;
         for (NPC npc : gPanel.getNpc()) {
             if (npc.getDialogIndex() == gPanel.getCurrDialogIndex() + 1) {
-                n++;
+                    n++;
             }
             if (npc.getDialogues().size() > howMany) {
-                howMany = npc.getDialogues().size() - 1;
+                    howMany = npc.getDialogues().size() - 1;
             }
+
+
         }
         if (n == gPanel.getNpc().size()){
             if (gPanel.getCurrDialogIndex() <= howMany-1){

@@ -68,15 +68,15 @@ public class CheckCollision {
     }
 
     public void npcMeetPlayer(){
-        int n = 0;
+        boolean n = false;
         int j = 0;
         for (int i = 0; i < gPanel.getNpc().size(); i++) {
             if (gPanel.getPlayer().entityArea().intersects(gPanel.getNpc().get(i).entityAreaAround())){
-                n++;
+                n = true;
                 j = i;
             }
         }
-        if (n != 0){
+        if (n){
             if (gPanel.getPlayer().isInteraction()){
                 if (gPanel.getCurrDialogIndex() == gPanel.getNpc().get(j).getDialogIndex()){
                     gPanel.getGame().setGameState(gPanel.getGame().getDialog());
