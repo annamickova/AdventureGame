@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GFrame extends JFrame {
-    GPanel gPanel;
+    private GPanel gPanel;
     public GFrame() throws HeadlessException {
         gPanel = new GPanel();
         JFrame frame = new JFrame();

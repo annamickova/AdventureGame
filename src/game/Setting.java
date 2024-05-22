@@ -5,7 +5,7 @@ import game.items.Teleport;
 import game.items.Walk;
 
 public class Setting {
-    GPanel gPanel;
+   private GPanel gPanel;
 
     public Setting(GPanel gPanel) throws Exception{
         this.gPanel = gPanel;

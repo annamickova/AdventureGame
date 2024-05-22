@@ -1,12 +1,13 @@
 package game;
 import game.background.Tile;
 import game.entity.Entity;
+import game.entity.NPC;
 
 import java.awt.*;
 
 public class CheckCollision {
 
-    GPanel gPanel;
+    private GPanel gPanel;
 
     public CheckCollision(GPanel gPanel) {
         this.gPanel = gPanel;
@@ -55,16 +56,17 @@ public class CheckCollision {
         return e1.entityArea().intersects(e2.entityArea());
     }
 
-    public boolean collisionWithOtherNPCs(int x, int y){
-        Rectangle e = new Rectangle(x, y, gPanel.getTileSize(), gPanel.getTileSize());
+    public boolean collisionWithOtherNPCs(NPC npc){
+        boolean c = false;
         for (int i = 0; i < gPanel.getNpc().size(); i++) {
-
-                if (e.intersects(gPanel.getNpc().get(i).entityArea())){
-                    return true;
+            if (npc.entityArea().intersects(gPanel.getNpc().get(i).entityArea())){
+                if (!gPanel.getNpc().get(i).equals(npc)){
+                    c = true;
                 }
+            }
 
         }
-        return false;
+        return c;
     }
 
     public void npcMeetPlayer(){

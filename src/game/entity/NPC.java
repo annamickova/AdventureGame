@@ -86,6 +86,7 @@ public class NPC extends Entity {
                 case 2 -> direction = "left";
                 case 3 -> direction = "right";
             }
+
         } else if (!checkCollision.hit(this, gPanel.getPlayer())) {
             x = newX;
             y = newY;
