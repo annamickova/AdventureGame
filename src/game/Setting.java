@@ -4,7 +4,7 @@ import game.entity.Creature;
 import game.entity.Witch;
 import game.entity.Ghost;
 import game.entity.NPC;
-import game.items.FlowerTeleport;
+import game.items.Teleport;
 import game.items.Walk;
 
 public class Setting {
@@ -19,17 +19,17 @@ public class Setting {
 
 
     private void setItems(){
-        FlowerTeleport flowerTeleport = new FlowerTeleport(gPanel);
-        flowerTeleport.setName("teleport");
-        flowerTeleport.setItemX(gPanel.getTileSize()*21);
-        flowerTeleport.setItemY(gPanel.getTileSize()*23);
-        gPanel.getItems().add(flowerTeleport);
+        Teleport teleport = new Teleport(gPanel);
+        teleport.setName("teleport");
+        teleport.setItemX(gPanel.getTileSize()*21);
+        teleport.setItemY(gPanel.getTileSize()*23);
+        gPanel.getItems().add(teleport);
 
-        FlowerTeleport flowerTeleport2 = new FlowerTeleport(gPanel);
-        flowerTeleport2.setName("teleport");
-        flowerTeleport2.setItemX(gPanel.getTileSize()*38);
-        flowerTeleport2.setItemY(gPanel.getTileSize()*40);
-        gPanel.getItems().add( flowerTeleport2);
+        Teleport teleport2 = new Teleport(gPanel);
+        teleport2.setName("teleport");
+        teleport2.setItemX(gPanel.getTileSize()*38);
+        teleport2.setItemY(gPanel.getTileSize()*40);
+        gPanel.getItems().add(teleport2);
 
         Walk walk = new Walk(gPanel);
         walk.setName("walk through");

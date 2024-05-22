@@ -117,6 +117,7 @@ public class Game {
     public void setState(Graphics2D graphics2D){
         graphics2D.setColor(new Color(250,250,250));
         end();
+        drawStates.drawlostCreatureCount(graphics2D);
         if (gameState == play){
         }
         if (gameState == stop) {

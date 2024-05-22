@@ -221,7 +221,7 @@ public class DrawStates {
         graphics2D.drawString(gameOver, hX,hY);
         graphics2D.setFont(new Font(font, Font.BOLD, 30));
         graphics2D.drawString(text, x - textCentred(graphics2D,text)/2,hY+3*gPanel.getTileSize()/2);
-        String newGame = "try again";
+        String newGame = "new game";
         String ending = "end";
 
         graphics2D.setFont(new Font(font, Font.BOLD, 50));
@@ -233,6 +233,29 @@ public class DrawStates {
                     hY+3*gPanel.getTileSize(), "•", 50);
             case 1 -> drawText(graphics2D, (x - textCentred(graphics2D,ending)/2) - gPanel.getTileSize(),
                     hY+5*gPanel.getTileSize(), "•", 50);
+        }
+    }
+
+    public void drawlostCreatureCount(Graphics2D graphics2D){
+
+        graphics2D.setColor(new Color(255,255,255,200));
+        int wX = gPanel.getTileSize()/2;
+        int wY = gPanel.getTileSize()/2;
+        int wWidth = 3*gPanel.getTileSize()/4*(gPanel.getLostAnimals().size()+2);
+        int wHeight = 3*gPanel.getTileSize()/2;
+        graphics2D.fillRoundRect(wX,wY,wWidth,wHeight, 20,20);
+
+        int x = gPanel.getTileSize();
+        int y = gPanel.getTileSize()-gPanel.getTileSize()/8;
+
+        graphics2D.setColor(new Color(0,0,0,255));
+        drawText(graphics2D, x-8, gPanel.getTileSize()/2 + wHeight/2 , "find: ", 15);
+
+
+        for (int i = 0; i < gPanel.getLostAnimals().size(); i++) {
+            x += 3*gPanel.getTileSize()/4;
+            graphics2D.drawImage(gPanel.getLostAnimals().get(i).getEntityImage(),x,y, 3*gPanel.getTileSize()/4, 3*gPanel.getTileSize()/4, null);
+
         }
     }
 

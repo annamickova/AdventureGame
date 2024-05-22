@@ -6,9 +6,9 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 
-public class FlowerTeleport extends Item{
+public class Teleport extends Item{
 
-    public FlowerTeleport(GPanel gPanel) {
+    public Teleport(GPanel gPanel) {
         super(gPanel);
         try {
             itemImage = ImageIO.read(new File("flower2.png"));
