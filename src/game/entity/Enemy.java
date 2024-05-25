@@ -20,8 +20,8 @@ public class Enemy extends NPC{
         guard.update();
         //creatureBackToLost();
         try {
-            stealCreature(this);
-            stealCreature(guard);
+            prisonCreature(this);
+            prisonCreature(guard);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -38,7 +38,7 @@ public class Enemy extends NPC{
         }
     }
 
-    public void stealCreature(Entity entity) throws Exception {
+    public void prisonCreature(Entity entity) throws Exception {
         for (int i = 0; i < gPanel.getLostAnimals().size(); i++) {
             if (gPanel.getLostAnimals().get(i).entityArea().intersects(entity.entityArea())){
                 gPanel.getLostAnimals().get(i).setX(57*gPanel.getTileSize());
