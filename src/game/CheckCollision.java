@@ -126,4 +126,16 @@ public class CheckCollision {
 
         return tile.equals(tileName);
     }
+
+    public void throwPlayer(Entity entity){
+        if (entity.entityArea().intersects(gPanel.getPlayer().entityArea())){
+            try {
+                gPanel.getPlayer().setX(gPanel.getTileSize());
+                gPanel.getPlayer().setY(58*gPanel.getTileSize());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+    }
 }

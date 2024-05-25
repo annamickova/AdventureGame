@@ -83,6 +83,11 @@ public class Setting {
         butterfly.setX(gPanel.getTileSize()*16);
         butterfly.setY(gPanel.getTileSize()*21);
         gPanel.getLostAnimals().add(butterfly);
+
+        Creature butterfly2 = new Creature(gPanel, "butterfly2", "butterfly.jpg");
+        butterfly2.setX(gPanel.getTileSize()*22);
+        butterfly2.setY(gPanel.getTileSize()*35);
+        gPanel.getLostAnimals().add(butterfly2);
     }
 
 

@@ -9,8 +9,8 @@ import java.util.Random;
 public class NPC extends Entity {
     private String name;
     protected ArrayList<String> dialogues;
-    private long lastMoveTime;
-    private final long moveInterval;
+    protected long lastMoveTime;
+    protected final long moveInterval;
     protected int dialogIndex = 0;
     public NPC(GPanel gPanel) {
         super(gPanel);

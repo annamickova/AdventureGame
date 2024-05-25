@@ -45,6 +45,7 @@ public class DrawStates {
     }
 
     public void pauseScreen(Graphics2D graphics2D){
+        graphics2D.setColor(Color.white);
         String text = "PAUSED";
         graphics2D.setFont(new Font(font, Font.BOLD, 60));
         int l = (int)graphics2D.getFontMetrics().getStringBounds(text, graphics2D).getWidth();

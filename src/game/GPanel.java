@@ -206,6 +206,7 @@ public class GPanel extends JPanel implements Runnable{
                 }
             }
             enemy.drawEntity(graphics2D);
+            enemy.getGuard().drawEntity(graphics2D);
             player.draw(graphics2D);
             game.setState(graphics2D);
         }
