@@ -84,7 +84,7 @@ public class KeyHandler implements KeyListener {
                         game.setGameState(game.getPlay());
                     }
                     if (game.getDrawStates().getPointer() == 1){
-
+                        game.setGameState(game.getDescription());
                     }
                     if (game.getDrawStates().getPointer() == 2){
                         System.exit(0);

@@ -46,7 +46,7 @@ public class Background {
         try {
             tiles[0] = new Tile();
             tiles[0].setName("grass");
-            tiles[0].setImage(ImageIO.read(new File("grass4.jpg")));
+            tiles[0].setImage(ImageIO.read(new File("grass5.jpg")));
 
             tiles[1] = new Tile();
             tiles[1].setName("wall");
@@ -64,7 +64,7 @@ public class Background {
 
             tiles[4] = new Tile();
             tiles[4].setName("tree");
-            tiles[4].setImage(ImageIO.read(new File("tree.png")));
+            tiles[4].setImage(ImageIO.read(new File("tree2.jpg")));
             tiles[4].setCollision(true);
 
             tiles[5] = new Tile();

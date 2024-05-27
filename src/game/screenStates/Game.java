@@ -19,6 +19,7 @@ public class Game {
     private final int catchingAnimal = 5;
     private final int end = 6;
     private boolean victory = false;
+    private final int description = 7;
 
 
     public Game(GPanel gPanel) {
@@ -71,6 +72,10 @@ public class Game {
         this.victory = victory;
     }
 
+    public int getDescription() {
+        return description;
+    }
+
     public void teleport() throws Exception{
         gPanel.getPlayer().setX(gPanel.getTileSize() * 23);
         gPanel.getPlayer().setY(gPanel.getTileSize() * 21);
@@ -106,8 +111,6 @@ public class Game {
             if (npc.getDialogues().size() > howMany) {
                     howMany = npc.getDialogues().size() - 1;
             }
-
-
         }
         if (n == gPanel.getNpc().size()){
             if (gPanel.getCurrDialogIndex() <= howMany-1){
@@ -133,9 +136,10 @@ public class Game {
             drawStates.funcScreen(graphics2D);
         }if (gameState == catchingAnimal){
             drawStates.animalsScreen(graphics2D);
-
         }if (gameState == end){
             drawStates.endScreen(graphics2D);
+        }if (gameState == description){
+            drawStates.gameDescriptionScreen(graphics2D);
         }
     }
 
