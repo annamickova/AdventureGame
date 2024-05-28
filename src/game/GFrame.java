@@ -5,6 +5,11 @@ import java.awt.*;
 
 public class GFrame extends JFrame {
     private GPanel gPanel;
+
+    /**
+     * Setting JFrame, creating new JPanel and starting thread.
+     * @throws HeadlessException
+     */
     public GFrame() throws HeadlessException {
         gPanel = new GPanel();
         JFrame frame = new JFrame();

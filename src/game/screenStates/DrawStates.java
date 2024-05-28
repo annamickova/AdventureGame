@@ -4,11 +4,14 @@ import game.GPanel;
 
 import java.awt.*;
 
+/**
+ * Class dealing with drawing screens.
+ */
 public class DrawStates {
     private GPanel gPanel;
     private String currDialog;
     private int pointer;
-    private int textCount;
+    private final int textCount;
     private String font = "Rockwell";
     private int funcPointer;
     private int funcCount;
@@ -18,10 +21,6 @@ public class DrawStates {
         this.textCount = 3;
         this.pointer = 0;
         this.funcPointer = 0;
-    }
-
-    public String getCurrDialog() {
-        return currDialog;
     }
 
     public void setCurrDialog(String currDialog) {
@@ -62,24 +61,18 @@ public class DrawStates {
         int wWidth = gPanel.getScreenWidth() - (gPanel.getTileSize()*6);
         int wHeight =gPanel.getTileSize() * 4;
         graphics2D.fillRoundRect(wX,wY,wWidth,wHeight, 20,20);
-
         displayDialogue(graphics2D,wX,wY,wWidth,wHeight);
-
     }
-
     private void displayDialogue(Graphics2D graphics2D, int wX, int wY, int wWidth, int wHeight){
         graphics2D.setColor(new Color(0,0,0));
         graphics2D.setStroke(new BasicStroke(5));
         graphics2D.setFont(new Font(font, Font.BOLD, 12));
         graphics2D.drawRoundRect(wX+5, wY+5, wWidth-10, wHeight -10, 20, 20);
-
         for (String line: currDialog.split("/")){
             graphics2D.drawString(line, wX + gPanel.getTileSize(), wY + gPanel.getTileSize());
             wY += gPanel.getTileSize();
         }
     }
-
-
     public void homeScreen(Graphics2D graphics2D){
         String text = "game";
         graphics2D.setFont(new Font(font, Font.BOLD, 50));
@@ -98,7 +91,6 @@ public class DrawStates {
         String menuT1 = "new game";
         String menuT2 = "game description";
         String menuT3 = "end";
-
         drawText(graphics2D, x - textCentred(graphics2D,menuT1)/2, hY+3*gPanel.getTileSize(), menuT1,50);
         drawText(graphics2D, x - textCentred(graphics2D,menuT2)/2, hY+5*gPanel.getTileSize(), menuT2,50);
         drawText(graphics2D, x - textCentred(graphics2D,menuT3)/2, hY+7*gPanel.getTileSize(), menuT3,50);

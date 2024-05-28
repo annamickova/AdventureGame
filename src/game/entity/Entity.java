@@ -26,7 +26,6 @@ public class Entity {
         this.checkCollision = new CheckCollision(gPanel);
 
     }
-
     public String getDirection() {
         return direction;
     }
@@ -59,7 +58,6 @@ public class Entity {
         }
 
     }
-
     public boolean isInteraction() {
         return interaction;
     }
@@ -72,31 +70,60 @@ public class Entity {
         return entityImage;
     }
 
+    /**
+     * Checking if entity is on screen by corners.
+     * @return
+     */
+    private boolean isOnScreen(){
+       return x + gPanel.getTileSize() > gPanel.getPlayer().getX() - gPanel.getPlayer().getScreenX() &&
+                x - gPanel.getTileSize() < gPanel.getPlayer().getX() + gPanel.getPlayer().getScreenX() &&
+                y + gPanel.getTileSize() > gPanel.getPlayer().getY() - gPanel.getPlayer().getScreenY() &&
+                y - gPanel.getTileSize() < gPanel.getPlayer().getY() + gPanel.getPlayer().getScreenY();
+    }
+
+    /**
+     * Drawing only visible entity on screen.
+     * @param graphics2D
+     */
     public void drawEntity(Graphics2D graphics2D){
         int screenX = x - gPanel.getPlayer().getX() + gPanel.getPlayer().getScreenX();
         int screenY = y - gPanel.getPlayer().getY()+ gPanel.getPlayer().getScreenY();
-
-        if (x + gPanel.getTileSize() > gPanel.getPlayer().getX() - gPanel.getPlayer().getScreenX() &&
-                x - gPanel.getTileSize() < gPanel.getPlayer().getX() + gPanel.getPlayer().getScreenX() &&
-                y + gPanel.getTileSize() > gPanel.getPlayer().getY() - gPanel.getPlayer().getScreenY() &&
-                y - gPanel.getTileSize() < gPanel.getPlayer().getY() + gPanel.getPlayer().getScreenY()){
+        if (isOnScreen()){
             graphics2D.drawImage(entityImage, screenX, screenY, gPanel.getTileSize(), gPanel.getTileSize(), null);
-
         }
     }
 
+    /**
+     * Rectangle of entity plus one tile around.
+     * @return
+     */
     public Rectangle entityAreaAround(){
         return new Rectangle(x-gPanel.getTileSize(), y-gPanel.getTileSize(),
                 gPanel.getTileSize()*3, gPanel.getTileSize()*3);
     }
 
+    /**
+     * Rectangle of entity size.
+     * @return Rectangle of entity
+     */
     public Rectangle entityArea(){
         return new Rectangle(x, y, gPanel.getTileSize(), gPanel.getTileSize());
     }
+
+    /**
+     * Creating rectangle with new x,y based on direction
+     * @param newX
+     * @param newY
+     * @return
+     */
     public Rectangle entityNewArea(int newX, int newY){
         return new Rectangle(newX, newY, gPanel.getTileSize(), gPanel.getTileSize());
     }
 
+    /**
+     * Loading entity image from file.
+     * @param fileName
+     */
     public void loadImage(String fileName) {
         try {
             entityImage = ImageIO.read(new File(fileName));
@@ -105,10 +132,6 @@ public class Entity {
         }
     }
 
-    public void update(){
+    public void update(){}
 
-    }
-
-    public void act() {
-    }
 }

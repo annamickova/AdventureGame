@@ -7,29 +7,25 @@ import game.screenStates.Game;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class GPanel extends JPanel implements Runnable{
 
-    Game game = new Game(this);
-    private final int tileSize = 48;
+    private Game game;
+    private final int tileSize;
     private int screenWidth;
     private int screenHeight;
     private int FPS;
-
-    Thread thread;
-    KeyHandler keyHandler;
-
+    private Thread thread;
+    private KeyHandler keyHandler;
     private Player player;
     private ArrayList<Item> items;
-    private ArrayList<Item> collectedItems = new ArrayList<>();
-    private ArrayList<Creature> lostCreatures = new ArrayList<>();
-    private ArrayList<Creature> caughtCreatures = new ArrayList<>();
+    private ArrayList<Item> collectedItems;
+    private ArrayList<Creature> lostCreatures;
+    private ArrayList<Creature> caughtCreatures;
     private Enemy enemy;
     private ArrayList<NPC> npc;
     private Setting setting;
-    private int speed;
     private Background bGround;
     private int maxCol;
     private int maxRow;
@@ -100,22 +96,13 @@ public class GPanel extends JPanel implements Runnable{
         return setting;
     }
 
-    public boolean isRunning() {
-        return running;
-    }
-
-    public void setRunning(boolean running) {
-        this.running = running;
-    }
-
     public GPanel(){
+        tileSize = 48;
         keyHandler = new KeyHandler(this);
+        game = new Game(this);
         currDialogIndex = 0;
-
         running = true;
-
         setPanelSize();
-
         setPlayersStuff();
         setAssets();
         setgPanelSettings();
@@ -123,21 +110,21 @@ public class GPanel extends JPanel implements Runnable{
 
     private void setPlayersStuff(){
         player = new Player(this, keyHandler);
-        speed = 5;
     }
 
     private void setAssets(){
         try {
             bGround = new Background(this);
             items = new ArrayList<>();
+            collectedItems = new ArrayList<>();
+            lostCreatures = new ArrayList<>();
+            caughtCreatures = new ArrayList<>();
             npc = new ArrayList<>();
             enemy = new Enemy(this);
             setting = new Setting(this);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
     private void setPanelSize(){
@@ -152,11 +139,13 @@ public class GPanel extends JPanel implements Runnable{
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
         this.setLayout(null);
-
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
     }
 
+    /**
+     * Creating new thread. Game is running until thread is not null.
+     */
     public void startGame(){
         if (thread == null || !running){
             thread = new Thread(this);
@@ -164,6 +153,9 @@ public class GPanel extends JPanel implements Runnable{
         }
     }
 
+    /**
+     * Updates player, enemy and npc.
+     */
     private void update(){
         if (game.getGameState() == game.getPlay()){
             player.update();
@@ -182,6 +174,10 @@ public class GPanel extends JPanel implements Runnable{
         }
     }
 
+    /**
+     * Painting all game components.
+     * @param graphics the <code>Graphics</code> object to protect
+     */
     public void paintComponent(Graphics graphics){
         super.paintComponent(graphics);
         Graphics2D graphics2D = (Graphics2D)graphics;
@@ -207,12 +203,15 @@ public class GPanel extends JPanel implements Runnable{
             }
             enemy.drawEntity(graphics2D);
             enemy.getGuard().drawEntity(graphics2D);
-            player.draw(graphics2D);
+            player.drawPlayer(graphics2D);
             game.setState(graphics2D);
         }
         graphics2D.dispose();
     }
 
+    /**
+     * Sleep method.
+     */
     @Override
     public void run() {
         double drawInterval = 1000000000/FPS;
@@ -229,7 +228,6 @@ public class GPanel extends JPanel implements Runnable{
                 if (remainingT < 0){
                     remainingT = 0;
                 }
-
                 Thread.sleep((long) remainingT);
                 nextDrawTime += drawInterval;
 

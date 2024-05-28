@@ -47,35 +47,31 @@ public class Item {
         return itemImage;
     }
 
-    public void setItemImage(BufferedImage itemImage) {
-        this.itemImage = itemImage;
-    }
-
     public Rectangle itemArea() {
         area = new Rectangle(itemX, itemY,gPanel.getTileSize(), gPanel.getTileSize() );
         return area;
     }
 
-
-    @Override
-    public String toString() {
-        return name;
-    }
-
-    public void drawItem(Graphics2D g2, GPanel gPanel){
-
-        int screenX = itemX - gPanel.getPlayer().getX() + gPanel.getPlayer().getScreenX();
-        int screenY = itemY - gPanel.getPlayer().getY()+ gPanel.getPlayer().getScreenY();
-
-        if (itemX + gPanel.getTileSize() > gPanel.getPlayer().getX() - gPanel.getPlayer().getScreenX() &&
+    private boolean isOnScreen(){
+        return itemX + gPanel.getTileSize() > gPanel.getPlayer().getX() - gPanel.getPlayer().getScreenX() &&
                 itemX - gPanel.getTileSize() < gPanel.getPlayer().getX() + gPanel.getPlayer().getScreenX() &&
                 itemY + gPanel.getTileSize() > gPanel.getPlayer().getY() - gPanel.getPlayer().getScreenY() &&
-                itemY - gPanel.getTileSize() < gPanel.getPlayer().getY() + gPanel.getPlayer().getScreenY()){
+                itemY - gPanel.getTileSize() < gPanel.getPlayer().getY() + gPanel.getPlayer().getScreenY();
+    }
+
+    /**
+     * Drawing visible items on screen.
+     * @param g2
+     * @param gPanel
+     */
+    public void drawItem(Graphics2D g2, GPanel gPanel){
+        int screenX = itemX - gPanel.getPlayer().getX() + gPanel.getPlayer().getScreenX();
+        int screenY = itemY - gPanel.getPlayer().getY()+ gPanel.getPlayer().getScreenY();
+        if (isOnScreen()){
             g2.drawImage(itemImage, screenX, screenY, gPanel.getTileSize(), gPanel.getTileSize(), null);
         }
     }
 
-    public void action(){
-    }
+    public void function(){}
 
 }

@@ -18,9 +18,13 @@ public class Walk extends Item{
         }
     }
 
+    /**
+     * Function that sets player's ability to walk through different tiles.
+     */
     @Override
-    public void action() {
-        gPanel.getGame().setPlayersWalkThrough();
+    public void function() {
+        gPanel.getPlayer().setWalkThrough(true);
+        gPanel.getGame().setGameState(gPanel.getGame().getPlay());
     }
 
 

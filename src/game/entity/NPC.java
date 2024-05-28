@@ -36,10 +36,6 @@ public class NPC extends Entity {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "name: " + name;
-    }
     public void setText(){
         if (gPanel.getCurrDialogIndex() == dialogIndex){
             if (dialogIndex < dialogues.size()){
@@ -48,6 +44,11 @@ public class NPC extends Entity {
             }
         }
     }
+
+    /**
+     * Loading speech for npc from text file.
+     * @param fileName
+     */
     public void setDialogues(String fileName){
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))){
             String line;
@@ -62,31 +63,32 @@ public class NPC extends Entity {
     }
     @Override
     public void update() {
-        act();
+        changeDirection();
         move();
     }
 
+    /***
+     * Generating random number to choose direction.
+     * NPC moves if there is no collision.
+     */
     public void move() {
         int newX = x;
         int newY = y;
-
         switch (this.direction) {
             case "up" -> newY -= speedP;
             case "down" -> newY += speedP;
             case "left" -> newX -= speedP;
             case "right" -> newX += speedP;
         }
-
-        Random rd = new Random();
         if (checkCollision.hasCollision(this)){
-            int i = rd.nextInt(4);
+            Random random = new Random();
+            int i = random.nextInt(4);
             switch (i) {
                 case 0 -> direction = "up";
                 case 1 -> direction = "down";
                 case 2 -> direction = "left";
                 case 3 -> direction = "right";
             }
-
         } else if (!checkCollision.hit(this, gPanel.getPlayer())) {
             x = newX;
             y = newY;
@@ -94,16 +96,19 @@ public class NPC extends Entity {
 
     }
 
-    public void act() {
+    /**
+     * Changing npc direction every 2 seconds.
+     */
+    public void changeDirection() {
         long currentTime = System.currentTimeMillis();
         if (currentTime - lastMoveTime >= moveInterval) {
             Random random = new Random();
             int i = random.nextInt(4);
             switch (i) {
-                case 0 -> this.direction = "up";
-                case 1 -> this.direction = "down";
-                case 2 -> this.direction = "left";
-                case 3 -> this.direction = "right";
+                case 0 -> direction = "up";
+                case 1 -> direction = "down";
+                case 2 -> direction = "left";
+                case 3 -> direction = "right";
             }
             lastMoveTime = currentTime;
         }

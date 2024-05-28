@@ -15,6 +15,9 @@ public class Ghost extends NPC{
         speedP = 1;
     }
 
+    /**
+     * Random moving. He can move through all tiles except wall.
+     */
     @Override
     public void move() {
         int newX = x;

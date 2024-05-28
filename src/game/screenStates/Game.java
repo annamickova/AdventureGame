@@ -10,6 +10,7 @@ public class Game {
     private GPanel gPanel;
     private DrawStates drawStates;
     private int gameState;
+    private int count = 0;
 
     private final int stop = 0;
     private final int play = 1;
@@ -76,18 +77,9 @@ public class Game {
         return description;
     }
 
-    public void teleport() throws Exception{
-        gPanel.getPlayer().setX(gPanel.getTileSize() * 23);
-        gPanel.getPlayer().setY(gPanel.getTileSize() * 21);
-        gameState = play;
-    }
-
-    public void setPlayersWalkThrough(){
-        gPanel.getPlayer().setWalkThrough(true);
-        gameState = play;
-    }
-
-    int count = 0;
+    /**
+     * Turning off walking through different tiles ability when player is not on tile with collision.
+     */
    public void turnOffWalking() {
         if (gPanel.getPlayer().isWalkThrough()){
             if (count >= 600) {
@@ -100,7 +92,9 @@ public class Game {
         }
     }
 
-
+    /**
+     * Checking and increasing npc dialog index.
+     */
     public void changeIndex(){
         int n = 0;
         int howMany = 0;
@@ -119,30 +113,31 @@ public class Game {
         }
     }
 
+    /**
+     * Deciding what to display by game state.
+     * @param graphics2D
+     */
     public void setState(Graphics2D graphics2D){
         graphics2D.setColor(new Color(250,250,250));
         end();
         drawStates.drawlostCreatureCount(graphics2D);
-        if (gameState == play){
-        }
-        if (gameState == stop) {
-            drawStates.pauseScreen(graphics2D);
-        }if (gameState == dialog){
-            changeIndex();
-            drawStates.dialogScreen(graphics2D);
-        }if (gameState == home){
-            drawStates.homeScreen(graphics2D);
-        }if (gameState == functions){
-            drawStates.funcScreen(graphics2D);
-        }if (gameState == catchingAnimal){
-            drawStates.animalsScreen(graphics2D);
-        }if (gameState == end){
-            drawStates.endScreen(graphics2D);
-        }if (gameState == description){
-            drawStates.gameDescriptionScreen(graphics2D);
+        switch (gameState){
+            case stop -> drawStates.pauseScreen(graphics2D);
+            case dialog -> {
+                changeIndex();
+                drawStates.dialogScreen(graphics2D);
+            }
+            case home -> drawStates.homeScreen(graphics2D);
+            case functions -> drawStates.funcScreen(graphics2D);
+            case catchingAnimal -> drawStates.animalsScreen(graphics2D);
+            case description -> drawStates.gameDescriptionScreen(graphics2D);
+            case end -> drawStates.endScreen(graphics2D);
         }
     }
 
+    /**
+     * Game over when player catches all creatures.
+     */
     public void end(){
        if (gPanel.getLostAnimals().size() == 0){
            victory = true;

@@ -42,6 +42,9 @@ public class Background {
         }
     }
 
+    /**
+     * Creating new kinds of tiles and adding into tiles array.
+     */
     public void loadTiles() {
         try {
             tiles[0] = new Tile();
@@ -77,7 +80,10 @@ public class Background {
         }
     }
 
-    // draws only visible tiles
+    /**
+     *  Drawing only visible tiles.
+     */
+
     public void draw(Graphics2D graphics2D) {
 
         int leftTileCol = (gPanel.getPlayer().getX() - gPanel.getPlayer().getScreenX()) / gPanel.getTileSize();

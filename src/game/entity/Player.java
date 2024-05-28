@@ -45,7 +45,9 @@ public class Player extends Entity {
         this.walkThrough = walkThrough;
     }
 
-
+    /**
+     * Moves if there is no collision, calls method to catch item or creature.
+     */
     @Override
     public void update() {
 
@@ -68,38 +70,25 @@ public class Player extends Entity {
             newX += speedP;
             direction = "right";
         }
-
        if (!walkThrough) {
-           coll(newX, newY);
+          getCheckCollision().coll(newX, newY);
        } if (walkThrough){
            if (!getCheckCollision().collisionWithout(this, "wall")){
                x = newX;
                y = newY;
            }
        }
-        checkCollision.npcMeetPlayer();
-
+       checkCollision.npcMeetPlayer();
        gPanel.getSettings().collectItem();
        gPanel.getSettings().catchCreature();
     }
 
 
-    private void coll(int newX, int newY){
-        boolean collision = false;
-        if (!checkCollision.hasCollision(this)){
-            for (int i = 0; i < gPanel.getNpc().size(); i++) {
-                if (entityNewArea(newX, newY).intersects(gPanel.getNpc().get(i).entityArea())){
-                    collision = true;
-                }
-            }
-            if (!collision){
-                x = newX;
-                y = newY;
-            }
-        }
-    }
-
-    public void draw(Graphics2D graphics2D) {
+    /**
+     * Drawing player on screen.
+     * @param graphics2D
+     */
+    public void drawPlayer(Graphics2D graphics2D) {
         graphics2D.drawImage(entityImage, getScreenX(), getScreenY(),
                 gPanel.getTileSize(), gPanel.getTileSize(), null);
     }

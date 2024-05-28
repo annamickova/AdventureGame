@@ -14,7 +14,9 @@ public class Setting {
         setCreatures();
     }
 
-
+    /**
+     * Creating new items and placing them into map.
+     */
     private void setItems(){
         Teleport teleport = new Teleport(gPanel);
         teleport.setName("teleport");
@@ -35,6 +37,9 @@ public class Setting {
         gPanel.getItems().add( walk);
     }
 
+    /**
+     * Moving item into already collected items.
+     */
     public void collectItem(){
         for (int i = 0; i < gPanel.getItems().size(); i++) {
             if (gPanel.getItems().get(i).itemArea().intersects(gPanel.getPlayer().entityArea())){
@@ -43,6 +48,11 @@ public class Setting {
             }
         }
     }
+
+    /**
+     * Creating new npc, setting their location and adding into list.
+     * @throws Exception
+     */
     private void setNPC() throws Exception{
         NPC npc1 = new Witch(gPanel);
         npc1.setX(gPanel.getTileSize()*21);
@@ -62,6 +72,9 @@ public class Setting {
 
     }
 
+    /**
+     * Method removes animal from lost and adds the anima into caught array.
+     */
     public void catchCreature(){
         for (int i = 0; i < gPanel.getLostAnimals().size(); i++) {
             if (gPanel.getLostAnimals().get(i).entityArea().intersects(gPanel.getPlayer().entityArea())){
@@ -72,7 +85,10 @@ public class Setting {
         }
     }
 
-
+    /**
+     * Creating new creatures and adding them into lost animals array list.
+     * @throws Exception
+     */
     private void setCreatures() throws Exception{
         Creature mouse = new Creature(gPanel, "mouse", "mouse.jpg");
         mouse.setX(gPanel.getTileSize()*16);

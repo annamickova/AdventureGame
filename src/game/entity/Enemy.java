@@ -38,6 +38,11 @@ public class Enemy extends NPC{
         }
     }
 
+    /**
+     *
+     * @param entity
+     * @throws Exception
+     */
     public void prisonCreature(Entity entity) throws Exception {
         for (int i = 0; i < gPanel.getLostAnimals().size(); i++) {
             if (gPanel.getLostAnimals().get(i).entityArea().intersects(entity.entityArea())){

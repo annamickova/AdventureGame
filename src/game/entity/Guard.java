@@ -19,6 +19,9 @@ public class Guard extends NPC{
 
     }
 
+    /**
+     * Guard's movement. Changing position by choosing random directory left or right.
+     */
     @Override
     public void update() {
         long currentTime = System.currentTimeMillis();

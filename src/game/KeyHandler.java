@@ -22,6 +22,11 @@ public class KeyHandler implements KeyListener {
     public void keyTyped(KeyEvent e) {
     }
 
+    /**
+     * Handles key input in the game.
+     * In play game state player can move, in other game states can stop game or display menu.
+     * @param e the event to be processed
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         if (game.getGameState() == game.getPlay()){
@@ -52,7 +57,7 @@ public class KeyHandler implements KeyListener {
                 }
                 case KeyEvent.VK_ENTER -> {
                     if (gPanel.getCollectedItems().size()!= 0){
-                        gPanel.getCollectedItems().get(game.getDrawStates().getFuncPointer()).action();
+                        gPanel.getCollectedItems().get(game.getDrawStates().getFuncPointer()).function();
                         gPanel.getCollectedItems().remove(game.getDrawStates().getFuncPointer());
                         game.getDrawStates().setFuncPointer(0);
 
@@ -115,6 +120,10 @@ public class KeyHandler implements KeyListener {
 
     }
 
+    /**
+     * Setting moving directions to false, when key is released.
+     * @param e the event to be processed
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()){
