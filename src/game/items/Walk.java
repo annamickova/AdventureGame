@@ -11,11 +11,7 @@ public class Walk extends Item{
 
     public Walk(GPanel gPanel) {
         super(gPanel);
-        try {
-            itemImage = ImageIO.read(new File("flower.jpg"));
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+        loadImage("flower.jpg");
     }
 
     /**

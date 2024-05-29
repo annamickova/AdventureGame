@@ -28,7 +28,7 @@ public class Enemy extends NPC{
 
     }
 
-    private void creatureBackToLost(){
+   /* private void creatureBackToLost(){
         int last = gPanel.getCaughtAnimals().size()-1;
         if (gPanel.getPlayer().entityArea().intersects(this.entityArea())){
             if (gPanel.getCaughtAnimals().size() != 0){
@@ -36,7 +36,7 @@ public class Enemy extends NPC{
                 gPanel.getCaughtAnimals().remove(last);
             }
         }
-    }
+    }*/
 
     /**
      *

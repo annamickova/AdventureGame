@@ -2,8 +2,11 @@ package game.items;
 
 import game.GPanel;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class Item {
 
@@ -73,5 +76,13 @@ public class Item {
     }
 
     public void function(){}
+
+    public void loadImage(String fileName) {
+        try {
+            itemImage = ImageIO.read(new File(fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

@@ -12,6 +12,7 @@ public class Player extends Entity {
     private int screenX;
     private int screenY;
     private boolean walkThrough;
+    private int lives;
 
     public Player(GPanel gPanel, KeyHandler keyHandler) {
         super(gPanel);
@@ -19,6 +20,7 @@ public class Player extends Entity {
 
         defValues();
         loadImage("cat.jpeg");
+        loadLivesImage("heart.png");
     }
 
     private void defValues(){
@@ -27,6 +29,15 @@ public class Player extends Entity {
         walkThrough = false;
         speedP = 4;
         direction = "down";
+        lives = 3;
+    }
+
+    public int getLives() {
+        return lives;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
     }
 
     public int getScreenX() {
@@ -80,7 +91,8 @@ public class Player extends Entity {
        }
        checkCollision.npcMeetPlayer();
        gPanel.getSettings().collectItem();
-       gPanel.getSettings().catchCreature();
+      // gPanel.getSettings().catchCreature();
+        gPanel.getSettings().takeItem();
     }
 
 

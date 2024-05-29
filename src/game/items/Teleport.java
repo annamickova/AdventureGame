@@ -10,11 +10,7 @@ public class Teleport extends Item{
 
     public Teleport(GPanel gPanel) {
         super(gPanel);
-        try {
-            itemImage = ImageIO.read(new File("flower2.png"));
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+        loadImage("flower2.png");
     }
 
     /**

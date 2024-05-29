@@ -1,14 +1,19 @@
 package game;
 
 import game.entity.*;
+import game.items.Item;
 import game.items.Teleport;
 import game.items.Walk;
+
+import javax.imageio.ImageIO;
+import java.io.File;
 
 public class Setting {
    private GPanel gPanel;
 
     public Setting(GPanel gPanel) throws Exception{
         this.gPanel = gPanel;
+        setFunctionItems();
         setItems();
         setNPC();
         setCreatures();
@@ -17,34 +22,49 @@ public class Setting {
     /**
      * Creating new items and placing them into map.
      */
-    private void setItems(){
+    private void setFunctionItems(){
         Teleport teleport = new Teleport(gPanel);
         teleport.setName("teleport");
         teleport.setItemX(gPanel.getTileSize()*21);
         teleport.setItemY(gPanel.getTileSize()*23);
-        gPanel.getItems().add(teleport);
+        gPanel.getFunctionItems().add(teleport);
 
         Teleport teleport2 = new Teleport(gPanel);
         teleport2.setName("teleport");
         teleport2.setItemX(gPanel.getTileSize()*38);
         teleport2.setItemY(gPanel.getTileSize()*40);
-        gPanel.getItems().add(teleport2);
+        gPanel.getFunctionItems().add(teleport2);
 
         Walk walk = new Walk(gPanel);
         walk.setName("walk through");
         walk.setItemX(gPanel.getTileSize()*21);
         walk.setItemY(gPanel.getTileSize()*20);
-        gPanel.getItems().add( walk);
+        gPanel.getFunctionItems().add( walk);
+
+    }
+
+    private void setItems(){
+        Teleport item = new Teleport(gPanel);
+        item.setName("teleport");
+        item.setItemX(gPanel.getTileSize()*24);
+        item.setItemY(gPanel.getTileSize()*23);
+        gPanel.getLostItems().add(item);
+
+        Teleport item2 = new Teleport(gPanel);
+        item2.setName("teleport");
+        item2.setItemX(gPanel.getTileSize()*24);
+        item2.setItemY(gPanel.getTileSize()*20);
+        gPanel.getLostItems().add(item2);
     }
 
     /**
      * Moving item into already collected items.
      */
     public void collectItem(){
-        for (int i = 0; i < gPanel.getItems().size(); i++) {
-            if (gPanel.getItems().get(i).itemArea().intersects(gPanel.getPlayer().entityArea())){
-                gPanel.getCollectedItems().add(0, gPanel.getItems().get(i));
-                gPanel.getItems().remove(gPanel.getItems().get(i));
+        for (int i = 0; i < gPanel.getFunctionItems().size(); i++) {
+            if (gPanel.getFunctionItems().get(i).itemArea().intersects(gPanel.getPlayer().entityArea())){
+                gPanel.getCollectedFunctionItems().add(0, gPanel.getFunctionItems().get(i));
+                gPanel.getFunctionItems().remove(gPanel.getFunctionItems().get(i));
             }
         }
     }
@@ -75,12 +95,20 @@ public class Setting {
     /**
      * Method removes animal from lost and adds the anima into caught array.
      */
-    public void catchCreature(){
+  /*  public void catchCreature(){
         for (int i = 0; i < gPanel.getLostAnimals().size(); i++) {
             if (gPanel.getLostAnimals().get(i).entityArea().intersects(gPanel.getPlayer().entityArea())){
                 gPanel.getCaughtAnimals().add(gPanel.getLostAnimals().get(i));
                 gPanel.getLostAnimals().remove(gPanel.getLostAnimals().get(i));
-                gPanel.getGame().setGameState(gPanel.getGame().getCatchingAnimal());
+            }
+        }
+    }*/
+
+    public void takeItem(){
+        for (int i = 0; i < gPanel.getLostItems().size(); i++) {
+            if (gPanel.getLostItems().get(i).itemArea().intersects(gPanel.getPlayer().entityArea())){
+                gPanel.getCollectedItems().add(gPanel.getLostItems().get(i));
+                gPanel.getLostItems().remove(gPanel.getLostItems().get(i));
             }
         }
     }

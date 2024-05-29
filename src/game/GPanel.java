@@ -19,10 +19,20 @@ public class GPanel extends JPanel implements Runnable{
     private Thread thread;
     private KeyHandler keyHandler;
     private Player player;
-    private ArrayList<Item> items;
-    private ArrayList<Item> collectedItems;
+    private ArrayList<Item> functionItems;
+    private ArrayList<Item> collectedFunctionItems;
+    private ArrayList<Item> collectedItems = new ArrayList<>();
+    private ArrayList<Item> lostItems = new ArrayList<>();
+
+    public ArrayList<Item> getCollectedItems() {
+        return collectedItems;
+    }
+    public ArrayList<Item> getLostItems() {
+        return lostItems;
+    }
+
     private ArrayList<Creature> lostCreatures;
-    private ArrayList<Creature> caughtCreatures;
+   // private ArrayList<Creature> caughtCreatures;
     private Enemy enemy;
     private ArrayList<NPC> npc;
     private Setting setting;
@@ -36,9 +46,9 @@ public class GPanel extends JPanel implements Runnable{
         return lostCreatures;
     }
 
-    public ArrayList<Creature> getCaughtAnimals() {
-        return caughtCreatures;
-    }
+   // public ArrayList<Creature> getCaughtAnimals() {
+   //     return caughtCreatures;
+   // }
 
     public Game getGame() {
         return game;
@@ -80,12 +90,12 @@ public class GPanel extends JPanel implements Runnable{
         return player;
     }
 
-    public ArrayList<Item> getItems() {
-        return items;
+    public ArrayList<Item> getFunctionItems() {
+        return functionItems;
     }
 
-    public ArrayList<Item> getCollectedItems() {
-        return collectedItems;
+    public ArrayList<Item> getCollectedFunctionItems() {
+        return collectedFunctionItems;
     }
 
     public ArrayList<NPC> getNpc() {
@@ -98,8 +108,8 @@ public class GPanel extends JPanel implements Runnable{
 
     public GPanel(){
         tileSize = 48;
-        keyHandler = new KeyHandler(this);
         game = new Game(this);
+        keyHandler = new KeyHandler(this);
         currDialogIndex = 0;
         running = true;
         setPanelSize();
@@ -115,10 +125,10 @@ public class GPanel extends JPanel implements Runnable{
     private void setAssets(){
         try {
             bGround = new Background(this);
-            items = new ArrayList<>();
-            collectedItems = new ArrayList<>();
+            functionItems = new ArrayList<>();
+            collectedFunctionItems = new ArrayList<>();
             lostCreatures = new ArrayList<>();
-            caughtCreatures = new ArrayList<>();
+            //caughtCreatures = new ArrayList<>();
             npc = new ArrayList<>();
             enemy = new Enemy(this);
             setting = new Setting(this);
@@ -186,7 +196,11 @@ public class GPanel extends JPanel implements Runnable{
             game.setState(graphics2D);
         }else {
             bGround.draw(graphics2D);
-            for (Item item : items) {
+            for (Item item : functionItems) {
+                if (item != null) {
+                    item.drawItem(graphics2D, this);
+                }
+            }   for (Item item : lostItems) {
                 if (item != null) {
                     item.drawItem(graphics2D, this);
                 }

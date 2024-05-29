@@ -20,12 +20,18 @@ public class Entity {
     protected BufferedImage entityImage;
     protected String direction;
     protected boolean interaction;
+    protected BufferedImage heart;
 
     public Entity(GPanel gPanel) {
         this.gPanel = gPanel;
         this.checkCollision = new CheckCollision(gPanel);
 
     }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
+
     public String getDirection() {
         return direction;
     }
@@ -130,6 +136,21 @@ public class Entity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public void loadLivesImage(String fileName) {
+        try {
+            heart = ImageIO.read(new File(fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public BufferedImage getHeart() {
+        return heart;
+    }
+
+    public void setHeart(BufferedImage heart) {
+        this.heart = heart;
     }
 
     public void update(){}

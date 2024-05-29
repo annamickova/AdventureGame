@@ -123,10 +123,11 @@ public class DrawStates {
         String menuT1 = "cat";
         String menuT2 = "unfriendly:";
         String characters = "friendly:";
+        String play = "press enter to start game";
 
         int leftX = x-x/2;
         int rightX = x+x/2;
-
+        drawText(graphics2D,x - textCentred(graphics2D, play)/2, hY+ gPanel.getTileSize(), play, 30 );
         drawText(graphics2D,  rightX - textCentred(graphics2D,menuT2)/2,hY+2*gPanel.getTileSize(), menuT2,30);
         drawText(graphics2D, leftX - textCentred(graphics2D,characters)/2,hY+2*gPanel.getTileSize(), characters,30);
         drawText(graphics2D, leftX - textCentred(graphics2D,menuT1)/2,hY+3*gPanel.getTileSize(), menuT1,22);
@@ -136,7 +137,7 @@ public class DrawStates {
         String gameOver = "game over";
         String text = "";
         if (gPanel.getGame().isVictory()){
-            text = "you found all your missing creatures";
+            text = "you found all your missing components";
         }else {
             text = "you lost, try again";
         }
@@ -215,15 +216,15 @@ public class DrawStates {
         int x = gPanel.getTileSize()*13;
         int y = gPanel.getTileSize();
         graphics2D.setColor(Color.BLACK);
-        funcCount = gPanel.getCollectedItems().size();
+        funcCount = gPanel.getCollectedFunctionItems().size();
         if (funcCount != 0){
-            if (funcCount > gPanel.getCollectedItems().size()){
+            if (funcCount > gPanel.getCollectedFunctionItems().size()){
                 funcCount = 0;
             }
-                for (int i = 0; i < gPanel.getCollectedItems().size(); i++) {
-                    graphics2D.drawImage(gPanel.getCollectedItems().get(i).getItemImage(), x, y,gPanel.getTileSize(), gPanel.getTileSize(), null);
+                for (int i = 0; i < gPanel.getCollectedFunctionItems().size(); i++) {
+                    graphics2D.drawImage(gPanel.getCollectedFunctionItems().get(i).getItemImage(), x, y,gPanel.getTileSize(), gPanel.getTileSize(), null);
                     y += 3*gPanel.getTileSize()/2;
-                    drawText(graphics2D, x, y, gPanel.getCollectedItems().get(i).getName(), 15);
+                    drawText(graphics2D, x, y, gPanel.getCollectedFunctionItems().get(i).getName(), 15);
                     if (funcPointer == i){
                         drawText(graphics2D, x - 8 , y, "•", 12);
                     }
@@ -235,7 +236,7 @@ public class DrawStates {
     }
 
 
-    public void animalsScreen(Graphics2D graphics2D){
+  /* public void animalsScreen(Graphics2D graphics2D){
         smallScreen(graphics2D);
         int x = gPanel.getTileSize()*13;
         int y = gPanel.getTileSize();
@@ -254,7 +255,7 @@ public class DrawStates {
             drawText(graphics2D, x,gPanel.getTileSize() * 7/2 , "no animals", 15);
             drawText(graphics2D, x,gPanel.getTileSize() * 9/2 , gPanel.getLostAnimals().size() + " animals left", 15);
         }
-    }
+    }*/
 
     public void drawlostCreatureCount(Graphics2D graphics2D){
         graphics2D.setColor(new Color(255,255,255,200));
@@ -271,11 +272,37 @@ public class DrawStates {
         drawText(graphics2D, x-8, gPanel.getTileSize()/2 + wHeight/2 , "find: ", 15);
 
 
-        for (int i = 0; i < gPanel.getLostAnimals().size(); i++) {
+        for (int i = 0; i < gPanel.getLostItems().size(); i++) {
             x += 3*gPanel.getTileSize()/4;
-            graphics2D.drawImage(gPanel.getLostAnimals().get(i).getEntityImage(),x,y, 3*gPanel.getTileSize()/4, 3*gPanel.getTileSize()/4, null);
+            graphics2D.drawImage(gPanel.getLostItems().get(i).getItemImage(),x,y, 3*gPanel.getTileSize()/4, 3*gPanel.getTileSize()/4, null);
 
         }
+        drawLives(graphics2D);
+    }
+
+    public void drawLives(Graphics2D graphics2D){
+        graphics2D.setColor(new Color(255,255,255,200));
+        int wX = gPanel.getTileSize()/2;
+        int wY = gPanel.getTileSize()/2+3*gPanel.getTileSize()/2;
+        int wWidth = 3*gPanel.getTileSize()/4*(gPanel.getLostAnimals().size()+2);
+        int wHeight = 3*gPanel.getTileSize()/2;
+        graphics2D.fillRoundRect(wX,wY,wWidth,wHeight, 20,20);
+
+        int x = gPanel.getTileSize();
+        int y = gPanel.getTileSize()-gPanel.getTileSize()/8;
+
+        graphics2D.setColor(new Color(0,0,0,255));
+        drawText(graphics2D, x-8, gPanel.getTileSize()/2 + wHeight/2 , ": ", 15);
+
+        for (int i = 0; i < gPanel.getPlayer().getLives(); i++) {
+           graphics2D.drawImage(gPanel.getPlayer().getHeart(), x, y+gPanel.getTileSize(), 3*gPanel.getTileSize()/4,3*gPanel.getTileSize()/4,null);
+           x += gPanel.getTileSize();
+
+        }
+
+        graphics2D.setColor(new Color(0,0,0,255));
+        drawText(graphics2D, x-8, gPanel.getTileSize()/2 + wHeight/2 , "find: ", 15);
+
     }
 
 

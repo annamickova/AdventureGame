@@ -17,7 +17,7 @@ public class Game {
     private final int dialog = 2;
     private final int home = 3;
     private final int functions = 4;
-    private final int catchingAnimal = 5;
+
     private final int end = 6;
     private boolean victory = false;
     private final int description = 7;
@@ -57,9 +57,6 @@ public class Game {
         return functions;
     }
 
-    public int getCatchingAnimal() {
-        return catchingAnimal;
-    }
 
     public int getEnd() {
         return end;
@@ -129,7 +126,7 @@ public class Game {
             }
             case home -> drawStates.homeScreen(graphics2D);
             case functions -> drawStates.funcScreen(graphics2D);
-            case catchingAnimal -> drawStates.animalsScreen(graphics2D);
+           // case catchingAnimal -> drawStates.animalsScreen(graphics2D);
             case description -> drawStates.gameDescriptionScreen(graphics2D);
             case end -> drawStates.endScreen(graphics2D);
         }
@@ -139,8 +136,10 @@ public class Game {
      * Game over when player catches all creatures.
      */
     public void end(){
-       if (gPanel.getLostAnimals().size() == 0){
+       if (gPanel.getLostItems().size() == 0){
            victory = true;
+           gameState = end;
+       } else if (gPanel.getPlayer().getLives() == 0) {
            gameState = end;
        }
     }
