@@ -2,7 +2,10 @@ package game.screenStates;
 
 import game.GPanel;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Class dealing with drawing screens.
@@ -197,13 +200,12 @@ public class DrawStates {
         }
     }
 
-
     public void smallScreen(Graphics2D graphics2D){
-        graphics2D.setColor(new Color(255,255,255,255));
+        graphics2D.setColor(new Color(255,255,255,200));
         int wX = gPanel.getTileSize() * 13 - gPanel.getTileSize()/2;
         int wY = gPanel.getTileSize()/2;
-        int wWidth = gPanel.getScreenWidth() - (gPanel.getTileSize()*13);
-        int wHeight = gPanel.getTileSize() * 7;
+        int wWidth = gPanel.getTileSize()*3;
+        int wHeight =gPanel.getTileSize()*gPanel.getCollectedFunctionItems().size()*2+gPanel.getTileSize();
         graphics2D.fillRoundRect(wX,wY,wWidth,wHeight, 20,20);
     }
 
@@ -231,7 +233,7 @@ public class DrawStates {
                     y += gPanel.getTileSize()/2;
                 }
         }else {
-            drawText(graphics2D, x,gPanel.getTileSize() * 7/2 , "no functions", 15);
+            drawText(graphics2D, x,gPanel.getTileSize() , "no functions", 15);
         }
     }
 
@@ -257,52 +259,47 @@ public class DrawStates {
         }
     }*/
 
-    public void drawlostCreatureCount(Graphics2D graphics2D){
+    public void drawlostItemsCount(Graphics2D graphics2D){
         graphics2D.setColor(new Color(255,255,255,200));
         int wX = gPanel.getTileSize()/2;
         int wY = gPanel.getTileSize()/2;
-        int wWidth = 3*gPanel.getTileSize()/4*(gPanel.getLostAnimals().size()+2);
+        int wWidth = 5*gPanel.getTileSize()/2;
         int wHeight = 3*gPanel.getTileSize()/2;
         graphics2D.fillRoundRect(wX,wY,wWidth,wHeight, 20,20);
-
         int x = gPanel.getTileSize();
         int y = gPanel.getTileSize()-gPanel.getTileSize()/8;
-
         graphics2D.setColor(new Color(0,0,0,255));
-        drawText(graphics2D, x-8, gPanel.getTileSize()/2 + wHeight/2 , "find: ", 15);
-
-
-        for (int i = 0; i < gPanel.getLostItems().size(); i++) {
-            x += 3*gPanel.getTileSize()/4;
-            graphics2D.drawImage(gPanel.getLostItems().get(i).getItemImage(),x,y, 3*gPanel.getTileSize()/4, 3*gPanel.getTileSize()/4, null);
-
+        gPanel.getGame().getFuelNeed();
+        int need = 10;
+        for (int i = 0; i < gPanel.getCollectedItems().size(); i++) {
+            need -= gPanel.getCollectedItems().get(i).getSize();
         }
+        gPanel.getGame().setFuelNeed(need);
+        drawText(graphics2D, x-8, gPanel.getTileSize()/2 + wHeight/2 , "find:", 15);
+        drawText(graphics2D, x-8, gPanel.getTileSize() + wHeight/2 , gPanel.getGame().getFuelNeed()+"l ", 15);
+            try {
+                graphics2D.drawImage(ImageIO.read(new File("fuel.png")),x+gPanel.getTileSize(),y, 3*gPanel.getTileSize()/4, 3*gPanel.getTileSize()/4, null);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         drawLives(graphics2D);
     }
 
     public void drawLives(Graphics2D graphics2D){
         graphics2D.setColor(new Color(255,255,255,200));
-        int wX = gPanel.getTileSize()/2;
-        int wY = gPanel.getTileSize()/2+3*gPanel.getTileSize()/2;
-        int wWidth = 3*gPanel.getTileSize()/4*(gPanel.getLostAnimals().size()+2);
+        int wX = 3*gPanel.getTileSize();
+        int wY = gPanel.getTileSize()/2;
+        int wWidth = 3*gPanel.getTileSize()/4*(gPanel.getPlayer().getLives()+2);
         int wHeight = 3*gPanel.getTileSize()/2;
         graphics2D.fillRoundRect(wX,wY,wWidth,wHeight, 20,20);
 
-        int x = gPanel.getTileSize();
+        int x = 7*gPanel.getTileSize()/2;
         int y = gPanel.getTileSize()-gPanel.getTileSize()/8;
 
-        graphics2D.setColor(new Color(0,0,0,255));
-        drawText(graphics2D, x-8, gPanel.getTileSize()/2 + wHeight/2 , ": ", 15);
-
         for (int i = 0; i < gPanel.getPlayer().getLives(); i++) {
-           graphics2D.drawImage(gPanel.getPlayer().getHeart(), x, y+gPanel.getTileSize(), 3*gPanel.getTileSize()/4,3*gPanel.getTileSize()/4,null);
-           x += gPanel.getTileSize();
-
+            graphics2D.drawImage(gPanel.getPlayer().getHeart(), x, y, 3*gPanel.getTileSize()/4,3*gPanel.getTileSize()/4,null);
+            x += gPanel.getTileSize();
         }
-
-        graphics2D.setColor(new Color(0,0,0,255));
-        drawText(graphics2D, x-8, gPanel.getTileSize()/2 + wHeight/2 , "find: ", 15);
-
     }
 
 

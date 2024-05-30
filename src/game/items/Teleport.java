@@ -11,6 +11,7 @@ public class Teleport extends Item{
     public Teleport(GPanel gPanel) {
         super(gPanel);
         loadImage("flower2.png");
+        setName("teleport");
     }
 
     /**

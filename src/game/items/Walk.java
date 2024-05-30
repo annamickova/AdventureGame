@@ -12,6 +12,7 @@ public class Walk extends Item{
     public Walk(GPanel gPanel) {
         super(gPanel);
         loadImage("flower.jpg");
+        setName("walk through");
     }
 
     /**

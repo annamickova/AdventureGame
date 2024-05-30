@@ -2,6 +2,7 @@ package game;
 
 import game.background.Background;
 import game.entity.*;
+import game.items.Fuel;
 import game.items.Item;
 import game.screenStates.Game;
 
@@ -21,18 +22,17 @@ public class GPanel extends JPanel implements Runnable{
     private Player player;
     private ArrayList<Item> functionItems;
     private ArrayList<Item> collectedFunctionItems;
-    private ArrayList<Item> collectedItems = new ArrayList<>();
-    private ArrayList<Item> lostItems = new ArrayList<>();
+    private ArrayList<Fuel> collectedItems = new ArrayList<>();
+    private ArrayList<Fuel> lostItems = new ArrayList<>();
 
-    public ArrayList<Item> getCollectedItems() {
+    public ArrayList<Fuel> getCollectedItems() {
         return collectedItems;
     }
-    public ArrayList<Item> getLostItems() {
+    public ArrayList<Fuel> getLostItems() {
         return lostItems;
     }
 
-    private ArrayList<Creature> lostCreatures;
-   // private ArrayList<Creature> caughtCreatures;
+    private ArrayList<Creature> creatures;
     private Enemy enemy;
     private ArrayList<NPC> npc;
     private Setting setting;
@@ -42,13 +42,9 @@ public class GPanel extends JPanel implements Runnable{
     private boolean running;
     private int currDialogIndex;
 
-    public ArrayList<Creature> getLostAnimals() {
-        return lostCreatures;
+    public ArrayList<Creature> getCreatures() {
+        return creatures;
     }
-
-   // public ArrayList<Creature> getCaughtAnimals() {
-   //     return caughtCreatures;
-   // }
 
     public Game getGame() {
         return game;
@@ -127,7 +123,7 @@ public class GPanel extends JPanel implements Runnable{
             bGround = new Background(this);
             functionItems = new ArrayList<>();
             collectedFunctionItems = new ArrayList<>();
-            lostCreatures = new ArrayList<>();
+            creatures = new ArrayList<>();
             //caughtCreatures = new ArrayList<>();
             npc = new ArrayList<>();
             enemy = new Enemy(this);
@@ -169,13 +165,15 @@ public class GPanel extends JPanel implements Runnable{
     private void update(){
         if (game.getGameState() == game.getPlay()){
             player.update();
+            game.loseLives();
             game.turnOffWalking();
+            game.higherSpeed();
             for (Entity entity : npc) {
                 if (entity != null) {
                     entity.update();
                 }
             }
-            for (Creature lostCreature : lostCreatures) {
+            for (Creature lostCreature : creatures) {
                 if (lostCreature != null) {
                     lostCreature.update();
                 }
@@ -210,7 +208,7 @@ public class GPanel extends JPanel implements Runnable{
                     entity.drawEntity(graphics2D);
                 }
             }
-            for (Creature lostCreature : lostCreatures) {
+            for (Creature lostCreature : creatures) {
                 if (lostCreature != null) {
                     lostCreature.drawEntity(graphics2D);
                 }

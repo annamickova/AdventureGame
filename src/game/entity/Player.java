@@ -13,6 +13,7 @@ public class Player extends Entity {
     private int screenY;
     private boolean walkThrough;
     private int lives;
+    private boolean highSpeed;
 
     public Player(GPanel gPanel, KeyHandler keyHandler) {
         super(gPanel);
@@ -54,6 +55,14 @@ public class Player extends Entity {
 
     public void setWalkThrough(boolean walkThrough) {
         this.walkThrough = walkThrough;
+    }
+
+    public boolean isHighSpeed() {
+        return highSpeed;
+    }
+
+    public void setHighSpeed(boolean highSpeed) {
+        this.highSpeed = highSpeed;
     }
 
     /**

@@ -3,8 +3,6 @@ import game.background.Tile;
 import game.entity.Entity;
 import game.entity.NPC;
 
-import java.awt.*;
-
 public class CheckCollision {
 
     private GPanel gPanel;
@@ -94,9 +92,31 @@ public class CheckCollision {
                 if (gPanel.getCurrDialogIndex() == gPanel.getNpc().get(j).getDialogIndex()){
                     gPanel.getGame().setGameState(gPanel.getGame().getDialog());
                     gPanel.getNpc().get(j).setText();
+
                 }
             }
         }
+    }
+    public boolean playerHitEntity(){
+        boolean n = false;
+        for (int i = 0; i < gPanel.getNpc().size(); i++) {
+            if (hit(gPanel.getPlayer(), gPanel.getNpc().get(i))){
+                n = true;
+            }
+        }for (int i = 0; i < gPanel.getCreatures().size(); i++) {
+            if (hit(gPanel.getPlayer(), gPanel.getCreatures().get(i))){
+                n = true;
+            }
+        }
+        return n;
+    }
+    public void entityTakesFuel(Entity entity){
+        for (int i = 0; i < gPanel.getLostItems().size(); i++) {
+            if (entity.entityArea().intersects(gPanel.getLostItems().get(i).itemArea())){
+                gPanel.getLostItems().get(i).setSize(1);
+            }
+        }
+
     }
 
     /**

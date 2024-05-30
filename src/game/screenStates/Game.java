@@ -21,6 +21,8 @@ public class Game {
     private final int end = 6;
     private boolean victory = false;
     private final int description = 7;
+    private int fuelNeed = 10;
+    private boolean canLostLives = true;
 
 
     public Game(GPanel gPanel) {
@@ -28,6 +30,14 @@ public class Game {
         gameState = home;
 
         drawStates = new DrawStates(gPanel);
+    }
+
+    public int getFuelNeed() {
+        return fuelNeed;
+    }
+
+    public void setFuelNeed(int fuelNeed) {
+        this.fuelNeed = fuelNeed;
     }
 
     public int getGameState() {
@@ -42,6 +52,14 @@ public class Game {
     }
     public DrawStates getDrawStates() {
         return drawStates;
+    }
+
+    public boolean isCanLostLives() {
+        return canLostLives;
+    }
+
+    public void setCanLostLives(boolean canLostLives) {
+        this.canLostLives = canLostLives;
     }
 
     public int getStop() {
@@ -89,6 +107,32 @@ public class Game {
         }
     }
 
+    public void higherSpeed(){
+        if (gPanel.getPlayer().isHighSpeed()){
+            gPanel.getPlayer().setSpeedP(6);
+            if (count == 600) {
+                gPanel.getPlayer().setHighSpeed(false);
+                gPanel.getPlayer().setSpeedP(4);
+                count = 0;
+            }
+            count++;
+        }
+   }
+
+   public void loseLives(){
+       if (gPanel.getPlayer().getCheckCollision().playerHitEntity()){
+           if (canLostLives){
+               gPanel.getPlayer().setLives(gPanel.getPlayer().getLives()-1);
+           }
+           canLostLives = false;
+           if (count == 60) {
+              canLostLives = true;
+              count = 0;
+           }
+           count++;
+       }
+   }
+
     /**
      * Checking and increasing npc dialog index.
      */
@@ -117,7 +161,7 @@ public class Game {
     public void setState(Graphics2D graphics2D){
         graphics2D.setColor(new Color(250,250,250));
         end();
-        drawStates.drawlostCreatureCount(graphics2D);
+        drawStates.drawlostItemsCount(graphics2D);
         switch (gameState){
             case stop -> drawStates.pauseScreen(graphics2D);
             case dialog -> {
@@ -136,7 +180,7 @@ public class Game {
      * Game over when player catches all creatures.
      */
     public void end(){
-       if (gPanel.getLostItems().size() == 0){
+       if (fuelNeed == 0){
            victory = true;
            gameState = end;
        } else if (gPanel.getPlayer().getLives() == 0) {

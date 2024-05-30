@@ -28,6 +28,14 @@ public class Entity {
 
     }
 
+    public int getSpeedP() {
+        return speedP;
+    }
+
+    public void setSpeedP(int speedP) {
+        this.speedP = speedP;
+    }
+
     public void setDirection(String direction) {
         this.direction = direction;
     }

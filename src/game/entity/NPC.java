@@ -40,7 +40,6 @@ public class NPC extends Entity {
         if (gPanel.getCurrDialogIndex() == dialogIndex){
             if (dialogIndex < dialogues.size()){
                 gPanel.getGame().getDrawStates().setCurrDialog(dialogues.get(dialogIndex));
-                gPanel.getPlayer().setLives(gPanel.getPlayer().getLives()-1);
                 dialogIndex++;
             }
         }
@@ -94,7 +93,7 @@ public class NPC extends Entity {
             x = newX;
             y = newY;
         }
-
+        checkCollision.entityTakesFuel(this);
     }
 
     /**

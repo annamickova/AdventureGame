@@ -18,7 +18,6 @@ public class Enemy extends NPC{
     public void update() {
         super.update();
         guard.update();
-        //creatureBackToLost();
         try {
             prisonCreature(this);
             prisonCreature(guard);
@@ -28,15 +27,6 @@ public class Enemy extends NPC{
 
     }
 
-   /* private void creatureBackToLost(){
-        int last = gPanel.getCaughtAnimals().size()-1;
-        if (gPanel.getPlayer().entityArea().intersects(this.entityArea())){
-            if (gPanel.getCaughtAnimals().size() != 0){
-                gPanel.getLostAnimals().add(gPanel.getCaughtAnimals().get(last));
-                gPanel.getCaughtAnimals().remove(last);
-            }
-        }
-    }*/
 
     /**
      *
@@ -44,10 +34,10 @@ public class Enemy extends NPC{
      * @throws Exception
      */
     public void prisonCreature(Entity entity) throws Exception {
-        for (int i = 0; i < gPanel.getLostAnimals().size(); i++) {
-            if (gPanel.getLostAnimals().get(i).entityArea().intersects(entity.entityArea())){
-                gPanel.getLostAnimals().get(i).setX(57*gPanel.getTileSize());
-                gPanel.getLostAnimals().get(i).setY(2*gPanel.getTileSize());
+        for (int i = 0; i < gPanel.getCreatures().size(); i++) {
+            if (gPanel.getCreatures().get(i).entityArea().intersects(entity.entityArea())){
+                gPanel.getCreatures().get(i).setX(57*gPanel.getTileSize());
+                gPanel.getCreatures().get(i).setY(2*gPanel.getTileSize());
             }
         }
     }
