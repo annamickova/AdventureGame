@@ -102,6 +102,10 @@ public class GPanel extends JPanel implements Runnable{
         return setting;
     }
 
+    public Enemy getEnemy() {
+        return enemy;
+    }
+
     public GPanel(){
         tileSize = 48;
         game = new Game(this);
@@ -165,9 +169,7 @@ public class GPanel extends JPanel implements Runnable{
     private void update(){
         if (game.getGameState() == game.getPlay()){
             player.update();
-            game.loseLives();
-            game.turnOffWalking();
-            game.higherSpeed();
+            game.checkFunctions();
             for (Entity entity : npc) {
                 if (entity != null) {
                     entity.update();
@@ -196,7 +198,9 @@ public class GPanel extends JPanel implements Runnable{
             bGround.draw(graphics2D);
             for (Item item : functionItems) {
                 if (item != null) {
-                    item.drawItem(graphics2D, this);
+                    if (item.isVisible()){
+                        item.drawItem(graphics2D, this);
+                    }
                 }
             }   for (Item item : lostItems) {
                 if (item != null) {

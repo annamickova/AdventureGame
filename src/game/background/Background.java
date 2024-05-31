@@ -14,10 +14,10 @@ public class Background {
 
     public Background(GPanel gPanel) {
         this.gPanel = gPanel;
-        this.tiles = new Tile[15];
+        this.tiles = new Tile[10];
         this.tileMap = new int[60][60];
         loadTiles();
-        loadMap("map.txt");
+        loadMap("assets/map.txt");
     }
 
     public Tile getTile(int col, int row) {
@@ -46,54 +46,45 @@ public class Background {
      * Creating new kinds of tiles and adding into tiles array.
      */
     public void loadTiles() {
-        try {
-            tiles[0] = new Tile();
-            tiles[0].setName("grass");
-            tiles[0].setImage(ImageIO.read(new File("grass5.jpg")));
+        tiles[0] = new Tile();
+        tiles[0].setName("grass");
+        tiles[0].loadTileImage("assets/grass5.jpg");
 
-            tiles[1] = new Tile();
-            tiles[1].setName("wall");
-            tiles[1].setImage(ImageIO.read(new File("wall.jpg")));
-            tiles[1].setCollision(true);
+        tiles[1] = new Tile();
+        tiles[1].setName("wall");
+        tiles[1].loadTileImage("assets/wall.jpg");
+        tiles[1].setCollision(true);
 
-            tiles[2] = new Tile();
-            tiles[2].setName("water");
-            tiles[2].setImage(ImageIO.read(new File("water.jpg")));
-            tiles[2].setCollision(true);
+        tiles[2] = new Tile();
+        tiles[2].setName("water");
+        tiles[2].loadTileImage("assets/water.jpg");
+        tiles[2].setCollision(true);
 
-            tiles[3] = new Tile();
-            tiles[3].setName("earth");
-            tiles[3].setImage(ImageIO.read(new File("earth.jpg")));
+        tiles[3] = new Tile();
+        tiles[3].setName("earth");
+        tiles[3].loadTileImage("assets/earth.jpg");
 
-            tiles[4] = new Tile();
-            tiles[4].setName("tree");
-            tiles[4].setImage(ImageIO.read(new File("tree2.jpg")));
-            tiles[4].setCollision(true);
+        tiles[4] = new Tile();
+        tiles[4].setName("tree");
+        tiles[4].loadTileImage("assets/tree2.jpg");
+        tiles[4].setCollision(true);
 
-            tiles[5] = new Tile();
-            tiles[5].setName("sand");
-            tiles[5].setImage(ImageIO.read(new File("sand.jpg")));
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        tiles[5] = new Tile();
+        tiles[5].setName("sand");
+        tiles[5].loadTileImage("assets/sand.jpg");
     }
 
     /**
      *  Drawing only visible tiles.
      */
-
     public void draw(Graphics2D graphics2D) {
+        int leftCol = (gPanel.getPlayer().getX() - gPanel.getPlayer().getScreenX()) / gPanel.getTileSize();
+        int topRow = (gPanel.getPlayer().getY() - gPanel.getPlayer().getScreenY()) / gPanel.getTileSize();
+        int x = gPanel.getScreenWidth() / gPanel.getTileSize() + 2;
+        int y = gPanel.getScreenHeight() / gPanel.getTileSize() + 2;
 
-        int leftTileCol = (gPanel.getPlayer().getX() - gPanel.getPlayer().getScreenX()) / gPanel.getTileSize();
-        int topTileRow = (gPanel.getPlayer().getY() - gPanel.getPlayer().getScreenY()) / gPanel.getTileSize();
-
-        int scTileX = gPanel.getScreenWidth() / gPanel.getTileSize() + 2;
-        int scTileY = gPanel.getScreenHeight() / gPanel.getTileSize() + 2;
-
-        for (int col = leftTileCol; col < leftTileCol + scTileX; col++) {
-            for (int row = topTileRow; row < topTileRow + scTileY; row++) {
+        for (int col = leftCol; col < leftCol + x; col++) {
+            for (int row = topRow; row < topRow + y; row++) {
                 if (col >= 0 && row >= 0 && col < gPanel.getMaxCol() && row < gPanel.getMaxRow()) {
                     int tileNum = tileMap[col][row];
                     int worldX = col * gPanel.getTileSize();

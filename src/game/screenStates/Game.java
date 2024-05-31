@@ -95,11 +95,11 @@ public class Game {
     /**
      * Turning off walking through different tiles ability when player is not on tile with collision.
      */
-   public void turnOffWalking() {
-        if (gPanel.getPlayer().isWalkThrough()){
+   private void turnOffFlying() {
+        if (gPanel.getPlayer().isFly()){
             if (count >= 600) {
                 if (!gPanel.getPlayer().getCheckCollision().hasCollision(gPanel.getPlayer())){
-                    gPanel.getPlayer().setWalkThrough(false);
+                    gPanel.getPlayer().setFly(false);
                     count = 0;
                 }
             }
@@ -107,30 +107,59 @@ public class Game {
         }
     }
 
-    public void higherSpeed(){
+    private void higherSpeed(){
         if (gPanel.getPlayer().isHighSpeed()){
-            gPanel.getPlayer().setSpeedP(6);
+            gPanel.getPlayer().setSpeed(6);
             if (count == 600) {
                 gPanel.getPlayer().setHighSpeed(false);
-                gPanel.getPlayer().setSpeedP(4);
+                gPanel.getPlayer().setSpeed(4);
                 count = 0;
             }
             count++;
         }
    }
 
-   public void loseLives(){
+   private void swim(){
+       if (gPanel.getPlayer().isSwimmming()){
+           if (count >= 420) {
+               if (!gPanel.getPlayer().getCheckCollision().hasCollision(gPanel.getPlayer())){
+                   gPanel.getPlayer().setSwimmming(false);
+                   count = 0;
+               }
+           }
+           count++;
+       }
+   }
+
+   private void loseLives(){
        if (gPanel.getPlayer().getCheckCollision().playerHitEntity()){
            if (canLostLives){
                gPanel.getPlayer().setLives(gPanel.getPlayer().getLives()-1);
            }
            canLostLives = false;
-           if (count == 60) {
+           if (count == 30) {
               canLostLives = true;
               count = 0;
            }
            count++;
+       } else if (gPanel.getPlayer().getCheckCollision().hit(gPanel.getPlayer(), gPanel.getEnemy())) {
+           if (canLostLives){
+               gPanel.getPlayer().setLives(gPanel.getPlayer().getLives()-2);
+           }
+           canLostLives = false;
+           if (count == 30) {
+               canLostLives = true;
+               count = 0;
+           }
+           count++;
        }
+   }
+
+   public void checkFunctions(){
+       loseLives();
+       turnOffFlying();
+       higherSpeed();
+       swim();
    }
 
     /**

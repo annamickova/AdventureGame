@@ -7,7 +7,7 @@ public class Enemy extends NPC{
     public Enemy(GPanel gPanel) throws Exception{
         super(gPanel);
         setName("enemy");
-        loadImage("pigeon.jpg");
+        loadImage("assets/spider.png");
         setX(gPanel.getTileSize()*22);
         setY(gPanel.getTileSize()*34);
         guard = new Guard(gPanel);

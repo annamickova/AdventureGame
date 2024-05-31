@@ -4,7 +4,9 @@ import game.GPanel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 
 /**
@@ -15,7 +17,7 @@ public class DrawStates {
     private String currDialog;
     private int pointer;
     private final int textCount;
-    private String font = "Rockwell";
+    private final String font = "Rockwell";
     private int funcPointer;
     private int funcCount;
 
@@ -108,33 +110,34 @@ public class DrawStates {
         }
     }
 
+
     public void gameDescriptionScreen(Graphics2D graphics2D){
         String text = "game description";
         graphics2D.setFont(new Font(font, Font.BOLD, 50));
-
         int x = gPanel.getScreenWidth()/2;
         int hX =  x - textCentred(graphics2D, text)/2;
         int hY = gPanel.getTileSize()*4;
         graphics2D.setColor(new Color(70,80,120));
         graphics2D.fillRect(0,0, gPanel.getScreenWidth(), gPanel.getScreenHeight());
-
-        graphics2D.setColor(Color.black);
-        graphics2D.drawString(text, hX+5,hY+5);
-
         graphics2D.setColor(Color.white);
         graphics2D.drawString(text, hX,hY);
-        String menuT1 = "cat";
-        String menuT2 = "unfriendly:";
-        String characters = "friendly:";
-        String play = "press enter to start game";
-
-        int leftX = x-x/2;
-        int rightX = x+x/2;
-        drawText(graphics2D,x - textCentred(graphics2D, play)/2, hY+ gPanel.getTileSize(), play, 30 );
-        drawText(graphics2D,  rightX - textCentred(graphics2D,menuT2)/2,hY+2*gPanel.getTileSize(), menuT2,30);
-        drawText(graphics2D, leftX - textCentred(graphics2D,characters)/2,hY+2*gPanel.getTileSize(), characters,30);
-        drawText(graphics2D, leftX - textCentred(graphics2D,menuT1)/2,hY+3*gPanel.getTileSize(), menuT1,22);
+        int leftX = (x-x/2)-gPanel.getTileSize()*3;
+        loadAndDrawText(graphics2D, leftX, hY+gPanel.getTileSize());
     }
+
+    public void loadAndDrawText(Graphics2D graphics2D, int x, int y) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("assets/game.txt"))) {
+            String line;
+            int lineNumber = 0;
+            while ((line = reader.readLine())!= null) {
+                drawText(graphics2D, x, y + lineNumber*gPanel.getTileSize(), line, 25);
+                lineNumber++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void endScreen(Graphics2D graphics2D){
         String gameOver = "game over";
@@ -236,29 +239,6 @@ public class DrawStates {
             drawText(graphics2D, x,gPanel.getTileSize() , "no functions", 15);
         }
     }
-
-
-  /* public void animalsScreen(Graphics2D graphics2D){
-        smallScreen(graphics2D);
-        int x = gPanel.getTileSize()*13;
-        int y = gPanel.getTileSize();
-        graphics2D.setColor(Color.BLACK);
-        int animalCount = gPanel.getCaughtAnimals().size();
-        if (animalCount != 0){
-            for (int i = 0; i < animalCount; i++) {
-                graphics2D.drawImage(gPanel.getCaughtAnimals().get(i).getEntityImage(), x, y,gPanel.getTileSize(), gPanel.getTileSize(), null);
-                y += 3*gPanel.getTileSize()/2;
-                drawText(graphics2D, x, y, gPanel.getCaughtAnimals().get(i).getName(), 15);
-                y += gPanel.getTileSize()/2;
-
-            }
-            drawText(graphics2D, x,y , gPanel.getLostAnimals().size() + " left animals", 15);
-        }else {
-            drawText(graphics2D, x,gPanel.getTileSize() * 7/2 , "no animals", 15);
-            drawText(graphics2D, x,gPanel.getTileSize() * 9/2 , gPanel.getLostAnimals().size() + " animals left", 15);
-        }
-    }*/
-
     public void drawlostItemsCount(Graphics2D graphics2D){
         graphics2D.setColor(new Color(255,255,255,200));
         int wX = gPanel.getTileSize()/2;
@@ -269,7 +249,6 @@ public class DrawStates {
         int x = gPanel.getTileSize();
         int y = gPanel.getTileSize()-gPanel.getTileSize()/8;
         graphics2D.setColor(new Color(0,0,0,255));
-        gPanel.getGame().getFuelNeed();
         int need = 10;
         for (int i = 0; i < gPanel.getCollectedItems().size(); i++) {
             need -= gPanel.getCollectedItems().get(i).getSize();
@@ -278,9 +257,10 @@ public class DrawStates {
         drawText(graphics2D, x-8, gPanel.getTileSize()/2 + wHeight/2 , "find:", 15);
         drawText(graphics2D, x-8, gPanel.getTileSize() + wHeight/2 , gPanel.getGame().getFuelNeed()+"l ", 15);
             try {
-                graphics2D.drawImage(ImageIO.read(new File("fuel.png")),x+gPanel.getTileSize(),y, 3*gPanel.getTileSize()/4, 3*gPanel.getTileSize()/4, null);
+                graphics2D.drawImage(ImageIO.read(new File("assets/fuel.png")),x+gPanel.getTileSize(),y, 3*gPanel.getTileSize()/4, 3*gPanel.getTileSize()/4, null);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+               e.printStackTrace();
+
             }
         drawLives(graphics2D);
     }
@@ -297,7 +277,7 @@ public class DrawStates {
         int y = gPanel.getTileSize()-gPanel.getTileSize()/8;
 
         for (int i = 0; i < gPanel.getPlayer().getLives(); i++) {
-            graphics2D.drawImage(gPanel.getPlayer().getHeart(), x, y, 3*gPanel.getTileSize()/4,3*gPanel.getTileSize()/4,null);
+            graphics2D.drawImage(gPanel.getPlayer().getLivesImage(), x, y, 3*gPanel.getTileSize()/4,3*gPanel.getTileSize()/4,null);
             x += gPanel.getTileSize();
         }
     }

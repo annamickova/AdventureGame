@@ -7,6 +7,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class Item {
 
@@ -17,6 +19,7 @@ public class Item {
     protected int itemX;
     protected int itemY;
     protected Rectangle area;
+    protected boolean visible = true;
 
     public Item(GPanel gPanel) {
         this.gPanel = gPanel;
@@ -48,6 +51,14 @@ public class Item {
 
     public BufferedImage getItemImage() {
         return itemImage;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 
     public Rectangle itemArea() {

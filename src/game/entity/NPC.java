@@ -15,7 +15,7 @@ public class NPC extends Entity {
     public NPC(GPanel gPanel) {
         super(gPanel);
         direction = "down";
-        speedP = 1;
+        speed = 1;
         dialogues = new ArrayList<>();
         moveInterval = 1200;
     }
@@ -75,10 +75,10 @@ public class NPC extends Entity {
         int newX = x;
         int newY = y;
         switch (this.direction) {
-            case "up" -> newY -= speedP;
-            case "down" -> newY += speedP;
-            case "left" -> newX -= speedP;
-            case "right" -> newX += speedP;
+            case "up" -> newY -= speed;
+            case "down" -> newY += speed;
+            case "left" -> newX -= speed;
+            case "right" -> newX += speed;
         }
         if (checkCollision.hasCollision(this)){
             Random random = new Random();

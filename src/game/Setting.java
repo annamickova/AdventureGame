@@ -1,10 +1,7 @@
 package game;
 
 import game.entity.*;
-import game.items.Fuel;
-import game.items.Speed;
-import game.items.Teleport;
-import game.items.Walk;
+import game.items.*;
 
 public class Setting {
    private GPanel gPanel;
@@ -23,23 +20,33 @@ public class Setting {
     private void setFunctionItems(){
         Teleport teleport = new Teleport(gPanel);
         teleport.setItemX(gPanel.getTileSize()*21);
-        teleport.setItemY(gPanel.getTileSize()*23);
+        teleport.setItemY(gPanel.getTileSize()*7);
+        teleport.setVisible(false);
         gPanel.getFunctionItems().add(teleport);
 
         Teleport teleport2 = new Teleport(gPanel);
         teleport2.setItemX(gPanel.getTileSize()*38);
         teleport2.setItemY(gPanel.getTileSize()*40);
+        teleport2.setVisible(true);
         gPanel.getFunctionItems().add(teleport2);
 
-        Walk walk = new Walk(gPanel);
-        walk.setItemX(gPanel.getTileSize()*21);
-        walk.setItemY(gPanel.getTileSize()*20);
-        gPanel.getFunctionItems().add(walk);
+        Fly fly = new Fly(gPanel);
+        fly.setItemX(gPanel.getTileSize()*21);
+        fly.setItemY(gPanel.getTileSize()*20);
+        fly.setVisible(true);
+        gPanel.getFunctionItems().add(fly);
 
         Speed speed = new Speed(gPanel);
         speed.setItemX(gPanel.getTileSize()*23);
         speed.setItemY(gPanel.getTileSize()*40);
+        speed.setVisible(true);
         gPanel.getFunctionItems().add(speed);
+
+        Swim swim = new Swim(gPanel);
+        swim.setItemX(gPanel.getTileSize()*21);
+        swim.setItemY(gPanel.getTileSize()*21);
+        swim.setVisible(true);
+        gPanel.getFunctionItems().add(swim);
 
     }
 
@@ -76,28 +83,16 @@ public class Setting {
     }
 
     /**
-     * Moving item into already collected items.
-     */
-    public void collectItem(){
-        for (int i = 0; i < gPanel.getFunctionItems().size(); i++) {
-            if (gPanel.getFunctionItems().get(i).itemArea().intersects(gPanel.getPlayer().entityArea())){
-                gPanel.getCollectedFunctionItems().add(0, gPanel.getFunctionItems().get(i));
-                gPanel.getFunctionItems().remove(gPanel.getFunctionItems().get(i));
-            }
-        }
-    }
-
-    /**
-     * Creating new npc, setting their location and adding into list.
+     * Creating new npc character with dialog, setting their location and adding into list.
      * @throws Exception
      */
     private void setNPC() throws Exception{
-        NPC npc1 = new TalkingCreature(gPanel,"creature1.png", "witch.txt");
+        TalkingCreature npc1 = new TalkingCreature(gPanel,"assets/littleDeer.png", "assets/littleDeer.txt");
         npc1.setX(gPanel.getTileSize()*45);
         npc1.setY(gPanel.getTileSize()*51);
         gPanel.getNpc().add(npc1);
 
-        NPC npc2 = new TalkingCreature(gPanel, "creature2.png", "witch.txt");
+        TalkingCreature npc2 = new TalkingCreature(gPanel, "assets/littleDeer.png", "assets/npc.txt");
         npc2.setX(gPanel.getTileSize()*20);
         npc2.setY(gPanel.getTileSize()*39);
         gPanel.getNpc().add(npc2);
@@ -109,34 +104,30 @@ public class Setting {
 
     }
 
-    public void takeItem(){
-        for (int i = 0; i < gPanel.getLostItems().size(); i++) {
-            if (gPanel.getLostItems().get(i).itemArea().intersects(gPanel.getPlayer().entityArea())){
-                gPanel.getCollectedItems().add(gPanel.getLostItems().get(i));
-                gPanel.getLostItems().remove(gPanel.getLostItems().get(i));
-            }
-        }
-    }
-
     /**
      * Creating new creatures and adding them into lost animals array list.
      * @throws Exception
      */
     private void setCreatures() throws Exception{
-        Creature mouse = new Creature(gPanel, "mouse", "mouse.jpg");
-        mouse.setX(gPanel.getTileSize()*16);
-        mouse.setY(gPanel.getTileSize()*20);
-        gPanel.getCreatures().add(mouse);
+        Creature creature1 = new Creature(gPanel, "raven", "assets/raven.png");
+        creature1.setX(gPanel.getTileSize()*16);
+        creature1.setY(gPanel.getTileSize()*20);
+        gPanel.getCreatures().add(creature1);
 
-        Creature butterfly = new Creature(gPanel, "butterfly", "butterfly.jpg");
-        butterfly.setX(gPanel.getTileSize()*16);
-        butterfly.setY(gPanel.getTileSize()*21);
-        gPanel.getCreatures().add(butterfly);
+        Creature creature2 = new Creature(gPanel, "butterfly", "assets/butterfly.png");
+        creature2.setX(gPanel.getTileSize()*16);
+        creature2.setY(gPanel.getTileSize()*21);
+        gPanel.getCreatures().add(creature2);
 
-        Creature butterfly2 = new Creature(gPanel, "butterfly2", "littleDeer.png");
-        butterfly2.setX(gPanel.getTileSize()*22);
-        butterfly2.setY(gPanel.getTileSize()*35);
-        gPanel.getCreatures().add(butterfly2);
+       /* Creature creature3 = new Creature(gPanel, "creature3", "assets/spider.png");
+        creature3.setX(gPanel.getTileSize()*22);
+        creature3.setY(gPanel.getTileSize()*35);
+        gPanel.getCreatures().add(creature3);
+
+        Creature creature4 = new Creature(gPanel, "creature4", "assets/spider.png");
+        creature4.setX(gPanel.getTileSize()*39);
+        creature4.setY(gPanel.getTileSize()*10);
+        gPanel.getCreatures().add(creature4); */
     }
 
 

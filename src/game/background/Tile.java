@@ -1,6 +1,9 @@
 package game.background;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class Tile {
     private  BufferedImage image;
@@ -29,5 +32,13 @@ public class Tile {
 
     public void setCollision(boolean collision) {
         this.collision = collision;
+    }
+
+    public void loadTileImage(String fileName){
+        try {
+            image = ImageIO.read(new File(fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

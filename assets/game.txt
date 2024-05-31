@@ -1,0 +1,10 @@
+Press enter to start game
+You just came to unknown land.
+Your goal is to find 10 liters of fuel for your vehicle.
+Almost all animals can take your live or your fuel.
+You can pick up all items and use some of them.
+On top of your screen you can see current lives
+and how much fuel you need to collect.
+Game movement is controlled by WASD or arrow keys.
+If you press F displays screen with functions,
+choose pressing enter or close with F or escape key.

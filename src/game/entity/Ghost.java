@@ -2,7 +2,6 @@ package game.entity;
 
 import game.GPanel;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Ghost extends NPC{
@@ -10,9 +9,9 @@ public class Ghost extends NPC{
     public Ghost(GPanel gPanel) {
         super(gPanel);
         setName("ghost");
-        setDialogues("ghost.txt");
-        loadImage("ghostOg.jpg");
-        speedP = 1;
+        setDialogues("assets/ghost.txt");
+        loadImage("assets/ghost.png");
+        speed = 1;
     }
 
     /**
@@ -24,10 +23,10 @@ public class Ghost extends NPC{
         int newY = y;
 
         switch (this.direction) {
-            case "up" -> newY -= speedP;
-            case "down" -> newY += speedP;
-            case "left" -> newX -= speedP;
-            case "right" -> newX += speedP;
+            case "up" -> newY -= speed;
+            case "down" -> newY += speed;
+            case "left" -> newX -= speed;
+            case "right" -> newX += speed;
         }
 
         Random rd = new Random();

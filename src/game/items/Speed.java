@@ -6,7 +6,7 @@ public class Speed extends Item{
 
     public Speed(GPanel gPanel) {
         super(gPanel);
-        loadImage("speed.png");
+        loadImage("assets/speed.png");
         setName("speed");
     }
 

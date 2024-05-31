@@ -8,8 +8,8 @@ public class Guard extends NPC{
     public Guard(GPanel gPanel) {
         super(gPanel);
         setName("guard");
-        speedP = 2;
-        loadImage("ghost.png");
+        speed = 2;
+        loadImage("assets/spider.png");
         try {
             setX(gPanel.getTileSize()*54);
             setY(gPanel.getTileSize()*13);
@@ -37,8 +37,8 @@ public class Guard extends NPC{
         int newX = x;
 
         switch (this.direction) {
-            case "left" -> newX -= speedP;
-            case "right" -> newX += speedP;
+            case "left" -> newX -= speed;
+            case "right" -> newX += speed;
         }
 
         if (checkCollision.hasCollision(this)){
@@ -52,7 +52,7 @@ public class Guard extends NPC{
             x = newX;
 
         }
-        checkCollision.throwPlayer(this);
+        checkCollision.npcMovePlayer(this);
     }
 
 

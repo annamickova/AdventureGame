@@ -155,9 +155,8 @@ public class CheckCollision {
                 tileY = bY;
             }
         }
-
-        tileX = tileX/ gPanel.getTileSize();
-        tileY = tileY/ gPanel.getTileSize();
+        tileX /= gPanel.getTileSize();
+        tileY /= gPanel.getTileSize();
 
         String tile = gPanel.getbGround().getTile(tileX, tileY).getName();
 
@@ -165,7 +164,7 @@ public class CheckCollision {
     }
 
     /**
-     * Checking colliion between player and npc.
+     * Checking collision between player and npc.
      * @param newX
      * @param newY
      */
@@ -192,7 +191,7 @@ public class CheckCollision {
      * Moving player when he meets guard.
      * @param entity
      */
-    public void throwPlayer(Entity entity){
+    public void npcMovePlayer(Entity entity){
         if (entity.entityArea().intersects(gPanel.getPlayer().entityArea())){
             try {
                 gPanel.getPlayer().setX(gPanel.getTileSize());
@@ -200,7 +199,24 @@ public class CheckCollision {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
+        }
+    }
 
+    /**
+     * Moving item into already collected items.
+     */
+    public void collectItem(){
+        for (int i = 0; i < gPanel.getFunctionItems().size(); i++) {
+            if (gPanel.getFunctionItems().get(i).itemArea().intersects(gPanel.getPlayer().entityArea())){
+                gPanel.getCollectedFunctionItems().add(0, gPanel.getFunctionItems().get(i));
+                gPanel.getFunctionItems().remove(gPanel.getFunctionItems().get(i));
+                gPanel.getCollectedFunctionItems().get(0).setVisible(true);
+            }
+        }  for (int i = 0; i < gPanel.getLostItems().size(); i++) {
+            if (gPanel.getLostItems().get(i).itemArea().intersects(gPanel.getPlayer().entityArea())){
+                gPanel.getCollectedItems().add(gPanel.getLostItems().get(i));
+                gPanel.getLostItems().remove(gPanel.getLostItems().get(i));
+            }
         }
     }
 }

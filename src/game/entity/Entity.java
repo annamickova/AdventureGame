@@ -14,13 +14,11 @@ public class Entity {
     protected GPanel gPanel;
     protected int x;
     protected int y;
-    protected int speedP;
+    protected int speed;
     protected CheckCollision checkCollision;
-
     protected BufferedImage entityImage;
     protected String direction;
     protected boolean interaction;
-    protected BufferedImage heart;
 
     public Entity(GPanel gPanel) {
         this.gPanel = gPanel;
@@ -28,12 +26,12 @@ public class Entity {
 
     }
 
-    public int getSpeedP() {
-        return speedP;
+    public int getSpeed() {
+        return speed;
     }
 
-    public void setSpeedP(int speedP) {
-        this.speedP = speedP;
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 
     public void setDirection(String direction) {
@@ -144,21 +142,6 @@ public class Entity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-    public void loadLivesImage(String fileName) {
-        try {
-            heart = ImageIO.read(new File(fileName));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public BufferedImage getHeart() {
-        return heart;
-    }
-
-    public void setHeart(BufferedImage heart) {
-        this.heart = heart;
     }
 
     public void update(){}
