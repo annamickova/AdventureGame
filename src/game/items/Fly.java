@@ -6,7 +6,7 @@ public class Fly extends Item{
 
     public Fly(GPanel gPanel) {
         super(gPanel);
-        loadImage("assets/flower.jpg");
+        loadImage("assets/cloud.png");
         setName("fly");
     }
 

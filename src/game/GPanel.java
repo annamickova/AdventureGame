@@ -12,18 +12,18 @@ import java.util.ArrayList;
 
 public class GPanel extends JPanel implements Runnable{
 
-    private Game game;
+    private final Game game;
     private final int tileSize;
     private int screenWidth;
     private int screenHeight;
     private int FPS;
     private Thread thread;
-    private KeyHandler keyHandler;
+    private final KeyHandler keyHandler;
     private Player player;
     private ArrayList<Item> functionItems;
     private ArrayList<Item> collectedFunctionItems;
-    private ArrayList<Fuel> collectedItems = new ArrayList<>();
-    private ArrayList<Fuel> lostItems = new ArrayList<>();
+    private ArrayList<Fuel> collectedItems;
+    private ArrayList<Fuel> lostItems;
 
     public ArrayList<Fuel> getCollectedItems() {
         return collectedItems;
@@ -39,7 +39,7 @@ public class GPanel extends JPanel implements Runnable{
     private Background bGround;
     private int maxCol;
     private int maxRow;
-    private boolean running;
+    private final boolean isRunning;
     private int currDialogIndex;
 
     public ArrayList<Creature> getCreatures() {
@@ -98,10 +98,6 @@ public class GPanel extends JPanel implements Runnable{
         return npc;
     }
 
-    public Setting getSettings() {
-        return setting;
-    }
-
     public Enemy getEnemy() {
         return enemy;
     }
@@ -111,7 +107,7 @@ public class GPanel extends JPanel implements Runnable{
         game = new Game(this);
         keyHandler = new KeyHandler(this);
         currDialogIndex = 0;
-        running = true;
+        isRunning = true;
         setPanelSize();
         setPlayersStuff();
         setAssets();
@@ -127,8 +123,9 @@ public class GPanel extends JPanel implements Runnable{
             bGround = new Background(this);
             functionItems = new ArrayList<>();
             collectedFunctionItems = new ArrayList<>();
+            collectedItems = new ArrayList<>();
+            lostItems = new ArrayList<>();
             creatures = new ArrayList<>();
-            //caughtCreatures = new ArrayList<>();
             npc = new ArrayList<>();
             enemy = new Enemy(this);
             setting = new Setting(this);
@@ -157,7 +154,7 @@ public class GPanel extends JPanel implements Runnable{
      * Creating new thread. Game is running until thread is not null.
      */
     public void startGame(){
-        if (thread == null || !running){
+        if (thread == null || !isRunning){
             thread = new Thread(this);
             thread.start();
         }
@@ -233,7 +230,7 @@ public class GPanel extends JPanel implements Runnable{
         double drawInterval = 1000000000/FPS;
         double nextDrawTime = System.nanoTime() + drawInterval;
 
-        while (running){
+        while (isRunning){
             update();
             repaint();
 

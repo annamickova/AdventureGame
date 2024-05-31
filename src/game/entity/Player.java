@@ -20,6 +20,7 @@ public class Player extends Entity {
     private int lives;
     private BufferedImage livesImage;
     private boolean highSpeed;
+    private double score;
 
     public boolean isSwimmming() {
         return swimmming;
@@ -69,7 +70,7 @@ public class Player extends Entity {
         this.keyHandler = keyHandler;
         defValues();
         loadImage("assets/cat.jpeg");
-        loadLivesImage("assets/heart.png");
+        loadLivesImage("assets/heart2.png");
     }
 
     private void defValues(){

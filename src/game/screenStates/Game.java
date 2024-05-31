@@ -6,9 +6,8 @@ import game.entity.NPC;
 import java.awt.*;
 
 public class Game {
-
-    private GPanel gPanel;
-    private DrawStates drawStates;
+    private final GPanel gPanel;
+    private final DrawStates drawStates;
     private int gameState;
     private int count = 0;
 
@@ -18,8 +17,8 @@ public class Game {
     private final int home = 3;
     private final int functions = 4;
 
-    private final int end = 6;
-    private boolean victory = false;
+    private final int isEnd = 6;
+    private boolean isVictory = false;
     private final int description = 7;
     private int fuelNeed = 10;
     private boolean canLostLives = true;
@@ -54,14 +53,6 @@ public class Game {
         return drawStates;
     }
 
-    public boolean isCanLostLives() {
-        return canLostLives;
-    }
-
-    public void setCanLostLives(boolean canLostLives) {
-        this.canLostLives = canLostLives;
-    }
-
     public int getStop() {
         return stop;
     }
@@ -74,18 +65,12 @@ public class Game {
     public int getFunctions() {
         return functions;
     }
-
-
-    public int getEnd() {
-        return end;
+    public int getIsEnd() {
+        return isEnd;
     }
 
     public boolean isVictory() {
-        return victory;
-    }
-
-    public void setVictory(boolean victory) {
-        this.victory = victory;
+        return isVictory;
     }
 
     public int getDescription() {
@@ -107,6 +92,9 @@ public class Game {
         }
     }
 
+    /**
+     * Setting player`s speed back to normal speed.
+     */
     private void higherSpeed(){
         if (gPanel.getPlayer().isHighSpeed()){
             gPanel.getPlayer().setSpeed(6);
@@ -119,6 +107,9 @@ public class Game {
         }
    }
 
+    /**
+     * Turning off swimming ability.
+     */
    private void swim(){
        if (gPanel.getPlayer().isSwimmming()){
            if (count >= 420) {
@@ -131,6 +122,9 @@ public class Game {
        }
    }
 
+    /**
+     * Removes players live if he meets npc. When he meets enemy he takes 2 his lives.
+     */
    private void loseLives(){
        if (gPanel.getPlayer().getCheckCollision().playerHitEntity()){
            if (canLostLives){
@@ -155,6 +149,9 @@ public class Game {
        }
    }
 
+    /**
+     * Checking all functions.
+     */
    public void checkFunctions(){
        loseLives();
        turnOffFlying();
@@ -199,21 +196,19 @@ public class Game {
             }
             case home -> drawStates.homeScreen(graphics2D);
             case functions -> drawStates.funcScreen(graphics2D);
-           // case catchingAnimal -> drawStates.animalsScreen(graphics2D);
             case description -> drawStates.gameDescriptionScreen(graphics2D);
-            case end -> drawStates.endScreen(graphics2D);
+            case isEnd -> drawStates.gameOverScreen(graphics2D);
         }
     }
-
     /**
      * Game over when player catches all creatures.
      */
     public void end(){
        if (fuelNeed == 0){
-           victory = true;
-           gameState = end;
+           isVictory = true;
+           gameState = isEnd;
        } else if (gPanel.getPlayer().getLives() == 0) {
-           gameState = end;
+           gameState = isEnd;
        }
     }
 }

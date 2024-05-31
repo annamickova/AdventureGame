@@ -125,7 +125,7 @@ public class DrawStates {
         loadAndDrawText(graphics2D, leftX, hY+gPanel.getTileSize());
     }
 
-    public void loadAndDrawText(Graphics2D graphics2D, int x, int y) {
+    private void loadAndDrawText(Graphics2D graphics2D, int x, int y) {
         try (BufferedReader reader = new BufferedReader(new FileReader("assets/game.txt"))) {
             String line;
             int lineNumber = 0;
@@ -139,25 +139,21 @@ public class DrawStates {
     }
 
 
-    public void endScreen(Graphics2D graphics2D){
+    public void gameOverScreen(Graphics2D graphics2D){
         String gameOver = "game over";
-        String text = "";
+        String text;
         if (gPanel.getGame().isVictory()){
-            text = "you found all your missing components";
+            text = "you found all your missing fuel";
         }else {
             text = "you lost, try again";
         }
         graphics2D.setFont(new Font(font, Font.BOLD, 50));
-
         int x = gPanel.getScreenWidth()/2;
         int hX =  x - textCentred(graphics2D, gameOver)/2;
         int hY = gPanel.getTileSize()*4;
-        graphics2D.setColor(Color.black);
-        graphics2D.fillRect(0,0, gPanel.getScreenWidth(), gPanel.getScreenHeight());
-
         graphics2D.setColor(new Color(70,80,120));
-        graphics2D.drawString(gameOver, hX+5,hY+5);
-
+        graphics2D.fillRect(0,0, gPanel.getScreenWidth(), gPanel.getScreenHeight());
+        graphics2D.setColor(new Color(70,80,120));
         graphics2D.setColor(Color.white);
         graphics2D.drawString(gameOver, hX,hY);
         graphics2D.setFont(new Font(font, Font.BOLD, 30));
@@ -202,7 +198,6 @@ public class DrawStates {
             funcPointer = 0;
         }
     }
-
     public void smallScreen(Graphics2D graphics2D){
         graphics2D.setColor(new Color(255,255,255,200));
         int wX = gPanel.getTileSize() * 13 - gPanel.getTileSize()/2;

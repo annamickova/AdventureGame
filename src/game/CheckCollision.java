@@ -5,7 +5,7 @@ import game.entity.NPC;
 
 public class CheckCollision {
 
-    private GPanel gPanel;
+    private final GPanel gPanel;
 
     public CheckCollision(GPanel gPanel) {
         this.gPanel = gPanel;

@@ -9,7 +9,7 @@ public class Guard extends NPC{
         super(gPanel);
         setName("guard");
         speed = 2;
-        loadImage("assets/spider.png");
+        loadImage("assets/enemy.png");
         try {
             setX(gPanel.getTileSize()*54);
             setY(gPanel.getTileSize()*13);

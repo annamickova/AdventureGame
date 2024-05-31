@@ -48,30 +48,31 @@ public class Background {
     public void loadTiles() {
         tiles[0] = new Tile();
         tiles[0].setName("grass");
-        tiles[0].loadTileImage("assets/grass5.jpg");
+        tiles[0].loadTileImage("assets/grass.png");
 
         tiles[1] = new Tile();
         tiles[1].setName("wall");
-        tiles[1].loadTileImage("assets/wall.jpg");
+        tiles[1].loadTileImage("assets/wall.png");
         tiles[1].setCollision(true);
 
         tiles[2] = new Tile();
         tiles[2].setName("water");
-        tiles[2].loadTileImage("assets/water.jpg");
+        tiles[2].loadTileImage("assets/water.png");
         tiles[2].setCollision(true);
 
         tiles[3] = new Tile();
-        tiles[3].setName("earth");
-        tiles[3].loadTileImage("assets/earth.jpg");
+        tiles[3].setName("lava");
+        tiles[3].loadTileImage("assets/lava.png");
+        tiles[3].setCollision(true);
 
         tiles[4] = new Tile();
         tiles[4].setName("tree");
-        tiles[4].loadTileImage("assets/tree2.jpg");
+        tiles[4].loadTileImage("assets/tree.png");
         tiles[4].setCollision(true);
 
         tiles[5] = new Tile();
         tiles[5].setName("sand");
-        tiles[5].loadTileImage("assets/sand.jpg");
+        tiles[5].loadTileImage("assets/sand.png");
     }
 
     /**

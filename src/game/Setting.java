@@ -87,12 +87,12 @@ public class Setting {
      * @throws Exception
      */
     private void setNPC() throws Exception{
-        TalkingCreature npc1 = new TalkingCreature(gPanel,"assets/littleDeer.png", "assets/littleDeer.txt");
+        TalkingCreature npc1 = new TalkingCreature(gPanel,"assets/animal.png", "assets/littleDeer.txt");
         npc1.setX(gPanel.getTileSize()*45);
         npc1.setY(gPanel.getTileSize()*51);
         gPanel.getNpc().add(npc1);
 
-        TalkingCreature npc2 = new TalkingCreature(gPanel, "assets/littleDeer.png", "assets/npc.txt");
+        TalkingCreature npc2 = new TalkingCreature(gPanel, "assets/animal.png", "assets/npc.txt");
         npc2.setX(gPanel.getTileSize()*20);
         npc2.setY(gPanel.getTileSize()*39);
         gPanel.getNpc().add(npc2);
@@ -109,7 +109,7 @@ public class Setting {
      * @throws Exception
      */
     private void setCreatures() throws Exception{
-        Creature creature1 = new Creature(gPanel, "raven", "assets/raven.png");
+        Creature creature1 = new Creature(gPanel, "creature", "assets/creature.png");
         creature1.setX(gPanel.getTileSize()*16);
         creature1.setY(gPanel.getTileSize()*20);
         gPanel.getCreatures().add(creature1);

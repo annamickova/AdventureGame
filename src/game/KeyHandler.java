@@ -7,8 +7,8 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 
-    private GPanel gPanel;
-    private Game game;
+    private final GPanel gPanel;
+    private final Game game;
     public boolean moveUp;
     public boolean moveDown;
     public boolean moveLeft;
@@ -99,7 +99,7 @@ public class KeyHandler implements KeyListener {
             }
 
 
-        } else if (game.getGameState() == game.getEnd()) {
+        } else if (game.getGameState() == game.getIsEnd()) {
             switch (e.getKeyCode()){
                 case KeyEvent.VK_W, KeyEvent.VK_UP -> {game.getDrawStates()
                         .setPointer(game.getDrawStates().getPointer()-1);
