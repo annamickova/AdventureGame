@@ -5,6 +5,7 @@ import game.entity.*;
 import game.items.Fuel;
 import game.items.Item;
 import game.screenStates.Game;
+import game.screenStates.GameState;
 
 import javax.swing.*;
 import java.awt.*;
@@ -164,7 +165,7 @@ public class GPanel extends JPanel implements Runnable{
      * Updates player, enemy and npc.
      */
     private void update(){
-        if (game.getGameState() == game.getPlay()){
+        if (game.getGameState() == GameState.PLAY){
             player.update();
             game.checkFunctions();
             for (Entity entity : npc) {
@@ -189,7 +190,7 @@ public class GPanel extends JPanel implements Runnable{
         super.paintComponent(graphics);
         Graphics2D graphics2D = (Graphics2D)graphics;
 
-        if (game.getGameState() == game.getHome()){
+        if (game.getGameState() == GameState.HOME){
             game.setState(graphics2D);
         }else {
             bGround.draw(graphics2D);

@@ -1,6 +1,7 @@
 package game.items;
 
 import game.GPanel;
+import game.screenStates.GameState;
 
 public class Fly extends Item{
 
@@ -17,7 +18,7 @@ public class Fly extends Item{
     @Override
     public void function() {
         gPanel.getPlayer().setFly(true);
-        gPanel.getGame().setGameState(gPanel.getGame().getPlay());
+        gPanel.getGame().setGameState(GameState.PLAY);
     }
 
 

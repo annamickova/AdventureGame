@@ -1,6 +1,7 @@
 package game.items;
 
 import game.GPanel;
+import game.screenStates.GameState;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -22,7 +23,7 @@ public class Teleport extends Item{
         try {
             gPanel.getPlayer().setX(gPanel.getTileSize() * 23);
             gPanel.getPlayer().setY(gPanel.getTileSize() * 21);
-            gPanel.getGame().setGameState(gPanel.getGame().getPlay());
+            gPanel.getGame().setGameState(GameState.PLAY);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

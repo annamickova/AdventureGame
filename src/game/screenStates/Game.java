@@ -8,25 +8,17 @@ import java.awt.*;
 public class Game {
     private final GPanel gPanel;
     private final DrawStates drawStates;
-    private int gameState;
+    private GameState gameState;
     private int count = 0;
-
-    private final int stop = 0;
-    private final int play = 1;
-    private final int dialog = 2;
-    private final int home = 3;
-    private final int functions = 4;
-
-    private final int isEnd = 6;
     private boolean isVictory = false;
-    private final int description = 7;
+
     private int fuelNeed = 10;
     private boolean canLostLives = true;
 
 
     public Game(GPanel gPanel) {
         this.gPanel = gPanel;
-        gameState = home;
+        gameState = GameState.HOME;
 
         drawStates = new DrawStates(gPanel);
     }
@@ -39,43 +31,23 @@ public class Game {
         this.fuelNeed = fuelNeed;
     }
 
-    public int getGameState() {
+    public GameState getGameState() {
         return gameState;
     }
 
-    public void setGameState(int gameState) {
+    public void setGameState(GameState gameState) {
         this.gameState = gameState;
     }
-    public int getPlay() {
-        return play;
-    }
+
     public DrawStates getDrawStates() {
         return drawStates;
-    }
-
-    public int getStop() {
-        return stop;
-    }
-    public int getDialog() {
-        return dialog;
-    }
-    public int getHome() {
-        return home;
-    }
-    public int getFunctions() {
-        return functions;
-    }
-    public int getIsEnd() {
-        return isEnd;
     }
 
     public boolean isVictory() {
         return isVictory;
     }
 
-    public int getDescription() {
-        return description;
-    }
+
 
     /**
      * Turning off walking through different tiles ability when player is not on tile with collision.
@@ -189,15 +161,15 @@ public class Game {
         end();
         drawStates.drawlostItemsCount(graphics2D);
         switch (gameState){
-            case stop -> drawStates.pauseScreen(graphics2D);
-            case dialog -> {
+            case STOP -> drawStates.pauseScreen(graphics2D);
+            case DIALOG -> {
                 changeIndex();
                 drawStates.dialogScreen(graphics2D);
             }
-            case home -> drawStates.homeScreen(graphics2D);
-            case functions -> drawStates.funcScreen(graphics2D);
-            case description -> drawStates.gameDescriptionScreen(graphics2D);
-            case isEnd -> drawStates.gameOverScreen(graphics2D);
+            case HOME -> drawStates.homeScreen(graphics2D);
+            case FUNCTIONS -> drawStates.funcScreen(graphics2D);
+            case DESCRIPTION -> drawStates.gameDescriptionScreen(graphics2D);
+            case END -> drawStates.gameOverScreen(graphics2D);
         }
     }
     /**
@@ -206,9 +178,9 @@ public class Game {
     public void end(){
        if (fuelNeed == 0){
            isVictory = true;
-           gameState = isEnd;
+           gameState = GameState.END;
        } else if (gPanel.getPlayer().getLives() == 0) {
-           gameState = isEnd;
+           gameState = GameState.END;
        }
     }
 }

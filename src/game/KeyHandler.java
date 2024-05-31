@@ -1,6 +1,7 @@
 package game;
 
 import game.screenStates.Game;
+import game.screenStates.GameState;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -29,24 +30,23 @@ public class KeyHandler implements KeyListener {
      */
     @Override
     public void keyPressed(KeyEvent e) {
-        if (game.getGameState() == game.getPlay()){
+        if (game.getGameState() == GameState.PLAY){
             switch (e.getKeyCode()){
                 case KeyEvent.VK_W, KeyEvent.VK_UP -> moveUp = true;
                 case KeyEvent.VK_S, KeyEvent.VK_DOWN -> moveDown = true;
                 case KeyEvent.VK_A, KeyEvent.VK_LEFT -> moveLeft = true;
                 case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> moveRight = true;
-                case KeyEvent.VK_P -> game.setGameState(game.getStop());
-                case KeyEvent.VK_F -> game.setGameState(game.getFunctions());
+                case KeyEvent.VK_P -> game.setGameState(GameState.STOP);
+                case KeyEvent.VK_F -> game.setGameState(GameState.FUNCTIONS);
             }
             gPanel.getPlayer().setInteraction(true);
-        }else if (game.getGameState() == game.getStop()){
+        }else if (game.getGameState() == GameState.STOP){
              if (e.getKeyCode() == KeyEvent.VK_P || e.getKeyCode() == KeyEvent.VK_ESCAPE){
-                 game.setGameState(game.getPlay());
+                 game.setGameState(GameState.PLAY);
              }
-        }else if (game.getGameState() == game.getFunctions()){
+        }else if (game.getGameState() == GameState.FUNCTIONS){
             switch (e.getKeyCode()){
-                case KeyEvent.VK_F -> game.setGameState(game.getPlay());
-                case KeyEvent.VK_ESCAPE -> game.setGameState(game.getPlay());
+                case KeyEvent.VK_F, KeyEvent.VK_ESCAPE -> game.setGameState(GameState.PLAY);
                 case KeyEvent.VK_W, KeyEvent.VK_UP -> {game.getDrawStates()
                         .setFuncPointer(game.getDrawStates().getFuncPointer()-1);
                     game.getDrawStates().resetFuncPointer();
@@ -59,19 +59,19 @@ public class KeyHandler implements KeyListener {
                     if (gPanel.getCollectedFunctionItems().size()!= 0){
                         gPanel.getCollectedFunctionItems().get(game.getDrawStates().getFuncPointer()).function();
                         gPanel.getCollectedFunctionItems().remove(game.getDrawStates().getFuncPointer());
-                        game.setGameState(game.getPlay());
+                        game.setGameState(GameState.PLAY);
                         game.getDrawStates().setFuncPointer(0);
 
                     }
                 }
             }
 
-        } else if (game.getGameState() == game.getDialog()){
+        } else if (game.getGameState() == GameState.DIALOG){
             if (e.getKeyCode() == KeyEvent.VK_M || e.getKeyCode() == KeyEvent.VK_ESCAPE){
                 gPanel.getPlayer().setInteraction(false);
-                game.setGameState(game.getPlay());
+                game.setGameState(GameState.PLAY);
             }
-        }else if (game.getGameState() == game.getHome()) {
+        }else if (game.getGameState() == GameState.HOME) {
             switch (e.getKeyCode()){
                 case KeyEvent.VK_W, KeyEvent.VK_UP -> {game.getDrawStates()
                         .setPointer(game.getDrawStates().getPointer()-1);
@@ -83,23 +83,23 @@ public class KeyHandler implements KeyListener {
                 }
                 case KeyEvent.VK_ENTER -> {
                     if (game.getDrawStates().getPointer() == 0){
-                        game.setGameState(game.getPlay());
+                        game.setGameState(GameState.PLAY);
                     }
                     if (game.getDrawStates().getPointer() == 1){
-                        game.setGameState(game.getDescription());
+                        game.setGameState(GameState.DESCRIPTION);
                     }
                     if (game.getDrawStates().getPointer() == 2){
                         System.exit(0);
                     }
                 }
             }
-        } else if (game.getGameState() == game.getDescription()) {
+        } else if (game.getGameState() == GameState.DESCRIPTION) {
             if (e.getKeyCode() == KeyEvent.VK_ENTER){
-                game.setGameState(game.getPlay());
+                game.setGameState(GameState.PLAY);
             }
 
 
-        } else if (game.getGameState() == game.getIsEnd()) {
+        } else if (game.getGameState() == GameState.END) {
             switch (e.getKeyCode()){
                 case KeyEvent.VK_W, KeyEvent.VK_UP -> {game.getDrawStates()
                         .setPointer(game.getDrawStates().getPointer()-1);
@@ -112,7 +112,7 @@ public class KeyHandler implements KeyListener {
                 case KeyEvent.VK_ENTER -> {
                     if (game.getDrawStates().getPointer() == 0){
                         GFrame frame = new GFrame();
-                        game.setGameState(game.getPlay());
+                        game.setGameState(GameState.PLAY);
                     }
                     if (game.getDrawStates().getPointer() == 1){
                         System.exit(0);

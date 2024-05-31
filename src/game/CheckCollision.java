@@ -2,6 +2,7 @@ package game;
 import game.background.Tile;
 import game.entity.Entity;
 import game.entity.NPC;
+import game.screenStates.GameState;
 
 public class CheckCollision {
 
@@ -90,7 +91,7 @@ public class CheckCollision {
         if (n){
             if (gPanel.getPlayer().isInteraction()){
                 if (gPanel.getCurrDialogIndex() == gPanel.getNpc().get(j).getDialogIndex()){
-                    gPanel.getGame().setGameState(gPanel.getGame().getDialog());
+                    gPanel.getGame().setGameState(GameState.DIALOG);
                     gPanel.getNpc().get(j).setText();
 
                 }
