@@ -47,20 +47,20 @@ public class KeyHandler implements KeyListener {
         }else if (game.getGameState() == GameState.FUNCTIONS){
             switch (e.getKeyCode()){
                 case KeyEvent.VK_F, KeyEvent.VK_ESCAPE -> game.setGameState(GameState.PLAY);
-                case KeyEvent.VK_W, KeyEvent.VK_UP -> {game.getDrawStates()
-                        .setFuncPointer(game.getDrawStates().getFuncPointer()-1);
-                    game.getDrawStates().resetFuncPointer();
+                case KeyEvent.VK_W, KeyEvent.VK_UP -> {game.getDraw()
+                        .setFuncPointer(game.getDraw().getFuncPointer()-1);
+                    game.getDraw().resetFuncPointer();
                 }
-                case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {game.getDrawStates()
-                        .setFuncPointer(game.getDrawStates().getFuncPointer()+1);
-                    game.getDrawStates().resetFuncPointer();
+                case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {game.getDraw()
+                        .setFuncPointer(game.getDraw().getFuncPointer()+1);
+                    game.getDraw().resetFuncPointer();
                 }
                 case KeyEvent.VK_ENTER -> {
                     if (gPanel.getCollectedFunctionItems().size()!= 0){
-                        gPanel.getCollectedFunctionItems().get(game.getDrawStates().getFuncPointer()).function();
-                        gPanel.getCollectedFunctionItems().remove(game.getDrawStates().getFuncPointer());
+                        gPanel.getCollectedFunctionItems().get(game.getDraw().getFuncPointer()).function();
+                        gPanel.getCollectedFunctionItems().remove(game.getDraw().getFuncPointer());
                         game.setGameState(GameState.PLAY);
-                        game.getDrawStates().setFuncPointer(0);
+                        game.getDraw().setFuncPointer(0);
 
                     }
                 }
@@ -73,22 +73,23 @@ public class KeyHandler implements KeyListener {
             }
         }else if (game.getGameState() == GameState.HOME) {
             switch (e.getKeyCode()){
-                case KeyEvent.VK_W, KeyEvent.VK_UP -> {game.getDrawStates()
-                        .setPointer(game.getDrawStates().getPointer()-1);
-                    game.getDrawStates().resetPointer();
+                case KeyEvent.VK_W, KeyEvent.VK_UP -> {game.getDraw()
+                        .setPointer(game.getDraw().getPointer()-1);
+                    game.getDraw().resetPointer();
                 }
-                case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {game.getDrawStates()
-                        .setPointer(game.getDrawStates().getPointer()+1);
-                    game.getDrawStates().resetPointer();
+                case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {game.getDraw()
+                        .setPointer(game.getDraw().getPointer()+1);
+                    game.getDraw().resetPointer();
                 }
                 case KeyEvent.VK_ENTER -> {
-                    if (game.getDrawStates().getPointer() == 0){
+                    if (game.getDraw().getPointer() == 0){
+                        game.setStartTime(System.nanoTime());
                         game.setGameState(GameState.PLAY);
                     }
-                    if (game.getDrawStates().getPointer() == 1){
+                    if (game.getDraw().getPointer() == 1){
                         game.setGameState(GameState.DESCRIPTION);
                     }
-                    if (game.getDrawStates().getPointer() == 2){
+                    if (game.getDraw().getPointer() == 2){
                         System.exit(0);
                     }
                 }
@@ -101,20 +102,20 @@ public class KeyHandler implements KeyListener {
 
         } else if (game.getGameState() == GameState.END) {
             switch (e.getKeyCode()){
-                case KeyEvent.VK_W, KeyEvent.VK_UP -> {game.getDrawStates()
-                        .setPointer(game.getDrawStates().getPointer()-1);
-                    game.getDrawStates().resetPointer();
+                case KeyEvent.VK_W, KeyEvent.VK_UP -> {game.getDraw()
+                        .setPointer(game.getDraw().getPointer()-1);
+                    game.getDraw().resetPointer();
                 }
-                case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {game.getDrawStates()
-                        .setPointer(game.getDrawStates().getPointer()+1);
-                    game.getDrawStates().resetPointer();
+                case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {game.getDraw()
+                        .setPointer(game.getDraw().getPointer()+1);
+                    game.getDraw().resetPointer();
                 }
                 case KeyEvent.VK_ENTER -> {
-                    if (game.getDrawStates().getPointer() == 0){
+                    if (game.getDraw().getPointer() == 0){
                         GFrame frame = new GFrame();
                         game.setGameState(GameState.PLAY);
                     }
-                    if (game.getDrawStates().getPointer() == 1){
+                    if (game.getDraw().getPointer() == 1){
                         System.exit(0);
                     }
                 }

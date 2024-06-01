@@ -39,7 +39,7 @@ public class NPC extends Entity {
     public void setText(){
         if (gPanel.getCurrDialogIndex() == dialogIndex){
             if (dialogIndex < dialogues.size()){
-                gPanel.getGame().getDrawStates().setCurrDialog(dialogues.get(dialogIndex));
+                gPanel.getGame().getDraw().setCurrDialog(dialogues.get(dialogIndex));
                 dialogIndex++;
             }
         }
@@ -80,7 +80,7 @@ public class NPC extends Entity {
             case "left" -> newX -= speed;
             case "right" -> newX += speed;
         }
-        if (checkCollision.hasCollision(this)){
+        if (someCollision()){
             Random random = new Random();
             int i = random.nextInt(4);
             switch (i) {
@@ -89,11 +89,21 @@ public class NPC extends Entity {
                 case 2 -> direction = "left";
                 case 3 -> direction = "right";
             }
-        } else if (!checkCollision.hit(this, gPanel.getPlayer())) {
-            x = newX;
-            y = newY;
+        } else  {
+                x = newX;
+                y = newY;
         }
         checkCollision.entityTakesFuel(this);
+    }
+
+    private boolean someCollision(){
+        boolean col;
+        if (checkCollision.hasCollision(this)){
+            col = true;
+        } else if (checkCollision.hit(this, gPanel.getPlayer())) {
+            col = true;
+        } else col = checkCollision.collisionWithOtherNPCs(this);
+        return col;
     }
 
     /**

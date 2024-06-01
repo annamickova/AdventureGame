@@ -4,23 +4,27 @@ import game.GPanel;
 import game.entity.NPC;
 
 import java.awt.*;
+import java.io.*;
 
 public class Game {
     private final GPanel gPanel;
-    private final DrawStates drawStates;
+    private final DrawStates draw;
     private GameState gameState;
     private int count = 0;
     private boolean isVictory = false;
-
     private int fuelNeed = 10;
     private boolean canLostLives = true;
-
+    private int minutes = 0;
+    private int seconds = 0;
+    private long startTime;
+    private long t;
+    private int score = 0;
 
     public Game(GPanel gPanel) {
         this.gPanel = gPanel;
         gameState = GameState.HOME;
 
-        drawStates = new DrawStates(gPanel);
+        draw = new DrawStates(gPanel);
     }
 
     public int getFuelNeed() {
@@ -28,7 +32,12 @@ public class Game {
     }
 
     public void setFuelNeed(int fuelNeed) {
-        this.fuelNeed = fuelNeed;
+        if (fuelNeed > 0){
+            this.fuelNeed = fuelNeed;
+        }else {
+            this.fuelNeed = 0;
+        }
+
     }
 
     public GameState getGameState() {
@@ -39,15 +48,28 @@ public class Game {
         this.gameState = gameState;
     }
 
-    public DrawStates getDrawStates() {
-        return drawStates;
+    public DrawStates getDraw() {
+        return draw;
     }
 
     public boolean isVictory() {
         return isVictory;
     }
 
+    public int getScore() {
+        return score;
+    }
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
+    }
 
+    public int getMinutes() {
+        return minutes;
+    }
+
+    public int getSeconds() {
+        return seconds;
+    }
 
     /**
      * Turning off walking through different tiles ability when player is not on tile with collision.
@@ -159,17 +181,24 @@ public class Game {
     public void setState(Graphics2D graphics2D){
         graphics2D.setColor(new Color(250,250,250));
         end();
-        drawStates.drawlostItemsCount(graphics2D);
+        draw.currTime(graphics2D);
+        draw.lostFuel(graphics2D);
         switch (gameState){
-            case STOP -> drawStates.pauseScreen(graphics2D);
+            case STOP -> draw.pauseScreen(graphics2D);
             case DIALOG -> {
                 changeIndex();
-                drawStates.dialogScreen(graphics2D);
+                draw.dialogScreen(graphics2D);
             }
-            case HOME -> drawStates.homeScreen(graphics2D);
-            case FUNCTIONS -> drawStates.funcScreen(graphics2D);
-            case DESCRIPTION -> drawStates.gameDescriptionScreen(graphics2D);
-            case END -> drawStates.gameOverScreen(graphics2D);
+            case HOME -> draw.homeScreen(graphics2D);
+            case FUNCTIONS -> draw.funcScreen(graphics2D);
+            case DESCRIPTION -> draw.gameDescriptionScreen(graphics2D);
+            case END -> {
+                draw.gameOverScreen(graphics2D);
+                if (!scoreWritten){
+                    writeScore("assets/scoreHistory.txt");
+                    scoreWritten = true;
+                }
+            }
         }
     }
     /**
@@ -182,5 +211,57 @@ public class Game {
        } else if (gPanel.getPlayer().getLives() == 0) {
            gameState = GameState.END;
        }
+       updateScore();
+    }
+
+    /**
+     * Calculating minutes and second since game started.
+     */
+    public void timer(){
+        if (gameState == GameState.PLAY){
+            long currentTime = System.nanoTime();
+            t = (currentTime - startTime) / 1000000000;
+            minutes = (int) (t / 60);
+            seconds = (int) (t % 60);
+        }
+    }
+
+    /**
+     * Counting score based on player's time and his lost lives.
+     */
+    public void updateScore(){
+        int num = (int) (1000 - t) - (3-gPanel.getPlayer().getLives())*20;
+        score = Math.max(num, 0);
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+    private boolean scoreWritten = false;
+
+    public int newScore(){
+        int highest = 0;
+        try (BufferedReader br = new BufferedReader(new FileReader("assets/scoreHistory.txt"))){
+            String line;
+            while ((line = br.readLine())!= null) {
+                int score = Integer.parseInt(line.trim());
+                if (score > highest) {
+                    highest = score;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return highest;
+    }
+    public void writeScore(String fileName){
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName, true))){
+            bw.write(score+"");
+            bw.newLine();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

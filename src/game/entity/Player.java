@@ -20,7 +20,6 @@ public class Player extends Entity {
     private int lives;
     private BufferedImage livesImage;
     private boolean highSpeed;
-    private double score;
 
     public boolean isSwimmming() {
         return swimmming;
@@ -35,9 +34,13 @@ public class Player extends Entity {
     }
 
     public void setLives(int lives) {
-        this.lives = lives;
-    }
+        if (lives > 0){
+            this.lives = lives;
+        }else {
+            this.lives = 0;
+        }
 
+    }
     public int getScreenX() {
         return screenX  = (gPanel.getScreenWidth()/2) - (gPanel.getTileSize()/2);
     }
@@ -73,6 +76,9 @@ public class Player extends Entity {
         loadLivesImage("assets/heart2.png");
     }
 
+    /**
+     * Setting player's default values.
+     */
     private void defValues(){
         this.x = gPanel.getTileSize()*23;
         this.y = gPanel.getTileSize()*21;
@@ -81,6 +87,11 @@ public class Player extends Entity {
         direction = "down";
         lives = 3;
     }
+
+    /**
+     * Setting heart image.
+     * @param fileName
+     */
     private void loadLivesImage(String fileName) {
         try {
             livesImage = ImageIO.read(new File(fileName));
@@ -94,10 +105,8 @@ public class Player extends Entity {
      */
     @Override
     public void update() {
-
         int newX = x;
         int newY = y;
-
         if (keyHandler.moveUp) {
             newY -= speed;
             direction = "up";

@@ -9,14 +9,22 @@ public class Fuel extends Item{
         super(gPanel);
         loadImage("assets/fuel.png");
         setName("fuel");
-        size = 2;
+        size = 10;
     }
 
     public int getSize() {
         return size;
     }
 
+    /**
+     * Fuel capacity can't be smaller than 0.
+     * @param size
+     */
     public void setSize(int size) {
-        this.size = Math.max(size, 0);
+        if (size > 0){
+           this.size = size;
+        }else {
+            this.size = 0;
+        }
     }
 }

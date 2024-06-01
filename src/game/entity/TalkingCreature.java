@@ -6,7 +6,7 @@ public class TalkingCreature extends NPC{
 
     public TalkingCreature(GPanel gPanel, String fileName, String dialog) {
         super(gPanel);
-        setName("witch");
+        setName("creature");
         setDialogues(dialog);
         loadImage(fileName);
     }

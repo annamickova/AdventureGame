@@ -80,6 +80,16 @@ public class Setting {
         f6.setItemX(gPanel.getTileSize()*15);
         f6.setItemY(gPanel.getTileSize()*22);
         gPanel.getLostItems().add(f6);
+
+        Fuel f7 = new Fuel(gPanel);
+        f7.setItemX(gPanel.getTileSize()*30);
+        f7.setItemY(gPanel.getTileSize()*29);
+        gPanel.getLostItems().add(f7);
+
+        Fuel f8 = new Fuel(gPanel);
+        f8.setItemX(gPanel.getTileSize()*37);
+        f8.setItemY(gPanel.getTileSize()*40);
+        gPanel.getLostItems().add(f8);
     }
 
     /**

@@ -25,16 +25,8 @@ public class Item {
         this.gPanel = gPanel;
     }
 
-    public int getItemX() {
-        return itemX;
-    }
-
     public void setItemX(int itemX) {
         this.itemX = itemX;
-    }
-
-    public int getItemY() {
-        return itemY;
     }
 
     public void setItemY(int itemY) {
@@ -66,6 +58,10 @@ public class Item {
         return area;
     }
 
+    /**
+     * Checking if item is on screen.
+     * @return
+     */
     private boolean isOnScreen(){
         return itemX + gPanel.getTileSize() > gPanel.getPlayer().getX() - gPanel.getPlayer().getScreenX() &&
                 itemX - gPanel.getTileSize() < gPanel.getPlayer().getX() + gPanel.getPlayer().getScreenX() &&
@@ -88,6 +84,10 @@ public class Item {
 
     public void function(){}
 
+    /**
+     * Setting item's image.
+     * @param fileName
+     */
     public void loadImage(String fileName) {
         try {
             itemImage = ImageIO.read(new File(fileName));

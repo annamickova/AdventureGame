@@ -3,10 +3,6 @@ package game.items;
 import game.GPanel;
 import game.screenStates.GameState;
 
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
-
 public class Teleport extends Item{
 
     public Teleport(GPanel gPanel) {
@@ -16,7 +12,7 @@ public class Teleport extends Item{
     }
 
     /**
-     * Teleport function. Moves player on starting location.
+     *  Function for teleporting. Moves player on starting location.
      */
     @Override
     public void function() {

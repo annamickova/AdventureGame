@@ -10,6 +10,9 @@ public class Speed extends Item{
         setName("speed");
     }
 
+    /**
+     * Function enable speed increase.
+     */
     @Override
     public void function() {
         gPanel.getPlayer().setHighSpeed(true);

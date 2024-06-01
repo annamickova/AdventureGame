@@ -223,6 +223,8 @@ public class GPanel extends JPanel implements Runnable{
         graphics2D.dispose();
     }
 
+
+
     /**
      * Sleep method.
      */
@@ -234,7 +236,7 @@ public class GPanel extends JPanel implements Runnable{
         while (isRunning){
             update();
             repaint();
-
+            game.timer();
             try {
                 double remainingT = nextDrawTime - System.nanoTime();
                 remainingT = remainingT/1000000;

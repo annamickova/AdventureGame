@@ -98,6 +98,11 @@ public class CheckCollision {
             }
         }
     }
+
+    /**
+     * Checking players and other entity collision.
+     * @return
+     */
     public boolean playerHitEntity(){
         boolean n = false;
         for (int i = 0; i < gPanel.getNpc().size(); i++) {
@@ -111,6 +116,11 @@ public class CheckCollision {
         }
         return n;
     }
+
+    /**
+     * Creatures can steal 1 litre of player's lost fuel when they find it.
+     * @param entity
+     */
     public void entityTakesFuel(Entity entity){
         for (int i = 0; i < gPanel.getLostItems().size(); i++) {
             if (entity.entityArea().intersects(gPanel.getLostItems().get(i).itemArea())){

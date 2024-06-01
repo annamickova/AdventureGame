@@ -9,6 +9,9 @@ public class Swim extends Item{
         setName("swim");
     }
 
+    /**
+     * Setting swimming ability so player can move through water.
+     */
     @Override
     public void function() {
         gPanel.getPlayer().setSwimmming(true);

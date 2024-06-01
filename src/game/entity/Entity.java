@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class Entity {
-
     protected GPanel gPanel;
     protected int x;
     protected int y;
@@ -23,13 +22,7 @@ public class Entity {
     public Entity(GPanel gPanel) {
         this.gPanel = gPanel;
         this.checkCollision = new CheckCollision(gPanel);
-
     }
-
-    public int getSpeed() {
-        return speed;
-    }
-
     public void setSpeed(int speed) {
         this.speed = speed;
     }
@@ -76,10 +69,6 @@ public class Entity {
 
     public void setInteraction(boolean interaction) {
         this.interaction = interaction;
-    }
-
-    public BufferedImage getEntityImage() {
-        return entityImage;
     }
 
     /**

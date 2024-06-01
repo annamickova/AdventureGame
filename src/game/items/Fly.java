@@ -13,7 +13,7 @@ public class Fly extends Item{
 
     /**
      * Function that sets player's ability to fly.
-     * He can move throught different tiles except wall.
+     * He can move through different tiles except wall.
      */
     @Override
     public void function() {

@@ -20,7 +20,7 @@ public class Guard extends NPC{
     }
 
     /**
-     * Guard's movement. Changing position by choosing random directory left or right.
+     * Guard's movement. Changing position by choosing random directory - left or right.
      */
     @Override
     public void update() {
@@ -47,7 +47,6 @@ public class Guard extends NPC{
                 case 0 -> direction = "left";
                 case 1 -> direction = "right";
             }
-
         } else {
             x = newX;
 

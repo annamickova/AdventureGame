@@ -19,21 +19,19 @@ public class Enemy extends NPC{
         super.update();
         guard.update();
         try {
-            prisonCreature(this);
-            prisonCreature(guard);
+            prison(this);
+            prison(guard);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
     }
-
-
     /**
-     *
+     * Enemy and his guard can prison some creatures, that could help player.
      * @param entity
      * @throws Exception
      */
-    public void prisonCreature(Entity entity) throws Exception {
+    public void prison(Entity entity) throws Exception {
         for (int i = 0; i < gPanel.getCreatures().size(); i++) {
             if (gPanel.getCreatures().get(i).entityArea().intersects(entity.entityArea())){
                 gPanel.getCreatures().get(i).setX(57*gPanel.getTileSize());
