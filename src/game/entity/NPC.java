@@ -96,6 +96,10 @@ public class NPC extends Entity {
         checkCollision.entityTakesFuel(this);
     }
 
+    /**
+     * Checking if there is any collision.
+     * @return
+     */
     private boolean someCollision(){
         boolean col;
         if (checkCollision.hasCollision(this)){

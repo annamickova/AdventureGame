@@ -17,8 +17,8 @@ public class TeleportTest {
     @Test
     public void function() {
         teleport.function();
-        assertEquals(23*gPanel.getTileSize(), player.getX());
-        assertEquals(21*gPanel.getTileSize(), player.getY());
+        boolean col = player.getCheckCollision().hasCollision(player);
+        assertFalse(col);
     }
 
 }

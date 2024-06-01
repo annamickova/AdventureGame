@@ -1,10 +1,11 @@
-Press enter to start game
-You just came to unknown land.
-Your goal is to find 10 liters of fuel for your vehicle.
-Almost all animals can take your live or your fuel.
-You can pick up all items and use some of them.
-On top of your screen you can see current lives
-and how much fuel you need to collect.
-Game movement is controlled by WASD or arrow keys.
-If you press F displays screen with functions,
-choose pressing enter or close with F or escape key.
+Welcome to an unknown land!
+Your mission is to find 10 liters of milk fuel to power your cat ship.
+Beware, almost all animals can take your life or steal your milk.
+Explore the land, collect items, and use some of them to assist you.
+At the top of the screen, you can keep track of your remaining lives,
+the amount of fuel still needed and time.
+
+Control your movement using the WASD keys or arrow keys.
+Press 'F' to access the function menu,
+where you can choose an option by pressing 'Enter'
+or close the menu by pressing 'F' or 'Escape'.

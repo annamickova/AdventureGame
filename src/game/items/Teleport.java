@@ -3,6 +3,8 @@ package game.items;
 import game.GPanel;
 import game.screenStates.GameState;
 
+import java.awt.*;
+
 public class Teleport extends Item{
 
     public Teleport(GPanel gPanel) {
@@ -16,9 +18,11 @@ public class Teleport extends Item{
      */
     @Override
     public void function() {
+        Point cor;
+        cor = gPanel.getSetting().generateCoordinates();
         try {
-            gPanel.getPlayer().setX(gPanel.getTileSize() * 23);
-            gPanel.getPlayer().setY(gPanel.getTileSize() * 21);
+            gPanel.getPlayer().setX(gPanel.getTileSize() * cor.x);
+            gPanel.getPlayer().setY(gPanel.getTileSize() * cor.y);
             gPanel.getGame().setGameState(GameState.PLAY);
         } catch (Exception e) {
             throw new RuntimeException(e);

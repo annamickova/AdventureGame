@@ -2,7 +2,6 @@ package game.background;
 
 import game.GPanel;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.*;
 
@@ -61,18 +60,13 @@ public class Background {
         tiles[2].setCollision(true);
 
         tiles[3] = new Tile();
-        tiles[3].setName("lava");
-        tiles[3].loadTileImage("assets/lava.png");
-        tiles[3].setCollision(true);
+        tiles[3].setName("sand");
+        tiles[3].loadTileImage("assets/sand.png");
 
         tiles[4] = new Tile();
         tiles[4].setName("tree");
         tiles[4].loadTileImage("assets/tree.png");
         tiles[4].setCollision(true);
-
-        tiles[5] = new Tile();
-        tiles[5].setName("sand");
-        tiles[5].loadTileImage("assets/sand.png");
     }
 
     /**

@@ -81,7 +81,6 @@ public class Item {
             g2.drawImage(itemImage, screenX, screenY, gPanel.getTileSize(), gPanel.getTileSize(), null);
         }
     }
-
     public void function(){}
 
     /**

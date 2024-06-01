@@ -24,8 +24,7 @@ public class KeyHandler implements KeyListener {
     }
 
     /**
-     * Handles key input in the game.
-     * In play game state player can move, in other game states can stop game or display menu.
+     * Handles key input in the game and updates the game state and player interactions.
      * @param e the event to be processed
      */
     @Override
@@ -65,7 +64,6 @@ public class KeyHandler implements KeyListener {
                     }
                 }
             }
-
         } else if (game.getGameState() == GameState.DIALOG){
             if (e.getKeyCode() == KeyEvent.VK_M || e.getKeyCode() == KeyEvent.VK_ESCAPE){
                 gPanel.getPlayer().setInteraction(false);
@@ -96,10 +94,9 @@ public class KeyHandler implements KeyListener {
             }
         } else if (game.getGameState() == GameState.DESCRIPTION) {
             if (e.getKeyCode() == KeyEvent.VK_ENTER){
+                game.setStartTime(System.nanoTime());
                 game.setGameState(GameState.PLAY);
             }
-
-
         } else if (game.getGameState() == GameState.END) {
             switch (e.getKeyCode()){
                 case KeyEvent.VK_W, KeyEvent.VK_UP -> {game.getDraw()
@@ -121,7 +118,6 @@ public class KeyHandler implements KeyListener {
                 }
             }
         }
-
     }
 
     /**

@@ -22,10 +22,6 @@ public class Tile {
         return image;
     }
 
-    public void setImage(BufferedImage image) {
-        this.image = image;
-    }
-
     public boolean isCollision() {
         return collision;
     }

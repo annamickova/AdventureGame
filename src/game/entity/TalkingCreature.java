@@ -11,6 +11,9 @@ public class TalkingCreature extends NPC{
         loadImage(fileName);
     }
 
+    /**
+     * Creature`s movement.
+     */
     @Override
     public void move() {
         super.move();

@@ -16,17 +16,17 @@ public class Player extends Entity {
     private int screenX;
     private int screenY;
     private boolean fly;
-    private boolean swimmming;
+    private boolean swimming;
     private int lives;
     private BufferedImage livesImage;
     private boolean highSpeed;
 
-    public boolean isSwimmming() {
-        return swimmming;
+    public boolean isSwimming() {
+        return swimming;
     }
 
-    public void setSwimmming(boolean swimmming) {
-        this.swimmming = swimmming;
+    public void setSwimming(boolean swimming) {
+        this.swimming = swimming;
     }
 
     public int getLives() {
@@ -128,7 +128,7 @@ public class Player extends Entity {
                x = newX;
                y = newY;
            }
-       }else if (swimmming){
+       }else if (swimming){
             if (getCheckCollision().collisionWithout(this, "water")){
                 x = newX;
                 y = newY;
@@ -145,7 +145,6 @@ public class Player extends Entity {
        checkCollision.npcMeetPlayer();
        checkCollision.collectItem();
     }
-
 
     /**
      * Drawing player on screen.

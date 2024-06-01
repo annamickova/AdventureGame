@@ -109,10 +109,10 @@ public class Game {
      * Turning off swimming ability.
      */
    private void swim(){
-       if (gPanel.getPlayer().isSwimmming()){
+       if (gPanel.getPlayer().isSwimming()){
            if (count >= 420) {
                if (!gPanel.getPlayer().getCheckCollision().hasCollision(gPanel.getPlayer())){
-                   gPanel.getPlayer().setSwimmming(false);
+                   gPanel.getPlayer().setSwimming(false);
                    count = 0;
                }
            }
@@ -229,12 +229,11 @@ public class Game {
             seconds = (int) (t % 60);
         }
     }
-
     /**
      * Counting score based on player's time and his lost lives.
      */
     public void updateScore(){
-        int num = (int) (1000 - t) - (3-gPanel.getPlayer().getLives())*20;
+        int num = (int) (1000 - t*2) - (3-gPanel.getPlayer().getLives())*30;
         score = Math.max(num, 0);
     }
 

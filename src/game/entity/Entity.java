@@ -71,6 +71,10 @@ public class Entity {
         this.interaction = interaction;
     }
 
+    public BufferedImage getEntityImage() {
+        return entityImage;
+    }
+
     /**
      * Checking if entity is on screen by corners.
      * @return

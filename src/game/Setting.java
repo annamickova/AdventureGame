@@ -16,6 +16,11 @@ public class Setting {
         setNPC();
         setCreatures();
     }
+
+    /**
+     * Generating random coordination for items.
+     * @return
+     */
     public Point generateCoordinates() {
         Random rd = new Random();
         int x;
@@ -30,9 +35,7 @@ public class Setting {
      * Creating new items and placing them into map.
      */
     private void setFunctionItems(){
-        Random rd = new Random();
         Point cor;
-
         Teleport teleport = new Teleport(gPanel);
         teleport.setItemX(gPanel.getTileSize()*21);
         teleport.setItemY(gPanel.getTileSize()*7);
@@ -72,7 +75,6 @@ public class Setting {
         swim.setItemY(gPanel.getTileSize()*cor.y);
         swim.setVisible(true);
         gPanel.getFunctionItems().add(swim);
-
     }
 
     /**
@@ -91,8 +93,9 @@ public class Setting {
         gPanel.getLostItems().add(f2);
 
         Fuel f3 = new Fuel(gPanel);
-        f3.setItemX(gPanel.getTileSize()*21);
-        f3.setItemY(gPanel.getTileSize()*39);
+        cor = generateCoordinates();
+        f3.setItemX(gPanel.getTileSize()*cor.x);
+        f3.setItemY(gPanel.getTileSize()*cor.y);
         gPanel.getLostItems().add(f3);
 
         Fuel f4 = new Fuel(gPanel);
@@ -125,14 +128,12 @@ public class Setting {
         gPanel.getLostItems().add(f8);
     }
 
-
-
     /**
      * Creating new npc character with dialog, setting their location and adding into list.
      * @throws Exception
      */
     private void setNPC() throws Exception{
-        TalkingCreature npc1 = new TalkingCreature(gPanel,"assets/animal.png", "assets/littleDeer.txt");
+        TalkingCreature npc1 = new TalkingCreature(gPanel,"assets/animal.png", "assets/creature.txt");
         npc1.setX(gPanel.getTileSize()*45);
         npc1.setY(gPanel.getTileSize()*51);
         gPanel.getNpc().add(npc1);
@@ -146,7 +147,6 @@ public class Setting {
         ghost.setX(gPanel.getTileSize()*10);
         ghost.setY(gPanel.getTileSize()*10);
         gPanel.getNpc().add(ghost);
-
     }
 
     /**
@@ -154,17 +154,40 @@ public class Setting {
      * @throws Exception
      */
     private void setCreatures() throws Exception{
-        Creature creature1 = new Creature(gPanel, "creature", "assets/creature.png");
+        Point cor;
+        Creature creature1 = new Creature(gPanel, "creature1", "assets/creature.png");
         creature1.setX(gPanel.getTileSize()*16);
         creature1.setY(gPanel.getTileSize()*20);
         gPanel.getCreatures().add(creature1);
 
-        Creature creature2 = new Creature(gPanel, "butterfly", "assets/butterfly.png");
-        creature2.setX(gPanel.getTileSize()*16);
-        creature2.setY(gPanel.getTileSize()*21);
+        Creature creature2 = new Creature(gPanel, "butterfly2", "assets/butterfly.png");
+        cor = generateCoordinates();
+        creature2.setX(gPanel.getTileSize()*cor.x);
+        creature2.setY(gPanel.getTileSize()*cor.y);
         gPanel.getCreatures().add(creature2);
 
+        Creature creature3 = new Creature(gPanel, "creature3","assets/creature.png");
+        cor = generateCoordinates();
+        creature3.setX(gPanel.getTileSize()*cor.x);
+        creature3.setY(gPanel.getTileSize()*cor.y);
+        gPanel.getCreatures().add(creature3);
+
+        Creature creature4 = new Creature(gPanel, "butterfly4", "assets/butterfly.png");
+        cor = generateCoordinates();
+        creature4.setX(gPanel.getTileSize()*cor.x);
+        creature4.setY(gPanel.getTileSize()*cor.y);
+        gPanel.getCreatures().add(creature4);
+
+        Creature creature5 = new Creature(gPanel, "butterfly5", "assets/butterfly.png");
+        cor = generateCoordinates();
+        creature5.setX(gPanel.getTileSize()*cor.x);
+        creature5.setY(gPanel.getTileSize()*cor.y);
+        gPanel.getCreatures().add(creature5);
+
+        Creature creature6 = new Creature(gPanel, "creature6","assets/creature.png");
+        cor = generateCoordinates();
+        creature6.setX(gPanel.getTileSize()*cor.x);
+        creature6.setY(gPanel.getTileSize()*cor.y);
+        gPanel.getCreatures().add(creature6);
     }
-
-
 }

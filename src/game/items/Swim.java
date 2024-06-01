@@ -14,6 +14,6 @@ public class Swim extends Item{
      */
     @Override
     public void function() {
-        gPanel.getPlayer().setSwimmming(true);
+        gPanel.getPlayer().setSwimming(true);
     }
 }

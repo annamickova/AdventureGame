@@ -4,6 +4,7 @@ import game.GPanel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -20,7 +21,6 @@ public class DrawStates {
     private final String font = "Rockwell";
     private int funcPointer;
     private int funcCount;
-    private String timeS;
 
     public DrawStates(GPanel gPanel) {
         this.gPanel = gPanel;
@@ -49,6 +49,10 @@ public class DrawStates {
         this.pointer = pointer;
     }
 
+    /**
+     * Drawing text for pausing game.
+     * @param graphics2D
+     */
     public void pauseScreen(Graphics2D graphics2D){
         graphics2D.setColor(Color.white);
         String text = "PAUSED";
@@ -60,6 +64,10 @@ public class DrawStates {
         graphics2D.drawString(text, x, y);
     }
 
+    /**
+     * Drawing rectangle background foŕ dialogue text.
+     * @param graphics2D
+     */
     public void dialogScreen(Graphics2D graphics2D){
         graphics2D.setColor(new Color(250,250,250,215));
         int wX = gPanel.getTileSize() * 6 - gPanel.getTileSize()/2;
@@ -67,13 +75,19 @@ public class DrawStates {
         int wWidth = gPanel.getScreenWidth() - (gPanel.getTileSize()*6);
         int wHeight =gPanel.getTileSize() * 4;
         graphics2D.fillRoundRect(wX,wY,wWidth,wHeight, 20,20);
-        dialogueText(graphics2D,wX,wY,wWidth,wHeight);
+        dialogueText(graphics2D,wX,wY);
     }
-    private void dialogueText(Graphics2D graphics2D, int wX, int wY, int wWidth, int wHeight){
+
+    /**
+     * Drawing text for npc dialog.
+     * @param graphics2D
+     * @param wX
+     * @param wY
+     */
+    private void dialogueText(Graphics2D graphics2D, int wX, int wY){
         graphics2D.setColor(new Color(0,0,0));
         graphics2D.setStroke(new BasicStroke(5));
         graphics2D.setFont(new Font(font, Font.BOLD, 12));
-        graphics2D.drawRoundRect(wX+5, wY+5, wWidth-10, wHeight -10, 20, 20);
         for (String line: currDialog.split("/")){
             graphics2D.drawString(line, wX + gPanel.getTileSize(), wY + gPanel.getTileSize());
             wY += gPanel.getTileSize();
@@ -85,20 +99,17 @@ public class DrawStates {
      * @param graphics2D
      */
     public void homeScreen(Graphics2D graphics2D){
-        String text = "game";
+        String text = "Catship Adventure";
         graphics2D.setFont(new Font(font, Font.BOLD, 50));
-
         int x = gPanel.getScreenWidth()/2;
         int hX =  x - textCentred(graphics2D, text)/2;
-        int hY = gPanel.getTileSize()*4;
+        int hY = gPanel.getTileSize()*3;
+
         graphics2D.setColor(new Color(70,80,120));
         graphics2D.fillRect(0,0, gPanel.getScreenWidth(), gPanel.getScreenHeight());
-
-        graphics2D.setColor(Color.black);
-        graphics2D.drawString(text, hX+5,hY+5);
-
         graphics2D.setColor(Color.white);
         graphics2D.drawString(text, hX,hY);
+        graphics2D.drawImage(gPanel.getPlayer().getEntityImage(), x+ 7*gPanel.getTileSize()/2, hY,null);
         String menuT1 = "new game";
         String menuT2 = "game description";
         String menuT3 = "end";
@@ -121,16 +132,19 @@ public class DrawStates {
      * @param graphics2D
      */
     public void gameDescriptionScreen(Graphics2D graphics2D){
-        String text = "game description";
+        String text = "Game description";
         graphics2D.setFont(new Font(font, Font.BOLD, 50));
         int x = gPanel.getScreenWidth()/2;
-        int y = gPanel.getTileSize()*4;
+        int y = gPanel.getTileSize()*3;
         graphics2D.setColor(new Color(70,80,120));
         graphics2D.fillRect(0,0, gPanel.getScreenWidth(), gPanel.getScreenHeight());
         graphics2D.setColor(Color.white);
         graphics2D.drawString(text,  x - textCentred(graphics2D, text)/2,y);
         int leftX = (x-x/2)-gPanel.getTileSize()*3;
-        loadAndDrawText(graphics2D, leftX, y+gPanel.getTileSize());
+        String start = "Press enter to start game";
+        graphics2D.setFont(new Font(font, Font.BOLD, 25));
+        graphics2D.drawString(start, x - textCentred(graphics2D,start)/2,y+gPanel.getTileSize());
+        loadAndDrawText(graphics2D, leftX, y+2*gPanel.getTileSize());
     }
 
     /**
@@ -144,7 +158,7 @@ public class DrawStates {
             String line;
             int lineNumber = 0;
             while ((line = br.readLine())!= null) {
-                drawText(graphics2D, x, y + lineNumber*gPanel.getTileSize(), line, 25);
+                drawText(graphics2D, x, y + lineNumber*gPanel.getTileSize(), line, 20);
                 lineNumber++;
             }
         } catch (IOException e) {
@@ -157,15 +171,15 @@ public class DrawStates {
      * @param graphics2D
      */
     public void gameOverScreen(Graphics2D graphics2D){
-        String gameOver = "game over";
+        String gameOver = "Game over";
         String text = "";
         graphics2D.setFont(new Font(font, Font.BOLD, 50));
         int x = gPanel.getScreenWidth()/2;
         int hX =  x - textCentred(graphics2D, gameOver)/2;
-        int hY = gPanel.getTileSize()*4;
+        int hY = gPanel.getTileSize()*3;
         String sc = "Score: ";
         if (gPanel.getGame().isVictory()){
-            text = "you found all your missing fuel";
+            text = "You have collected all needed milk!";
             if (gPanel.getGame().getScore() >= gPanel.getGame().newScore()){
                 sc = "New score: ";
             }
@@ -173,7 +187,6 @@ public class DrawStates {
             text = "you lost, try again";
             gPanel.getGame().setScore(0);
         }
-
         sc += gPanel.getGame().getScore();
 
         graphics2D.setColor(new Color(70,80,120));
@@ -181,6 +194,7 @@ public class DrawStates {
         graphics2D.setColor(new Color(70,80,120));
         graphics2D.setColor(Color.white);
         graphics2D.drawString(gameOver, hX,hY);
+        drawCat(graphics2D, x,hY);
         graphics2D.setFont(new Font(font, Font.BOLD, 30));
         graphics2D.drawString(text, x - textCentred(graphics2D,text)/2,hY+3*gPanel.getTileSize()/2);
         graphics2D.drawString(sc, x - textCentred(graphics2D, sc)/2,hY+3*gPanel.getTileSize());
@@ -198,7 +212,16 @@ public class DrawStates {
                     hY+7*gPanel.getTileSize(), "•", 50);
         }
     }
+    private void drawCat(Graphics2D graphics2D, int hX, int hY){
+        BufferedImage image;
+        try {
+            image = ImageIO.read(new File("assets/catInShip.png"));
+            graphics2D.drawImage(image,hX+3*gPanel.getTileSize(),hY+7*gPanel.getTileSize(), 5*gPanel.getTileSize(), 5*gPanel.getTileSize(), null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+    }
     private void drawText(Graphics2D graphics2D, int hX, int mY, String text, int size){
         graphics2D.setFont(new Font(font, Font.BOLD, size));
         graphics2D.drawString(text, hX, mY);
@@ -342,7 +365,7 @@ public class DrawStates {
     public void currTime(Graphics2D graphics2D){
         graphics2D.setColor(Color.white);
         graphics2D.setFont(new Font(font, Font.BOLD, 30));
-        timeS = String.format("%02d:%02d", gPanel.getGame().getMinutes(), gPanel.getGame().getSeconds());
+        String timeS = String.format("%02d:%02d", gPanel.getGame().getMinutes(), gPanel.getGame().getSeconds());
         graphics2D.drawString(timeS, gPanel.getScreenWidth()/2 - gPanel.getTileSize()/2, 3*gPanel.getTileSize()/2);
     }
 

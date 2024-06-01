@@ -8,7 +8,7 @@ public class Fuel extends Item{
     public Fuel(GPanel gPanel) {
         super(gPanel);
         loadImage("assets/fuel.png");
-        setName("fuel");
+        setName("milk");
         size = 2;
     }
 
