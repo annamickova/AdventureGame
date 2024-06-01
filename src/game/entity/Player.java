@@ -72,7 +72,7 @@ public class Player extends Entity {
         super(gPanel);
         this.keyHandler = keyHandler;
         defValues();
-        loadImage("assets/cat.jpeg");
+        loadImage("assets/orangeCat.png");
         loadLivesImage("assets/heart2.png");
     }
 

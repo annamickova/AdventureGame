@@ -19,6 +19,7 @@ public class Game {
     private long startTime;
     private long t;
     private int score = 0;
+    private boolean scoreWritten = false;
 
     public Game(GPanel gPanel) {
         this.gPanel = gPanel;
@@ -69,6 +70,9 @@ public class Game {
 
     public int getSeconds() {
         return seconds;
+    }
+    public void setScore(int score) {
+        this.score = score;
     }
 
     /**
@@ -125,7 +129,7 @@ public class Game {
                gPanel.getPlayer().setLives(gPanel.getPlayer().getLives()-1);
            }
            canLostLives = false;
-           if (count == 30) {
+           if (count == 90) {
               canLostLives = true;
               count = 0;
            }
@@ -135,7 +139,7 @@ public class Game {
                gPanel.getPlayer().setLives(gPanel.getPlayer().getLives()-2);
            }
            canLostLives = false;
-           if (count == 30) {
+           if (count == 90) {
                canLostLives = true;
                count = 0;
            }
@@ -202,7 +206,7 @@ public class Game {
         }
     }
     /**
-     * Game over when player catches all creatures.
+     * Game over when player catches all creatures or loses all lives.
      */
     public void end(){
        if (fuelNeed == 0){
@@ -234,11 +238,10 @@ public class Game {
         score = Math.max(num, 0);
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
-    private boolean scoreWritten = false;
-
+    /**
+     * Comparing new high score.
+     * @return
+     */
     public int newScore(){
         int highest = 0;
         try (BufferedReader br = new BufferedReader(new FileReader("assets/scoreHistory.txt"))){
@@ -256,6 +259,11 @@ public class Game {
         }
         return highest;
     }
+
+    /**
+     * Writing new score into text file.
+     * @param fileName
+     */
     public void writeScore(String fileName){
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName, true))){
             bw.write(score+"");

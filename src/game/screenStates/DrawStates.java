@@ -63,7 +63,7 @@ public class DrawStates {
     public void dialogScreen(Graphics2D graphics2D){
         graphics2D.setColor(new Color(250,250,250,215));
         int wX = gPanel.getTileSize() * 6 - gPanel.getTileSize()/2;
-        int wY = gPanel.getTileSize()/2;
+        int wY = 2*gPanel.getTileSize();
         int wWidth = gPanel.getScreenWidth() - (gPanel.getTileSize()*6);
         int wHeight =gPanel.getTileSize() * 4;
         graphics2D.fillRoundRect(wX,wY,wWidth,wHeight, 20,20);

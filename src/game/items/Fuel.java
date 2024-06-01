@@ -9,7 +9,7 @@ public class Fuel extends Item{
         super(gPanel);
         loadImage("assets/fuel.png");
         setName("fuel");
-        size = 10;
+        size = 2;
     }
 
     public int getSize() {

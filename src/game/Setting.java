@@ -36,6 +36,12 @@ public class Setting {
         fly.setVisible(true);
         gPanel.getFunctionItems().add(fly);
 
+        Fly fly2 = new Fly(gPanel);
+        fly2.setItemX(gPanel.getTileSize()*52);
+        fly2.setItemY(gPanel.getTileSize()*3);
+        fly2.setVisible(true);
+        gPanel.getFunctionItems().add(fly2);
+
         Speed speed = new Speed(gPanel);
         speed.setItemX(gPanel.getTileSize()*23);
         speed.setItemY(gPanel.getTileSize()*40);

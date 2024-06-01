@@ -57,9 +57,9 @@ public class KeyHandler implements KeyListener {
                 }
                 case KeyEvent.VK_ENTER -> {
                     if (gPanel.getCollectedFunctionItems().size()!= 0){
+                        game.setGameState(GameState.PLAY);
                         gPanel.getCollectedFunctionItems().get(game.getDraw().getFuncPointer()).function();
                         gPanel.getCollectedFunctionItems().remove(game.getDraw().getFuncPointer());
-                        game.setGameState(GameState.PLAY);
                         game.getDraw().setFuncPointer(0);
 
                     }
