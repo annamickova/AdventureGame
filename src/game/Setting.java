@@ -3,6 +3,9 @@ package game;
 import game.entity.*;
 import game.items.*;
 
+import java.awt.*;
+import java.util.Random;
+
 public class Setting {
    private GPanel gPanel;
 
@@ -13,11 +16,23 @@ public class Setting {
         setNPC();
         setCreatures();
     }
-
+    public Point generateCoordinates() {
+        Random rd = new Random();
+        int x;
+        int y;
+        do {
+            x = rd.nextInt(60);
+            y = rd.nextInt(60);
+        } while (gPanel.getbGround().getTile(x, y).isCollision());
+        return new Point(x, y);
+    }
     /**
      * Creating new items and placing them into map.
      */
     private void setFunctionItems(){
+        Random rd = new Random();
+        Point cor;
+
         Teleport teleport = new Teleport(gPanel);
         teleport.setItemX(gPanel.getTileSize()*21);
         teleport.setItemY(gPanel.getTileSize()*7);
@@ -25,38 +40,46 @@ public class Setting {
         gPanel.getFunctionItems().add(teleport);
 
         Teleport teleport2 = new Teleport(gPanel);
-        teleport2.setItemX(gPanel.getTileSize()*38);
-        teleport2.setItemY(gPanel.getTileSize()*40);
+        cor = generateCoordinates();
+        teleport2.setItemX(gPanel.getTileSize()*cor.x);
+        teleport2.setItemY(gPanel.getTileSize()*cor.y);
         teleport2.setVisible(true);
         gPanel.getFunctionItems().add(teleport2);
 
         Fly fly = new Fly(gPanel);
-        fly.setItemX(gPanel.getTileSize()*21);
-        fly.setItemY(gPanel.getTileSize()*20);
+        fly.setItemX(gPanel.getTileSize()*52);
+        fly.setItemY(gPanel.getTileSize()*3);
         fly.setVisible(true);
         gPanel.getFunctionItems().add(fly);
 
         Fly fly2 = new Fly(gPanel);
-        fly2.setItemX(gPanel.getTileSize()*52);
-        fly2.setItemY(gPanel.getTileSize()*3);
+        cor = generateCoordinates();
+        fly2.setItemX(gPanel.getTileSize()*cor.x);
+        fly2.setItemY(gPanel.getTileSize()*cor.y);
         fly2.setVisible(true);
         gPanel.getFunctionItems().add(fly2);
 
         Speed speed = new Speed(gPanel);
-        speed.setItemX(gPanel.getTileSize()*23);
-        speed.setItemY(gPanel.getTileSize()*40);
+        cor = generateCoordinates();
+        speed.setItemX(gPanel.getTileSize()*cor.x);
+        speed.setItemY(gPanel.getTileSize()*cor.y);
         speed.setVisible(true);
         gPanel.getFunctionItems().add(speed);
 
         Swim swim = new Swim(gPanel);
-        swim.setItemX(gPanel.getTileSize()*21);
-        swim.setItemY(gPanel.getTileSize()*21);
+        cor = generateCoordinates();
+        swim.setItemX(gPanel.getTileSize()*cor.x);
+        swim.setItemY(gPanel.getTileSize()*cor.y);
         swim.setVisible(true);
         gPanel.getFunctionItems().add(swim);
 
     }
 
+    /**
+     * Creating and placing fuel tanks.
+     */
     private void setFuel(){
+        Point cor;
         Fuel f1 = new Fuel(gPanel);
         f1.setItemX(gPanel.getTileSize()*4);
         f1.setItemY(gPanel.getTileSize()*23);
@@ -73,13 +96,15 @@ public class Setting {
         gPanel.getLostItems().add(f3);
 
         Fuel f4 = new Fuel(gPanel);
-        f4.setItemX(gPanel.getTileSize()*11);
-        f4.setItemY(gPanel.getTileSize()*25);
+        cor = generateCoordinates();
+        f4.setItemX(gPanel.getTileSize()*cor.x);
+        f4.setItemY(gPanel.getTileSize()*cor.y);
         gPanel.getLostItems().add(f4);
 
         Fuel f5 = new Fuel(gPanel);
-        f5.setItemX(gPanel.getTileSize()*57);
-        f5.setItemY(gPanel.getTileSize()*3);
+        cor = generateCoordinates();
+        f5.setItemX(gPanel.getTileSize()*cor.x);
+        f5.setItemY(gPanel.getTileSize()*cor.y);
         gPanel.getLostItems().add(f5);
 
         Fuel f6 = new Fuel(gPanel);
@@ -88,15 +113,19 @@ public class Setting {
         gPanel.getLostItems().add(f6);
 
         Fuel f7 = new Fuel(gPanel);
-        f7.setItemX(gPanel.getTileSize()*30);
-        f7.setItemY(gPanel.getTileSize()*29);
+        cor = generateCoordinates();
+        f7.setItemX(gPanel.getTileSize()*cor.x);
+        f7.setItemY(gPanel.getTileSize()*cor.y);
         gPanel.getLostItems().add(f7);
 
         Fuel f8 = new Fuel(gPanel);
-        f8.setItemX(gPanel.getTileSize()*37);
-        f8.setItemY(gPanel.getTileSize()*40);
+        cor = generateCoordinates();
+        f8.setItemX(gPanel.getTileSize()*cor.x);
+        f8.setItemY(gPanel.getTileSize()*cor.y);
         gPanel.getLostItems().add(f8);
     }
+
+
 
     /**
      * Creating new npc character with dialog, setting their location and adding into list.
@@ -135,15 +164,6 @@ public class Setting {
         creature2.setY(gPanel.getTileSize()*21);
         gPanel.getCreatures().add(creature2);
 
-       /* Creature creature3 = new Creature(gPanel, "creature3", "assets/spider.png");
-        creature3.setX(gPanel.getTileSize()*22);
-        creature3.setY(gPanel.getTileSize()*35);
-        gPanel.getCreatures().add(creature3);
-
-        Creature creature4 = new Creature(gPanel, "creature4", "assets/spider.png");
-        creature4.setX(gPanel.getTileSize()*39);
-        creature4.setY(gPanel.getTileSize()*10);
-        gPanel.getCreatures().add(creature4); */
     }
 
 

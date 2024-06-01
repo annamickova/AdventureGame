@@ -103,6 +103,7 @@ public class GPanel extends JPanel implements Runnable{
         return enemy;
     }
 
+
     public GPanel(){
         tileSize = 48;
         game = new Game(this);
